@@ -1,0 +1,392 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+<script src="../js/jquery-1.10.2.min.js"></script>
+
+<?php
+$inward_id =sanitize_string($_GET['inw_id']);
+$get_inw = mysql_fetch_assoc(mysql_query("select tm.req_no,tm.g_inward_id,tm.g_ref_no,tm.g_date,tm.g_time,tm.delivery_note_no,tm.vehicle_no, tm.g_delivered_by,tm.g_desc,mt.mat_name,pk.pack_name,tm.g_qty, tm.received_by, tm.checked_by,us.user_id, us.fname, us.lname, s.sup_id, s.sup_name, pk.pack_id from temp_inward as tm 
+left join materials as mt on mt.mat_id = tm.g_mat_id 
+left join suppliers as s on s.sup_id = tm.sup_id
+left join users as us on us.user_id = tm.confirmed_by
+left join packages as pk on pk.pack_id = tm.pack_id 
+where tm.g_inward_id='$inward_id'
+"));
+
+?>
+<script>
+
+$(document).ready(function(){
+startRefreshing();
+
+
+//$("#mat_name").select2();  
+//$("#sup_name").select2(); 
+//hide all errors when form loads
+$("#mat_name_error").hide();
+$("#by_name_error").hide();
+$("#del_note_error").hide();
+$("#vehicle_no_error").hide();
+$("#delivered_by_error").hide();
+$("#sup_name_error").hide();
+$("#check_name_error").hide();
+$("#confirm_name_error").hide();
+$("#req_error").hide();
+$("#ref_no_error").hide();
+$("#qty_error").hide();
+$('#TransDiv').hide();
+$("#CompleteTrans").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//$("#CompleteTrans").fadeIn();
+		//error
+		error = false;
+		inward_ref_no = $("#inward_ref_no").val();
+		del_note = $("#del_note").val();
+		vehicle_no = $("#vehicle_no").val();
+		delivered_by = $("#delivered_by").val();
+		req = $(".req_no").val();
+		sup_name= $("#sup_name").val();
+		check_name = $("#check_name").val();
+		confirm_name = $("#confirm_name").val();
+		mat_name = $("#mat_name").val();
+		by_name = $("#by_name").val();
+		pack_name = $("#pack_name").val();
+		inward_id = $("#inward_id").val();
+	    qty = $("#qty").val();
+		 desc = $("#desc").val();
+		 
+		  if(confirm_name ===''){
+		error =true;
+		$("#confirm_name_error").fadeIn();
+		$("#confirm_name").focus();
+		}else{
+		$("#confirm_name_error").fadeOut();
+		
+		}
+		
+		  if(check_name ===''){
+		error =true;
+		$("#check_name_error").fadeIn();
+		$("#check_name").focus();
+		}else{
+		$("#check_name_error").fadeOut();
+		
+		}
+		
+		 if(by_name ===''){
+		error =true;
+		$("#by_name_error").fadeIn();
+		$("#by_name").focus();
+		}else{
+		$("#by_name_error").fadeOut();
+		
+		}
+			 if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		 if(sup_name ===''){
+		error =true;
+		$("#sup_name_error").fadeIn();
+		$("#sup_name").focus();
+		}else{
+		$("#sup_name_error").fadeOut();
+		
+		}
+		
+		
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(req ===''){
+		error =true;
+		$("#req_error").fadeIn();
+		$(".req_no").focus();
+		}else{
+		$("#req_error").fadeOut();
+		
+		}
+		if(delivered_by ===''){
+		error =true;
+		$("#delivered_by_error").fadeIn();
+		$("#delivered_by").focus();
+		}else{
+		$("#delivered_by_error").fadeOut();
+		
+		}
+		if(vehicle_no ===''){
+		error =true;
+		$("#vehicle_no_error").fadeIn();
+		$("#vehicle_no").focus();
+		}else{
+		$("#vehicle_no_error").fadeOut();
+		
+		}
+		if(del_note ===''){
+		error =true;
+		$("#del_note_error").fadeIn();
+		$("#del_note").focus();
+		}else{
+		$("#del_note_error").fadeOut();
+		
+		}
+		
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		$("#CompleteTrans").fadeIn();
+		/* Ajax Request here*/
+					//data values
+			var myData = 'inward_ref_no='+inward_ref_no + '&req='+ req + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc + '&by_name='+ by_name + '&del_note='+ del_note+ '&vehicle_no='+ vehicle_no + '&delivered_by='+ delivered_by + '&sup_name='+ sup_name
+			+ '&check_name='+ check_name + '&confirm_name='+ confirm_name + '&inward_id='+ inward_id; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/update_inward.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$("#CompleteTrans").fadeIn();
+			$('#submit').fadeIn();			
+			$('#TransDiv').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+<script>
+// Config for the javascript part
+ 
+var urlForPHP 			= "../process/temp_inward.php";
+var milsecondsTillRepeat 	= 1000;
+var idForReplace		= "TransDiv";
+ 
+function startRefreshing()
+{
+	setTimeout("startRefreshing()",milsecondsTillRepeat);
+	reloadPHP();
+}
+ 
+ 
+function reloadPHP()
+{
+	xmlhttp=GetXmlHttpObject();
+	if (xmlhttp==null)
+	{
+		alert ("Your Browser does not support HTTP Request");
+		return;
+	}
+	var url=urlForPHP;
+	url=url+"?random="+Math.random();
+	xmlhttp.onreadystatechange=stateChanged;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+ 
+function stateChanged()
+{
+	if (xmlhttp.readyState==4)
+	{
+	document.getElementById(idForReplace).innerHTML=xmlhttp.responseText;
+	}
+}
+ 
+function GetXmlHttpObject()
+{
+if (window.XMLHttpRequest)
+  {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  return new XMLHttpRequest();
+  }
+if (window.ActiveXObject)
+  {
+  // code for IE6, IE5
+  return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+return null;
+}
+</script>
+
+             <script>
+    $(document).ready(function(){
+			//Delete Inward cart item
+$("#delreq_<?php echo $get_inw['g_inward_id'];?>").click(function(){												
+$("#response").empty();													
+var con = confirm("Are you sure you want to remove this inward item?");													
+	if(con==true){
+	//we select the first link 
+	//then call the attr method to get back the href value
+	var g_inward_id = <?php echo $get_inw['g_inward_id']; ?>;
+	$.post("../process/delete_inward.php",
+	{ g_inward_id : g_inward_id  },
+	function(g_inward_id) {
+	$("#response").html(g_inward_id);											 
+	});											
+	}
+});
+        //supplier
+               $(".req_no").change(function(){
+                     var req_no=$(".req_no").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_supplier_name.php",
+                        data:"req_no="+req_no,
+                        success:function(data){
+
+                         $("#sup_name").html(data);
+                        }
+                     });
+               });
+               //material supplied by the supplier
+                  $(".req_no").change(function(){
+                     var req_no=$(".req_no").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_mat_name.php",
+                        data:"req_no="+req_no,
+                        success:function(data){
+                         $("#mat_name").html(data);
+                        }
+                     });
+               });
+	});
+    </script>
+        
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h3>Edit Inward Goods</h3><hr/>
+						   <form action="../process/update_inward.php" method="POST">
+						    <span class="error" id="ref_no_error">* Ref No</span><br/>
+						    <label>Ref No:</label>
+							<input type="text" name="inward_ref_no" disabled id="inward_ref_no" value="<?php echo $get_inw['g_ref_no']; ?>" />
+							<input type="hidden" name="inward_id" id="inward_id"  value="<?php echo sanitize_string($_GET['inw_id']); ?>" />
+	                       <span class="error" id="del_note_error">* Delivery Note No</span><br/>
+						    <label>Delivery Note No:</label>
+							<input type="text" name="del_note"  id="del_note"  value="<?php echo $get_inw['delivery_note_no']; ?>"/><br/>
+                            <span class="error" id="vehicle_no_error">* Vehicle No</span><br/>
+						    <label>Vehicle No:</label>
+							<input type="text" name="vehicle_no"  id="vehicle_no"  value="<?php echo $get_inw['vehicle_no']; ?>"/><br/>
+                            <span class="error" id="delivered_by_error">* Delivered By</span><br/>
+						    <label>Delivered By:</label>
+							<input type="text" name="delivered_by"  id="delivered_by"  value="<?php echo $get_inw['g_delivered_by']; ?>"/><br/>
+							<span class="error" id="req_error">* Choose Requisition</span><br/>
+							<label>Requisition</label>
+							<select name="req" id="req" class="req_no" style="width:100%">
+								<option value="<?php echo $get_inw['req_no'];?>"><?php echo '<font color="green">'.$get_inw['req_no'].'</font>';?></font></option>
+								<?php
+								
+								$qr = mysql_query("select * from requisitions where site_id='".$_SESSION['COMSYS_SiteID']."' and lpo_status='Completed' group by req_ref_no order by req_id desc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['req_ref_no'];?>"><?php echo $qrow['req_ref_no'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>
+                               <span class="error" id="sup_name_error">* Choose Supplier</span><br/>
+							<label>Supplier</label>
+							<select name="sup_name" id="sup_name" style="width:100%">
+								<option value="<?php echo $get_inw['sup_id'];?>"><?php echo titleCase($get_inw['sup_name']);?></font></option>
+								
+							</select><br/><br/>
+      
+                              <span class="error" id="mat_name_error">* Choose Material</span><br/>
+							<label>Material</label>
+							<select name="mat_name" id="mat_name" style="width:100%">
+								<option value="<?php echo $get_inw['mat_id'];?>"><?php echo titleCase($get_inw['mat_name']);?></font></option>
+								
+							</select><br/><br/>
+							<label>Package:</label>
+							<span class="error" id="pack_name_error">* Choose Package</span><br/>
+							<select name="pack_name" id="pack_name">
+								<option value="<?php echo $get_inw['pack_id'];?>"><?php echo titleCase($get_inw['pack_name']);?></font></option>
+								<?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['pack_id'];?>"><?php echo $qrow['pack_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+		
+							<span class="error" id="qty_error">* Quantity</span><br/>
+							<label>Quantity:</label>
+							<input type="text" name="qty" id="qty" value="<?php echo $get_inw['g_qty']; ?>"/>
+							<span class="error" id="desc_error">* Description</span><br/>
+							<label>Description:</label>
+							<input type="text" name="desc" id="desc" value="<?php echo $get_inw['g_desc']; ?>"/>
+                               <label>Received By:</label>
+							 <span class="error" id="by_name_error">* Enter Name</span><br/>
+							<input type="text" name="by_name" id="by_name" placeholder="Received by" value="<?php echo $get_inw['received_by']; ?>" /><br/>
+                              <label>Checked By:</label>
+							 <span class="error" id="check_name_error">* Enter Name</span><br/>
+                             <input type="text" name="check_name" id="check_name" placeholder="Checked by" value="<?php echo $get_inw['checked_by']; ?>" /><br/>
+                              <label>Confirmed By:</label>
+							 <span class="error" id="confirm_name_error">* Select User</span><br/>
+							<select name="confirm_name" id="confirm_name" style="width:100%">
+								<option value="<?php echo $get_inw['user_id'];?>"><?php echo titleCase($get_inw['fname'].' '.$get_inw['lname']);?></font></option>
+								<?php
+								
+								$qr = mysql_query("select * from users where site_id='".$_SESSION['COMSYS_SiteID']."' order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>				
+							<button type="submit" id="submit" class="btn btn-default">Update Cart</button><br/> <a href="#DelThis" class="btn btn-xs btn-danger" id="delreq_<?php echo $get_inw['g_inward_id'];?>">Remove Item</a> or <a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=inw&act=new_inw#TransDiv" class="btn btn-xs btn-success" >View Cart</a>
+							<span class="loader" id="DelThis"><img src="../images/loader.gif" width="40px" height="40px"/>Processing Request...</span><br/><br/>
+							<div id="response"></div><br/>
+							
+						</form>
+							
+			
+					</div>
+				</div>

@@ -1,0 +1,205 @@
+<link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+<?php 
+$store_id = sanitize_string($_GET['st_id']);
+
+?>
+<script>
+
+$(document).ready(function(){
+$("#mat_name").select2();
+$("#app_name").select2(); 
+$("#pack_name").select2();   
+//hide all errors when form loads
+$("#mat_name_error").hide();
+$("#pack_name_error").hide();
+$("#req_name_error").hide();
+$("#app_name_error").hide();
+$("#qty_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		mat_name = $("#mat_name").val();
+		pack_name = $("#pack_name").val();
+	    qty = $("#qty").val();
+		store = <?php echo $store_id;?>;
+		desc = $("#desc").val();
+		req_name= $("#req_name").val();
+		app_name= $("#app_name").val();
+		
+		//validate data
+		 if(req_name ===''){
+		error =true;
+		$("#req_name_error").fadeIn();
+		$("#req_name").focus();
+		}else{
+		$("#req_name_error").fadeOut();
+		
+		}
+		 if(app_name ===''){
+		error =true;
+		$("#app_name_error").fadeIn();
+		$("#app_name").focus();
+		}else{
+		$("#app_name_error").fadeOut();
+		
+		}
+	  if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+		
+		 if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+	  if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'mat_name='+mat_name + '&pack_name='+pack_name + '&qty='+ qty  + '&desc='+ desc + '&store='+ store + '&req_name='+ req_name  + '&app_name='+ app_name  ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/issue_material.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>
+<hr/><div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+<h3>Issue Material</h3>                   
+<table width="100%" border="0">
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Material:</strong></div></td>
+    <td><div align="left">
+      <select name="mat_name" id="mat_name" style="width:200px;">
+          <option value="">--Select Material--</option>
+        <?php								
+		$qr = mysql_query("select mt.mat_name,mt.mat_id from materials_stock as ms left join materials as mt on ms.mat_id = mt.mat_id where ms.store_id='$store_id'");
+		while($qrow=mysql_fetch_assoc($qr)){								
+		?>
+          <option value="<?php echo $qrow['mat_id'];?>"><?php echo titleCase($qrow['mat_name']);?></option>
+          <?php
+		}
+		?>
+      </select>
+      <br/>
+      <span class="error" id="mat_name_error">* Choose Materials</span></div></td>
+    <td><div align="right"><strong>Requested by:</strong></div></td>
+    <td><div align="left">
+      <input type="text" class="my-form-control" style="width:200px;" name="req_name" id="req_name" placeholder="Requested By"/>
+      <span class="error" id="req_name_error">* Requested By</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Package:</strong></div></td>
+    <td><div align="left">
+      <select name="pack_name" id="pack_name" style="width:200px;">
+        <option value="">--Select Package--</option>
+        <?php
+		$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+		while($qrow=mysql_fetch_assoc($qr)){
+	   ?>
+        <option value="<?php echo $qrow['pack_id'];?>"><?php echo titleCase($qrow['pack_name']);?></option>
+        <?php
+		}
+       ?>
+      </select>
+      <br/>
+      <span class="error" id="pack_name_error">* Choose Package</span></div></td>
+    <td><div align="right"><strong>Approved by:</strong></div></td>
+    <td><div align="left">
+      <select name="app_name" id="app_name" style="width:200px;">
+        <option value="">--Approved By--</option>
+        <?php
+		$qr = mysql_query("select * from users where site_id='".sanitize_string($_GET['site_id'])."'");
+		while($qrow=mysql_fetch_assoc($qr)){
+       ?>
+        <option value="<?php echo $qrow['user_id'];?>"><?php echo titleCase($qrow['fname'].' '.$qrow['lname']);?></option>
+        <?php
+		}
+	   ?>
+      </select>
+      <br/>
+      <span class="error" id="app_name_error">* Approved By</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Quantity:</strong></div></td>
+    <td><div align="left">
+      <input type="text" class="my-form-control" style="width:200px;" name="qty" id="qty" placeholder="Quantity"/>
+      <span class="error" id="qty_error">* Quantity</span></div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Description:</strong></div></td>
+    <td><div align="left">
+      <input type="text" class="my-form-control" style="width:200px;" name="desc" id="desc" placeholder="Description"/>
+      <span class="error" id="desc_error">* Description</span></div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<br/>
+<button type="submit" id="submit" class="btn btn-blue-alt">Save Record</button><br/>
+<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+<div id="response"></div>
+</div>

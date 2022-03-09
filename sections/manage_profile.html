@@ -1,0 +1,42 @@
+
+				
+				<div class="col-sm-9 padding-right">
+				
+				<h2>My Account</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='view_prof'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=prof&act=view_prof" >My Profile</a></li>								
+						<li <?php if($atype=='ch_pass'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=prof&act=ch_pass">Change Password</a></li>
+								<li <?php if($atype=='act_log'){echo 'class="active"';}?>>
+							
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'view_prof':
+						include('../views/view_user_profile.html');
+						break;
+						case 'ch_pass':
+						include('../views/change_pass.html');
+						break;
+						
+						default:
+						include('../views/view_user_profile.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

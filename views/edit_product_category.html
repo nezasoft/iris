@@ -1,0 +1,88 @@
+<?php
+$cat_id = sanitize_string($_GET['cat_id']);
+$q_row=mysql_fetch_assoc(mysql_query("select * from materials_categories where mat_cat_id='$cat_id'"));
+
+?>
+
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#cat_name_error").hide();
+$("#cat_name_error").hide();
+$("#cat_desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		cat_name = $("#cat_name").val();
+	    cat_desc = $("#cat_desc").val();
+		cat_id = <?php echo sanitize_string($_GET['cat_id']);?>;
+		//validate data
+	  if(cat_desc ===''){
+		error =true;
+		$("#cat_desc_error").fadeIn();
+		$("#cat_desc").focus();
+		}else{
+		$("#cat_desc_error").fadeOut();
+		
+		}
+		if(cat_name ===''){
+		error =true;
+		$("#cat_name_error").fadeIn();
+		$("#cat_name").focus();
+		}else{
+		$("#cat_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'cat_name='+cat_name + '&cat_desc='+ cat_desc + '&cat_id='+ cat_id; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_product_category.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4">
+					<div class="signup-form">
+						<h2>Edit Product Category</h2>
+						<form action="../process/edit_product_category.php" method="POST">
+						    <span class="error" id="cat_name_error">* Category Name</span><br/>
+							<input type="text" name="cat_name" id="cat_name" value="<?php echo $q_row['mat_cat_name'];?>"/>
+							<span class="error" id="cat_desc_error">* Category Description</span><br/>
+							<input type="text" name="cat_desc" id="cat_desc" value="<?php echo $q_row['mat_cat_desc'];?>"/>
+						
+							<button type="submit" id="submit" class="btn btn-default">Update Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

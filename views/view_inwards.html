@@ -1,0 +1,136 @@
+    <?php
+
+$qr= mysql_query("select s.site_name, tm.g_inward_id,tm.in_status,tm.g_ref_no,tm.g_date,tm.g_time,tm.delivery_note_no,tm.vehicle_no,
+tm.g_delivered_by,tm.g_desc,mt.mat_name,pk.pack_name,tm.g_qty, c_us.fname as checked_us, r_us.fname as received_us,
+con_us.fname as confirm_user
+from goods_inwards as tm 
+left join materials as mt on mt.mat_id = tm.g_mat_id
+left join sites as s on s.site_id = tm.site_id
+left join packages as pk on pk.pack_id = tm.pack_id
+left join users as c_us on c_us.user_id = tm.checked_by
+left join users as r_us on r_us.user_id = tm.received_by
+left join users as con_us on con_us.user_id = tm.confirmed_by
+where  tm.site_id='".$_SESSION['COMSYS_SiteID']."' group by tm.g_ref_no
+
+");
+
+?>	
+
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Inwards &raquo;<?php echo $_SESSION['COMSYS_SiteName'];?> </h3>
+                        </div>
+						<br/><span id="confirm"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_inw">
+                                    <thead>
+                                        <tr>
+                                            <th>Ref No</th>
+											<th>Del No</th>
+											<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Veh No</th>
+											<th>Del By</th>
+											<th>Desc</th>
+											<th>Qty</th>
+											<th>Checked By</th>
+											<th>Received By</th>
+											<th>To be approved by</th>
+											<?php } ?>
+											<th>Status</th>
+											<th>Site</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th></th>
+									
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+								
+									while($qr_row=mysql_fetch_assoc($qr)){
+									//check status to define color code
+									$st = $qr_row['in_status'];
+									
+									switch($st){
+									case 'New' ;
+									$color_code='#00FF00';//lime green
+									break;
+									case 'Checked' ;
+									$color_code='#FF0000';//red
+									break;
+									case 'Approved' ;
+									$color_code='#3300FF';//red
+									break;
+									case 'Completed' ;
+									$color_code='#FFFF00';//yellow
+									break;
+									
+									}
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $qr_row['g_ref_no']; ?></td>
+                                            <td><?php echo $qr_row['delivery_note_no']; ?></td>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+											<td><?php echo $qr_row['vehicle_no']; ?></td>
+											<td><?php echo $qr_row['g_delivered_by']; ?></td>
+											<td><?php echo $qr_row['g_desc']; ?></td>
+											<td><?php echo $qr_row['g_qty']; ?></td>
+											<td><?php echo $qr_row['checked_us']; ?></td>
+											<td><?php echo $qr_row['received_us']; ?></td>
+											<td><?php echo $qr_row['received_us']; ?></td>
+											<?php } ?>
+											 <td><?php echo '<font color="'.$color_code.'">'. $qr_row['in_status'].'</font>'; ?></td>
+											 <td><?php echo $qr_row['site_name']; ?></td>
+                                            <td><?php echo $qr_row['g_date']; ?></td>
+                                            <td><?php echo $qr_row['g_time']; ?> </td>
+											<td>
+											<?php if(($_SESSION['COMSYS_UserRole']=='SiteAdmin' || $_SESSION['COMSYS_UserRole']=='CompanyAdmin') && $st !='Approved' ){
+											//show confirm by link
+											?>
+														  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {																							
+												$("#confirm_<?php echo $qr_row['g_ref_no'];?>").click(function(){												
+													$("#confirm").empty();													
+													var con = confirm("Approve?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var g_ref_no = $(".confirm_<?php echo $qr_row['g_ref_no'];?>").attr("rel");												
+        											$.post("../process/approve_inward.php",
+        											 { g_ref_no : g_ref_no  },
+        											 function(g_ref_no) {
+        											 $("#confirm").html(g_ref_no);											 
+        										   });											
+												}
+														   
+												});
+											
+												
+											});
+                                           </script>
+											<a href="#" class="confirm_<?php echo $qr_row['g_ref_no'];?>" rel="<?php echo $qr_row['g_ref_no'];?>"></a>
+											<a class="btn btn-xs btn-warning" href="#confirm_<?php echo $qr_row['g_ref_no'];?>" id="confirm_<?php echo $qr_row['g_ref_no'];?>" >Approve</a>
+											<?php
+											}
+											?>
+											  <a class="btn btn-xs btn-success" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>
+											&sec=inw&act=view_inw&inw_ref=<?php echo $qr_row['g_ref_no']; ?>">View</a>
+											</td>
+								
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_inw').dataTable();
+            });
+    </script>

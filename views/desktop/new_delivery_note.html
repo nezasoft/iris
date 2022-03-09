@@ -1,0 +1,403 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+
+<script>
+
+$(document).ready(function(){
+$("#response_message").hide();
+//ajaxrequest('../views/desktop/req_items.php', 'ReqItemsList');	
+ //Hit Refresh to reload the data
+ $("#refresh").click(function(e){
+ e.preventDefault();
+ ajaxrequest('../views/desktop/delivery_items.php', 'DeliveryItemsList');
+ //Show save button
+ $("#save").fadeIn();
+ });
+<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+$("#mat_name").select2();  
+$("#by_name").select2();
+$("#pack_name").select2();
+$("#site_name").select2();
+$("#attention").select2();
+<?php } ?>
+//hide all errors when form loads
+$("#taken_by_error").hide();
+$("#vehicle_no_error").hide();
+$("#del_name_error").hide();
+$("#attention_error").hide();
+$("#site_name_error").hide();
+$("#mat_name_error").hide();
+$("#by_name_error").hide();
+$("#ref_no_error").hide();
+$("#qty_error").hide();
+$('#TransDiv').hide();
+$("#CompleteTrans").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide()
+
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+	$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		
+		//$("#CompleteTrans").fadeIn();
+		//error
+		error = false;
+		ref_no = $("#ref_no").val();
+		del_name = $("#del_name").val();
+		attention = $("#attention").val();
+		site_name = $("#site_name").val();
+		vehicle_no = $("#vehicle_no").val();
+		mat_name = $("#mat_name").val();
+		taken_by = $("#taken_by").val();
+		by_name = $("#by_name").val();
+		pack_name = $("#pack_name").val();
+	    qty = $("#qty").val();
+		 desc = $("#desc").val();
+		 
+		 if(by_name ===''){
+		error =true;
+		$("#by_name_error").fadeIn();
+		$("#by_name").focus();
+		}else{
+		$("#by_name_error").fadeOut();
+		
+		}
+
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+	     
+		 if(site_name ===''){
+		error =true;
+		$("#site_name_error").fadeIn();
+		$("#site_name").focus();
+		}else{
+		$("#site_name_error").fadeOut();
+		
+		}
+		 if(vehicle_no ===''){
+		error =true;
+		$("#vehicle_no_error").fadeIn();
+		$("#vehicle_no").focus();
+		}else{
+		$("#vehicle_no_error").fadeOut();
+		
+		}
+		 if(taken_by ===''){
+		error =true;
+		$("#taken_by_error").fadeIn();
+		$("#taken_by").focus();
+		}else{
+		$("#taken_by_error").fadeOut();
+		
+		}
+		if(attention ===''){
+		error =true;
+		$("#attention_error").fadeIn();
+		$("#attention").focus();
+		}else{
+		$("#attention_error").fadeOut();
+		
+		}
+		if(del_name ===''){
+		error =true;
+		$("#del_name_error").fadeIn();
+		$("#del_name").focus();
+		}else{
+		$("#del_name_error").fadeOut();
+		
+		}
+		if(ref_no ===''){
+		error =true;
+		$("#ref_no_error").fadeIn();
+		$("#ref_no").focus();
+		}else{
+		$("#ref_no_error").fadeOut();
+		
+		}
+		
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		$("#CompleteTrans").fadeIn();
+		/* Ajax Request here*/
+					//data values
+			var myData = 'ref_no='+ref_no  + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc +
+			'&by_name='+ by_name + '&site_name='+ site_name  + '&vehicle_no='+ vehicle_no + '&attention='+ attention + '&taken_by='+ taken_by + '&del_name='+ del_name; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_delivery.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();			
+            ajaxrequest('../views/desktop/delivery_items.php', 'DeliveryItemsList');	
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>
+<?php 
+ //get the id of the last column to make the delivery note no
+               $q = mysql_fetch_array(mysql_query("select last_insert_id(delivery_id) as del_id from delivery_note 
+			   where site_code='".$_SESSION['COMSYS_SiteCode']."' order by delivery_id desc limit 1"));
+
+                $del_id = $q['del_id'];
+                if($del_id==''){
+                   $del_ref_no = 1;
+                }else{
+                $del_ref_no = $del_id + 1;
+                }
+                 //create a del ref no and save it in a session
+                 $del_ref_no = $_SESSION['COMSYS_SiteCode'].'DEL'.$del_ref_no ;
+                 //create and save it in a session
+                 $_SESSION['COMSYS_DelRefNo'] = $del_ref_no;
+?>
+<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					
+ <table width="100%" border="0">
+  <tr>
+    <td colspan="4"><h3 align="left">New Delivery Note</h3></td>
+   </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Ref. No:</strong></div></td>
+    <td><div align="left">
+      <input type="text" name="ref_no" disabled="disabled" style="width:200px;" class="my-form-control" id="ref_no" value="<?php echo $_SESSION['COMSYS_DelRefNo']; ?>" />
+    <span class="error" id="ref_no_error">* Ref No</span></div></td>
+    <td><div align="right"><strong>Site Name:</strong></div></td>
+    <td><div align="left">
+      <select name="site_name" id="site_name" style="width:200px;">
+        <option value="">--Select Site--</option>
+        <?php
+								
+								$qr = mysql_query("select * from sites order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+        <option value="<?php echo $qrow['site_id'];?>"><?php echo $qrow['site_name'];?></option>
+        <?php
+								}
+								?>
+      </select>
+      <br/>
+    <span class="error" id="site_name_error">* Choose Site</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Delivery Name:</strong></div></td>
+    <td><div align="left">
+      <input type="text" name="del_name"  style="width:200px;" class="my-form-control" id="del_name" value="" placeholder="Delivery Name" />
+    <span class="error" id="del_name_error">* Delivery Name</span></div></td>
+    <td><div align="right"><strong>Attention:</strong></div></td>
+    <td><div align="left">
+      <select name="attention" id="attention" style="width:200px;">
+        <option value="">--Choose User--</option>
+        <?php
+								
+								$qr = mysql_query("select * from users where user_role = 'CompanyAdmin' or user_role='SiteAdmin' 
+								or user_role='SiteManager'  order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+        <option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+        <?php
+								}
+								?>
+      </select><br/>
+    <span class="error" id="attention_error">* Person to bring to attention about this delivery</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Material:</strong></div></td>
+    <td><div align="left">
+      <select name="mat_name" id="mat_name" style="width:300px;">
+        <option value="">--Select Material--</option>
+        <?php
+								
+								$qr = mysql_query("select ms.quantity,site.site_name,mt.mat_name,pk.pack_name, st.store_name from materials_stock as ms 
+                                                    left join stores as st on st.store_id = ms.store_id
+                                                    left join materials as mt on mt.mat_id = ms.mat_id
+                                                    left join packages as pk on pk.pack_id = ms.pack_id
+                                                    left join sites as site on site.site_id = ms.site_id
+                                                    where st.site_id='".$_SESSION['COMSYS_SiteID']."' order by mt.mat_name");
+								while($qrow=mysql_fetch_assoc($qr)){
+								 $val = titleCase($qrow['mat_name'])." (In-Stock: ".$qrow['quantity'].")";
+								?>
+        <option value="<?php echo $qrow['mat_id'];?>"><?php echo $val; ?></option>
+        <?php
+								}
+								?>
+      </select>
+      <br/> 
+    <span class="error" id="mat_name_error">* Choose Materials</span></div></td>
+    <td><div align="right"><strong>Taken by:</strong></div></td>
+    <td><div align="left">
+      <input type="text" name="taken_by"  style="width:200px;" class="my-form-control" id="taken_by" value="" placeholder="Taken By" />
+    <span class="error" id="taken_by_error">* Taken By</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Package:</strong></div></td>
+    <td><div align="left">
+      <select name="pack_name" id="pack_name" style="width:200px;">
+        <option value="">--Select Package--</option>
+        <?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+        <option value="<?php echo $qrow['pack_id'];?>"><?php echo titleCase($qrow['pack_name']);?></option>
+        <?php
+								}
+								?>
+      </select>
+      <br/>
+    <span class="error" id="pack_name_error">* Choose Package</span></div></td>
+    <td><div align="right"><strong>Vehicle no:</strong></div></td>
+    <td><div align="left">
+      <input type="text" name="vehicle_no"  style="width:200px;" class="my-form-control" id="vehicle_no" value="" placeholder="Vehicle No" />
+    <span class="error" id="vehicle_no_error">* Vehicle Registration No</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Quantity:</strong></div></td>
+    <td><input type="text" name="qty" id="qty" style="width:200px;" class="my-form-control" placeholder="Quantity"/><span class="error" id="qty_error">* Quantity</span></td>
+    <td><div align="right"><strong>To be approved by:</strong></div></td>
+    <td><div align="left">
+      <select name="by_name[]" id="by_name" multiple="multiple" style="width:200px;">
+        <option value="">--Choose User--</option>
+        <?php
+								
+								$qr = mysql_query("select * from users where user_role = 'CompanyAdmin' or user_role='SiteAdmin' 
+								or user_role='SiteManager'  order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+        <option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+        <?php
+								}
+								?>
+      </select>
+      <br/>
+    <span class="error" id="by_name_error">* Select User</span></div></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Description:</strong></div></td>
+    <td><input type="text" name="desc"  style="width:200px;" class="my-form-control" id="desc" placeholder="Description"/><span class="error" id="desc_error">* Description</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td>&nbsp;</td>
+    <td><button type="submit" id="submit" class="btn btn-blue-alt">Add to Cart</button> | <a href="#" id="refresh" class="btn btn-xs btn-success">Refresh</a>
+		<span class="loader" id="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Processing Request...</span><br/>
+		<div id="response"></div><br/>
+		<div id="TransDiv"><img src="../images/iconLoading.gif"/></div><br/></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<div id="response"></div><br/>
+<div id="DeliveryItemsList"></div><br/>
+<div id="response_form">
+<div id="response_message" class="alert alert-success" style="padding:20px; margin-top:30px; margin-right:30px; border:2px solid #FF9900;">
+<img src="../images/tick.png" width="40px" height="40px" align="left" /> <p style="font-size:24px;align:right;"> Delivery note  successfully saved! </p>
+</div>
+</div>
+<script>
+// sends data to a php file, via POST, and displays the received answer
+function ajaxrequest(php_file, tagID) {
+  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');  // XMLHttpRequest object
+  var  the_data = '';       // here you can set data to be send to the server (pairs index=value)
+  request.open("POST", php_file, true);			// set the request
+ // adds  a header to tell the PHP script to recognize the data as is sent via POST
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(the_data);		// calls the send() method with data as parameter
+  // Check request status
+  // If the response is received completely, will be transferred to the HTML tag with tagID
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      var resp = request.responseText;        // get the response from php
+      document.getElementById(tagID).innerHTML = resp;       // add the response into the tag with the ID from "tagID"
+      // calls the parseScript() function, with the response from PHP as argument
+      parseScript(resp);
+    }
+  }
+}
+
+// this function create an Array that contains the JS code of every <script> tag in parameter
+// then apply the eval() to execute the code in every script collected
+function parseScript(strcode) {
+  var scripts = new Array();         // Array which will store the script's code
+  // Strip out tags
+  while(strcode.indexOf("<script") > -1 || strcode.indexOf("</script") > -1) {
+    var s = strcode.indexOf("<script");
+    var s_e = strcode.indexOf(">", s);
+    var e = strcode.indexOf("</script", s);
+    var e_e = strcode.indexOf(">", e);  
+    // Add to scripts array
+    scripts.push(strcode.substring(s_e+1, e));
+    // Strip from strcode
+    strcode = strcode.substring(0, s) + strcode.substring(e_e+1);
+  }  
+  // Loop through every script collected and eval it
+  for(var i=0; i<scripts.length; i++) {
+    try {
+      eval(scripts[i]);
+    }
+    catch(ex) {
+      // do what you want here when a script fails
+    }
+  }
+}
+
+</script>
+                
+				
+			

@@ -1,0 +1,82 @@
+<link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+<?php 
+$store_id = sanitize_string($_GET['st_id']);
+$_SESSION['COMSYS_StoreID'] = $store_id;
+
+?>
+
+<script>
+$(document).ready(function(){
+
+$("#inw_name").select2(); 
+$("#inw_name_error").hide();
+$(".loader").hide();
+
+$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+	inw_name = $("#inw_name").val();
+    if(inw_name ===''){
+		error =true;
+		$("#inw_name_error").fadeIn();
+		$("#inw_name").focus();
+		}else{
+		$("#inw_name_error").fadeOut();
+		
+		}	
+  	//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'inw_name='+inw_name ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/update_stock_from_inward.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}		
+	});
+});
+</script>
+<hr/>
+<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h2>Update from Inward</h2>
+						<form action="../process/update_stock_from_inward.php" method="POST">
+						 <span class="error" id="inw_name_error">* Select Inward</span><br/>
+							<label>Select Inward</label>
+							<select name="inw_name" id="inw_name" style="width:300px;">
+								<option value="">--Select Inward--</option>
+								<?php
+								
+								$qr = mysql_query("select * from goods_inwards where in_status='Approved' and site_id='".$_SESSION['COMSYS_SiteID']."' group by g_ref_no order by g_inward_id desc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['g_ref_no'];?>"><?php echo $qrow['g_ref_no']."--".$qrow['g_desc']."--".$qrow['delivery_note_no'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>
+
+							<button type="submit" id="submit" class="btn btn-default">Receive Goods</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

@@ -1,0 +1,84 @@
+    <?php
+    $site_id=sanitize_string($_GET['site_id']);
+$qr= mysql_query("select  st.store_name,ms.stock_desc,ms.min_stock_level,ms.max_stock_level,ms.quantity,ms.add_date,ms.add_time,mt.mat_name,pk.pack_name from materials_stock as ms left join stores as st on st.store_id = ms.store_id
+left join materials as mt on mt.mat_id = ms.mat_id
+left join packages as pk on pk.pack_id = ms.pack_id
+where ms.site_id='$site_id'
+");
+
+?>	
+<br/>
+			<div class="panel panel-default" id="print_cont">
+                        <div class="panel-heading">
+                             <h3>Materials Stock</h3>
+                        </div>
+						<br/><span id="matresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_materials">
+                                    <thead>
+                                        <tr>
+                                            <th>Material Name</th>                                         
+											<th>In-Stock</th>
+											<th>Package</th>
+                                            <th>Max Stock</th>
+                                            <th>Min Stock</th>
+                                            <th>Status</th>
+											<th>Store</th>
+											<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Desc</th>
+                                            <?php } ?>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                         
+                                        <td><?php echo titleCase($qr_row['mat_name']); ?></td>                                      
+							           <td><?php echo $qr_row['quantity']; ?></td>
+									   <td><?php echo $qr_row['pack_name']; ?></td>
+                                       <td><?php echo $qr_row['max_stock_level']; ?></td>
+                                       <td><?php echo $qr_row['min_stock_level']; ?></td>
+                                       <td><?php 
+                                       $stock = $qr_row['quantity']; 
+                                       $min_stock = $qr_row['min_stock_level'];
+                                        $max_stock = $qr_row['max_stock_level'];
+                                       if($stock > $min_stock){
+                                       echo '<font color="green">In Stock</font>';
+                                       }elseif($stock==0){
+                                       echo '<font color="red">Out of Stock</font>';
+                                       }elseif($stock<$min_stock){
+                                       echo '<font color="orange">Low Stock</font>';
+                                        }elseif($stock>$max_stock){
+                                       echo '<font color="blue">Excess Stock</font>';
+                                        
+                                       }
+                                         ?></td>
+                                       <td><?php echo $qr_row['store_name']; ?></td>
+                                       <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+									   <td><?php echo $qr_row['stock_desc']; ?></td>
+									   <?php } ?>
+                                       <td><?php echo $qr_row['add_date']; ?></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_materials').dataTable();
+            });
+    </script>
+<div class="signup-form">
+<form action="#" method="post">
+  <button onclick="printContent('print_cont')">Print Record</button>
+</form>
+</div> 

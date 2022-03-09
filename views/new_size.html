@@ -1,0 +1,65 @@
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#size_name_error").hide();
+
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		size_name = $("#size_name").val();
+	   
+		if(size_name ===''){
+		error =true;
+		$("#size_name_error").fadeIn();
+		$("#size_name").focus();
+		}else{
+		$("#size_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'size_name='+size_name ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_size.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+</script>	
+		<div class="col-sm-6" style="background-color:#fff;border:2px solid #616A6B;margin:20px;">
+					<div class="signup-form">
+						<h2>New Size</h2>
+						<form action="../process/new_size.php" method="POST">
+						    <span class="error" id="size_name_error">* Size Name</span><br/>
+							<input type="text" name="size_name" id="size_name" placeholder="Size Name"/>						
+							<button type="submit" id="submit" class="btn btn-blue-alt">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

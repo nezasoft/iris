@@ -1,0 +1,164 @@
+<link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+<?php 
+$store_id = sanitize_string($_GET['st_id']);
+?>
+<script>
+$(document).ready(function(){
+$("#mat_name").select2(); 
+//hide all errors when form loads
+$("#mat_name_error").hide();
+$("#pack_name_error").hide();
+$("#qty_error").hide();
+$("#desc_error").hide();
+$("#min_stock_error").hide();
+$("#max_stock_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		mat_name = $("#mat_name").val();
+		pack_name = $("#pack_name").val();
+	    qty = $("#qty").val();
+		min_stock = $("#min_stock").val();
+		max_stock = $("#max_stock").val();
+		store = <?php echo $store_id;?>;
+		 desc = $("#desc").val();
+		//validate data
+	  if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+		 if(max_stock ===''){
+		error =true;
+		$("#max_stock_error").fadeIn();
+		$("#max_stock").focus();
+		}else{
+		$("#max_stock_error").fadeOut();
+		
+		}
+		 if(min_stock ===''){
+		error =true;
+		$("#min_stock_error").fadeIn();
+		$("#min_stock").focus();
+		}else{
+		$("#min_stock_error").fadeOut();
+		
+		}
+		 if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+	  if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'mat_name='+mat_name + '&pack_name='+pack_name + '&qty='+ qty  + '&desc='+ desc + '&min_stock='+ min_stock  + '&max_stock='+ max_stock + '&store='+ store + '&site_id='+ <?php echo sanitize_string($_GET['site_id']); ?> ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_stock.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4">
+					<div class="signup-form">
+						<h2>Add New Stock</h2>
+						<form action="../process/new_stock.php" method="POST">
+						 <span class="error" id="mat_name_error">* Choose Materials</span><br/>
+							<label>Material</label>
+							<select name="mat_name" id="mat_name" style="width:100%">
+								<option value="">--Select Material--</option>
+								<?php
+								
+								$qr = mysql_query("select * from materials group by mat_name order by mat_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['mat_id'];?>"><?php echo $qrow['mat_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>
+							<label>Package:</label>
+							<span class="error" id="pack_name_error">* Choose Package</span><br/>
+							<select name="pack_name" id="pack_name">
+								<option value="">--Select Package--</option>
+								<?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['pack_id'];?>"><?php echo $qrow['pack_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+		                      			<span class="error" id="qty_error">* Quantity</span><br/>
+							<label>Quantity:</label>
+							<input type="text" name="qty" id="qty" placeholder="Quantity"/>
+                            <span class="error" id="min_stock_error">* Min Stock Level</span><br/>
+							<label>Min Stock Level:</label>
+							<input type="text" name="min_stock" id="min_stock" placeholder="Min Stock Level"/>
+                            <span class="error" id="max_stock_error">* Max Stock Level</span><br/>
+							<label>Max Stock Level:</label>
+							<input type="text" name="max_stock" id="max_stock" placeholder="Max Stock Level"/>
+                         
+							<span class="error" id="desc_error">* Description</span><br/>
+							<label>Description:</label>
+							<input type="text" name="desc" id="desc" placeholder="Description"/>
+						
+							<button type="submit" id="submit" class="btn btn-default">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

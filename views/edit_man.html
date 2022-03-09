@@ -1,0 +1,66 @@
+<?php
+$man_id = sanitize_string($_GET['man_id']);
+$qr=mysql_fetch_assoc(mysql_query("select * from manufactures where man_id='$man_id'"));
+?>
+<script>
+$(document).ready(function(){
+//hide all errors when form loads
+$("#man_name_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		man_name = $("#man_name").val();
+		man_id = <?php echo $man_id; ?>;
+	   
+		if(man_name ===''){
+		error =true;
+		$("#man_name_error").fadeIn();
+		$("#man_name").focus();
+		}else{
+		$("#man_name_error").fadeOut();		
+		}		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();		
+		/* Ajax Request here*/
+		//data values
+			var myData = 'man_name='+man_name + '&man_id='+man_id ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_man.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+			});
+		}		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-6" style="background-color:#fff;border:2px solid #616A6B;margin:20px;">
+					<div class="signup-form">
+						<h2>Update Manufacturer</h2>
+						<form action="../process/edit_man.php" method="POST">
+						    <span class="error" id="man_name_error">* Manufacturer's Name</span><br/>
+							<label>Manufacturer's Name</label>
+							<input type="text" name="man_name" id="man_name" value="<?php echo $qr['man_name'];?>"/>						
+							<button type="submit" id="submit" class="btn btn-blue-alt">Update Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

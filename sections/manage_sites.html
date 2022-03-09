@@ -1,0 +1,55 @@
+
+				
+				<div class="col-sm-9 padding-right">
+				<h2>Sites</h3><hr/>
+				
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_site'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sites&act=new_site" >New Site </a></li>
+								<?php 
+								if($atype=='edit_site'){
+								?>
+								<li <?php if($atype=='edit_site'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sites&act=edit_site&site_id=<?php echo $_GET['site_id']; ?>">Edit Site</a></li>
+								<?php 
+									}
+								?>
+							
+								<li <?php if($atype=='man_sites'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sites&act=man_sites#manage_site">Manage Sites</a></li>
+								<li <?php if($atype=='activity_log'){echo 'class="active"';}?>><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&section=sites&action=activity_log#activity_log">Activity Log</a></li>
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_site':
+						include('../views/new_site.html');
+						break;
+						case 'edit_site':
+						include('../views/edit_site.html');
+						break;
+						case 'man_sites':
+						include('../views/view_sites.html');
+						break;
+						case 'activity_log':
+						include('../views/sites_activity_log.html');
+						break;
+						default:
+						include('../views/view_sites.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

@@ -1,0 +1,115 @@
+<?php
+$qr= mysql_query("select * from suppliers");
+?>	
+<br/><br/><br/>
+			<div class="panel panel-default">
+              
+						<br/><span id="supresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_suppliers">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Email</th>
+                                            <th>Postal Address</th>
+                                            <th>Physical Address</th>
+                                            <th>Phone No</th>
+                                            <?php } ?>
+											<th>Status</th>
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo titleCase($qr_row['sup_name']); ?></td>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <td width="10px"><?php echo $qr_row['sup_email']; ?></td>
+                                            <td><?php echo $qr_row['sup_postal']; ?></td>
+                                            <td><?php echo $qr_row['sup_physical']; ?></td>
+                                            <td><?php echo $qr_row['sup_phone']; ?></td>
+                                            <?php } ?>
+											 <td><?php echo $qr_row['status']; ?></td>
+												  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete site
+												$("#delsup_<?php echo $qr_row['sup_id'];?>").click(function(){												
+													$("#supresults").empty();													
+													var con = confirm("Are you sure you want to remove this supplier? All records related to this supplier be lost!");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var sup_id = $("#delsupval_<?php echo $qr_row['sup_id'];?>").attr("rel");												
+											$.post("../process/delete_supplier.php",
+											 { sup_id : sup_id  },
+											 function(sup_id) {
+											 $("#supresults").html(sup_id);											 
+										   });											
+												}
+														   
+												});
+												//Deactivate site
+												$("#deactivate_<?php echo $qr_row['sup_id'];?>").click(function(){												
+													$("#supresults").empty();													
+													var con = confirm("Are you sure you want to deactivate this supplier?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var sup_id = $("#delsupval_<?php echo $qr_row['sup_id'];?>").attr("rel");												
+											$.post("../process/deactivate_supplier.php",
+											 { sup_id : sup_id  },
+											 function(sup_id) {
+											 $("#supresults").html(sup_id);											 
+										   });											
+												}
+														   
+												});
+												//Reactivate site
+												$("#reactivate_<?php echo $qr_row['sup_id'];?>").click(function(){												
+													$("#supresults").empty();													
+													var con = confirm("Are you sure you want to reactivate this supplier?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var sup_id = $("#delsupval_<?php echo $qr_row['sup_id'];?>").attr("rel");												
+											$.post("../process/reactivate_supplier.php",
+											 { sup_id : sup_id  },
+											 function(sup_id) {
+											 $("#supresults").html(sup_id);											 
+										   });											
+												}
+														   
+												});
+												
+											});
+                                           </script>
+										   <a href="" id="delsupval_<?php echo $qr_row['sup_id'];?>" rel="<?php echo $qr_row['sup_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=sup&act=edit_sup&sup_id=<?php echo $qr_row['sup_id']; ?>">Edit</a></td>
+											<td><!--<a href="#" id="delsup_<?php echo $qr_row['sup_id'];?>">Delete</a> -->
+											<?php if($qr_row['sup_id']=='Active'){ ?>
+											<a href="#" class="btn btn-xs btn-danger" id="deactivate_<?php echo $qr_row['sup_id'];?>">Deactivate</a>
+											<?php }else{?>
+											<a href="#" class="btn btn-xs btn-success" id="reactivate_<?php echo $qr_row['sup_id'];?>">Reactivate</a>
+											<?php } ?>
+											</td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_suppliers').dataTable();
+            });
+    </script>

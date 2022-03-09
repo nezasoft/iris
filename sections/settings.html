@@ -1,0 +1,96 @@
+<div class="col-sm-9" style="background:#fff;padding:5px;">
+<div class="category-tab"><!--category-tab-->
+<h3>Settings</h3><hr/>
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_mat">New Material</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_mat">Materials</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=import_mat">Import Data</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_cat">New Category</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_cat">Categories</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_pack">New Package</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_pack">Packages</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_brand">New Brand</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_brands">Brands</a> 
+<a  class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_man">New Man</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_man">Manufactures</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=new_size">New Size</a> 
+<a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=view_sizes">Sizes</a> 
+<br/>
+<br/>
+ <?php
+ //get action
+ $ip = sanitize_string($_GET['ip']); 
+ switch($ip){
+  case 'new_mat':
+  if($_SESSION['COMSYS_IS_MOBILE']==1){
+   include('../views/new_product.html');
+   break;
+   }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+   include('../views/desktop/new_product.html');
+   break;
+   }
+  case 'view_mat':
+   if($_SESSION['COMSYS_IS_MOBILE']==1){
+   include('../views/view_products.html');
+   break;
+   }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+   include('../views/desktop/view_products.html');
+   break;
+   }
+ case 'import_mat':
+  include('../views/import_materials.html');
+  break;
+  case 'new_cat':
+  include('../views/new_product_category.html');
+  break;
+   case 'edit_cat':
+  include('../views/edit_product_category.html');
+  break;
+   case 'view_cat':
+  include('../views/view_product_categories.html');
+  break;
+   case 'new_pack':
+  include('../views/new_package.html');
+  break;
+   case 'view_pack':
+  include('../views/view_packages.html');
+  break;
+   case 'edit_pack':
+  include('../views/edit_package.html');
+  break;
+   case 'edit_mat':
+  include('../views/edit_product.html');
+  break;
+   case 'edit_brand':
+  include('../views/edit_brand.html');
+  break;
+    case 'new_brand':
+  include('../views/new_brand.html');
+  break;
+    case 'view_brands':
+  include('../views/view_brands.html');
+  break;
+    case 'new_man':
+  include('../views/new_man.html');
+  break;
+    case 'view_man':
+  include('../views/view_manufacturers.html');
+  break;
+  case 'edit_man':
+  include('../views/edit_man.html');
+  break;
+   case 'new_size':
+  include('../views/new_size.html');
+  break;
+   case 'edit_size':
+  include('../views/edit_size.html');
+  break;
+   case 'view_sizes':
+  include('../views/view_sizes.html');
+  break;
+   case 'edit_cat':
+  include('../views/edit_product_category.html');
+  break;
+ }
+ ?>
+ </div> 
+ </div>

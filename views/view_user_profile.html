@@ -1,0 +1,47 @@
+<?php
+$qrow = mysql_fetch_assoc(mysql_query("select * from users as us left join sites as s on s.site_id = us.site_id where  us.user_id='".$_SESSION['COMSYS_UserID']."'"));
+
+?>
+<div class="panel panel-default" id="user_profile">
+                        <div class="panel-heading">
+                             <h3>My Account</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+								<table  id="list_users">
+								<tbody>
+								<tr>
+									<td><div align="right"><strong>First Name: </strong></div></td>
+									<td><code><?php echo $qrow['fname']; ?></code></td>
+								</tr>
+								<tr>
+									<td><div align="right"><strong>Last Name: </strong></div></td>
+									<td><code><?php echo $qrow['lname']; ?></code></td>
+								</tr>
+								<tr>
+									<td><div align="right"><strong>Email: </strong></div></td>
+									<td><code><?php echo $qrow['email']; ?></code></td>
+								</tr>
+								<tr>
+									<td><div align="right"><strong>Role: </strong></div></td>
+									<td><code><?php echo $qrow['user_role']; ?></code></td>
+								</tr>
+								<tr>
+									<td><div align="right"><strong>Account Status: </strong></div></td>
+									<td><code><?php echo $qrow['account_status']; ?></code></td>
+								</tr>
+								<tr>
+									<td><div align="right"><strong>Site Name: </strong></div></td>
+									<td><code><?php echo $qrow['site_name']; ?></code></td>
+								</tr>
+								</tbody>
+							</table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                //$('#list_users').dataTable();
+            });
+    </script>

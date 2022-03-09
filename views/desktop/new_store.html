@@ -1,0 +1,127 @@
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#store_name_error").hide();
+$("#site_name_error").hide();
+$("#store_desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		site_name = $("#site_name").val();
+		store_name = $("#store_name").val();
+	    store_desc = $("#store_desc").val();
+		
+		//validate data
+	  if(store_desc ===''){
+		error =true;
+		$("#store_desc_error").fadeIn();
+		$("#store_desc").focus();
+		}else{
+		$("#store_desc_error").fadeOut();
+		
+		}
+     if(site_name ===''){
+		error =true;
+		$("#site_name_error").fadeIn();
+		$("#site_name").focus();
+		}else{
+		$("#site_name_error").fadeOut();
+		
+		}
+		if(store_name ===''){
+		error =true;
+		$("#store_name_error").fadeIn();
+		$("#store_name").focus();
+		}else{
+		$("#store_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'site_name='+site_name + '&store_name='+ store_name + '&store_desc='+ store_desc ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_store.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h3>New Store</h3><hr/>
+
+                        
+					    <table width="100%" border="0">
+                          <tr>
+                            <td width="25%">&nbsp;</td>
+                            <td width="75%">&nbsp;</td>
+                          </tr>
+                          <tr height="40">
+                            <td><div align="right"><strong>Store Name:</strong></div></td>
+                            <td><div align="left">
+                              <input type="text" style="width:200px;" class="my-form-control" name="store_name" id="store_name" placeholder="Store Name"/>
+                            <span class="error" id="store_name_error">* Store Name</span></div></td>
+                          </tr>
+                          <tr height="40">
+                            <td><div align="right"><strong>Site Name:</strong></div></td>
+                            <td><div align="left">
+                              <select name="site_name"  id="site_name" style="width:200px;">
+                                <option value="">--Select Site--</option>
+                                <?php
+								
+								$qr = mysql_query("select * from sites where site_status='Active' order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+                                <option value="<?php echo $qrow['site_id'];?>"><?php echo titleCase($qrow['site_name']);?></option>
+                                <?php
+								}
+								?>
+                              </select><br/>
+                            <span class="error" id="site_name_error">* Choose Site</span></div></td>
+                          </tr>
+                          <tr height="40">
+                            <td><div align="right"><strong>Store Description:</strong></div></td>
+                            <td><div align="left">
+                              <input type="text" style="width:200px;" class="my-form-control" name="store_desc" id="store_desc" placeholder="Store Desc"/> 
+                            <span class="error" id="store_desc_error">* Store Desc</span></div></td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                          </tr>
+                        </table>
+					    <br/>
+                            <button type="submit" id="submit" class="btn btn-blue-alt">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+							<div id="response"></div>
+					</div>
+				</div>

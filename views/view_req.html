@@ -1,0 +1,71 @@
+    <?php
+
+	$qr= mysql_query("select * from requisitions where site_id='".$_SESSION['COMSYS_SiteID']."' group by req_ref_no order by req_id desc");
+
+?>	
+<br/><br/><br/>
+			<div class="panel panel-default" style="margin-right:10px;">
+                        <div class="panel-heading">
+                             <h3>Requisitions &raquo;<?php echo $_SESSION['COMSYS_SiteName'];?></h3>
+                        </div>
+						<br/><span id="userresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?> id="list_req" <?php } ?> >
+                                    <thead>
+                                        <tr>
+											<th>Ref No</th>
+											<th>Req Title</th>
+                                            <th>Status</th>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <?php } ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									//check status to define color code
+									$st = $qr_row['req_status'];
+									switch($st){
+									case 'New' ;
+									$color_code='#00FF00';//lime green
+									break;
+									case 'Cancelled' ;
+									$color_code='#FF0000';//red
+									break;
+									case 'Approved' ;
+									$color_code='#3300FF';//red
+									break;
+									case 'Completed' ;
+									$color_code='#DF013A';//yellow
+									break;
+									}
+									?>
+                                        <tr class="odd gradeX">
+                                           <td><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=req&act=view_req&req_ref=<?php echo $qr_row['req_ref_no']; ?>"><?php echo $qr_row['req_ref_no']; ?></a></td>
+                                            <td><?php echo $qr_row['req_name']; ?></td>
+											<td><?php echo '<font color="'.$color_code.'">'. $qr_row['req_status'].'</font>';
+											if($st=='Approved'){?>
+											<a class="btn btn-xs btn-success" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $qr_row['site_id'];?>&sec=lpos&act=new_lpo#new_lpo">>>Generate LPO<<</a>
+											<?php } ?></td>
+										  <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <td><?php echo $qr_row['req_date']; ?></td>
+                                            <td><?php echo $qr_row['req_time']; ?></td>
+                                            <?php } ?>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_req').dataTable();
+            });
+    </script>

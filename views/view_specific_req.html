@@ -1,0 +1,524 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <script src="../js/select2.js"></script>
+
+<script>$(document).ready(function(){$("#response_form").hide();});</script>
+<script>
+
+if("undefined"==typeof jQuery)throw new Error("Tabledit requires jQuery library.");!function(t){"use strict";t.fn.Tabledit=function(e){if(!this.is("table"))throw new Error("Tabledit only works when applied to a table.");var n=this,i={url:window.location.href,inputClass:"form-control input-sm",toolbarClass:"btn-toolbar",groupClass:"btn-group btn-group-sm",dangerClass:"danger",warningClass:"warning",mutedClass:"text-muted",eventType:"click",rowIdentifier:"id",hideIdentifier:!1,autoFocus:!0,editButton:!0,deleteButton:!0,saveButton:!0,restoreButton:!0,buttons:{edit:{class:"btn btn-sm btn-default",html:'<span class="glyphicon glyphicon-pencil"></span>',action:"edit"},delete:{class:"btn btn-sm btn-default",html:'<span class="glyphicon glyphicon-trash"></span>',action:"delete"},save:{class:"btn btn-sm btn-success",html:"Save"},restore:{class:"btn btn-sm btn-warning",html:"Restore",action:"restore"},confirm:{class:"btn btn-sm btn-danger",html:"Confirm"}},onDraw:function(){},onSuccess:function(){},onFail:function(){},onAlways:function(){},onAjax:function(){}},a=t.extend(!0,i,e),d="undefined",s="undefined",o={identifier:function(){a.hideIdentifier&&n.find("th:nth-child("+parseInt(a.columns.identifier[0])+"1), tbody td:nth-child("+parseInt(a.columns.identifier[0])+"1)").hide(),n.find("tbody td:nth-child("+(parseInt(a.columns.identifier[0])+1)+")").each(function(){var e='<span class="tabledit-span tabledit-identifier">'+t(this).text()+"</span>",n='<input class="tabledit-input tabledit-identifier" type="hidden" name="'+a.columns.identifier[1]+'" value="'+t(this).text()+'" disabled>';t(this).html(e+n),t(this).parent("tr").attr(a.rowIdentifier,t(this).text())})},editable:function(){for(var e=0;e<a.columns.editable.length;e++){n.find("tbody td:nth-child("+(parseInt(a.columns.editable[e][0])+1)+")").each(function(){var n=t(this).text();a.editButton||t(this).css("cursor","pointer");var i='<span class="tabledit-span">'+n+"</span>";if(void 0!==a.columns.editable[e][2]){var d='<select class="tabledit-input '+a.inputClass+'" name="'+a.columns.editable[e][1]+'" style="display: none;" disabled>';t.each(jQuery.parseJSON(a.columns.editable[e][2]),function(t,e){d+=n===e?'<option value="'+t+'" selected>'+e+"</option>":'<option value="'+t+'">'+e+"</option>"}),d+="</select>"}else d='<input class="tabledit-input '+a.inputClass+'" type="text" name="'+a.columns.editable[e][1]+'" value="'+t(this).text()+'" style="display: none;" disabled>';t(this).html(i+d),t(this).addClass("tabledit-view-mode")})}},toolbar:function(){if(a.editButton||a.deleteButton){var t="",e="",i="",d="",s="";0===n.find("th.tabledit-toolbar-column").length&&n.find("tr:first").append('<th class="tabledit-toolbar-column"></th>'),a.editButton&&(t='<button type="button" class="tabledit-edit-button '+a.buttons.edit.class+'" style="float: none;">'+a.buttons.edit.html+"</button>"),a.deleteButton&&(e='<button type="button" class="tabledit-delete-button '+a.buttons.delete.class+'" style="float: none;">'+a.buttons.delete.html+"</button>",s='<button type="button" class="tabledit-confirm-button '+a.buttons.confirm.class+'" style="display: none; float: none;">'+a.buttons.confirm.html+"</button>"),a.editButton&&a.saveButton&&(i='<button type="button" class="tabledit-save-button '+a.buttons.save.class+'" style="display: none; float: none;">'+a.buttons.save.html+"</button>"),a.deleteButton&&a.restoreButton&&(d='<button type="button" class="tabledit-restore-button '+a.buttons.restore.class+'" style="display: none; float: none;">'+a.buttons.restore.html+"</button>");var o='<div class="tabledit-toolbar '+a.toolbarClass+'" style="text-align: left;">\n                                           <div class="'+a.groupClass+'" style="float: none;">'+t+e+"</div>\n                                           "+i+"\n                                           "+s+"\n                                           "+d+"\n                                       </div></div>";n.find("tr:gt(0)").append('<td style="white-space: nowrap; width: 1%;">'+o+"</td>")}}},l=function(e){var n=t(e).parent("tr");t(e).parent("tr").find(".tabledit-input.tabledit-identifier").prop("disabled",!0),t(e).find(".tabledit-input").blur().hide().prop("disabled",!0),t(e).find(".tabledit-span").show(),t(e).addClass("tabledit-view-mode").removeClass("tabledit-edit-mode"),a.editButton&&(n.find("button.tabledit-save-button").hide(),n.find("button.tabledit-edit-button").removeClass("active").blur())},r=function(e){c.reset(e);var n=t(e).parent("tr");n.find(".tabledit-input.tabledit-identifier").prop("disabled",!1),t(e).find(".tabledit-span").hide();var i=t(e).find(".tabledit-input");i.prop("disabled",!1).show(),a.autoFocus&&i.focus(),t(e).addClass("tabledit-edit-mode").removeClass("tabledit-view-mode"),a.editButton&&(n.find("button.tabledit-edit-button").addClass("active"),n.find("button.tabledit-save-button").show())},u=function(e){t(e).each(function(){var e=t(this).find(".tabledit-input"),n=t(this).find(".tabledit-span").text();e.is("select")?e.find("option").filter(function(){return t.trim(t(this).text())===n}).attr("selected",!0):e.val(n),l(this)})},b=function(e){!1!==f(a.buttons.edit.action)&&(t(e).each(function(){var e=t(this).find(".tabledit-input");e.is("select")?t(this).find(".tabledit-span").text(e.find("option:selected").text()):t(this).find(".tabledit-span").text(e.val()),l(this)}),d=t(e).parent("tr"))},c={reset:function(t){n.find(".tabledit-confirm-button").hide(),n.find(".tabledit-delete-button").removeClass("active").blur()},submit:function(e){c.reset(e),t(e).parent("tr").find("input.tabledit-identifier").attr("disabled",!1);var n=f(a.buttons.delete.action);t(e).parents("tr").find("input.tabledit-identifier").attr("disabled",!0),!1!==n&&(t(e).parent("tr").addClass("tabledit-deleted-row"),t(e).parent("tr").addClass(a.mutedClass).find(".tabledit-toolbar button:not(.tabledit-restore-button)").attr("disabled",!0),t(e).find(".tabledit-restore-button").hide(),s=t(e).parent("tr"))},confirm:function(e){n.find("td.tabledit-edit-mode").each(function(){u(this)}),t(e).find(".tabledit-delete-button").addClass("active"),t(e).find(".tabledit-confirm-button").show()},restore:function(e){t(e).parent("tr").find("input.tabledit-identifier").attr("disabled",!1);var n=f(a.buttons.restore.action);t(e).parents("tr").find("input.tabledit-identifier").attr("disabled",!0),!1!==n&&(t(e).parent("tr").removeClass("tabledit-deleted-row"),t(e).parent("tr").removeClass(a.mutedClass).find(".tabledit-toolbar button").attr("disabled",!1),t(e).find(".tabledit-restore-button").hide(),t(e).parent("tr"))}};function f(e){var i=n.find(".tabledit-input").serialize()+"&action="+e;if(!1===a.onAjax(e,i))return!1;var o=t.post(a.url,i,function(t,i,s){e===a.buttons.edit.action&&(d.removeClass(a.dangerClass).addClass(a.warningClass),setTimeout(function(){n.find("tr."+a.warningClass).removeClass(a.warningClass)},1400)),a.onSuccess(t,i,s)},"json");return o.fail(function(t,n,i){e===a.buttons.delete.action?(s.removeClass(a.mutedClass).addClass(a.dangerClass),s.find(".tabledit-toolbar button").attr("disabled",!1),s.find(".tabledit-toolbar .tabledit-restore-button").hide()):e===a.buttons.edit.action&&d.addClass(a.dangerClass),a.onFail(t,n,i)}),o.always(function(){a.onAlways()}),o}return o.identifier(),o.editable(),o.toolbar(),a.onDraw(),a.deleteButton&&(n.on("click","button.tabledit-delete-button",function(e){if(!0!==e.handled){e.preventDefault();var n=t(this).hasClass("active"),i=t(this).parents("td");c.reset(i),n||c.confirm(i),e.handled=!0}}),n.on("click","button.tabledit-confirm-button",function(e){if(!0!==e.handled){e.preventDefault();var n=t(this).parents("td");c.submit(n),e.handled=!0}})),a.restoreButton&&n.on("click","button.tabledit-restore-button",function(e){!0!==e.handled&&(e.preventDefault(),c.restore(t(this).parents("td")),e.handled=!0)}),a.editButton?(n.on("click","button.tabledit-edit-button",function(e){if(!0!==e.handled){e.preventDefault();var i=t(this),a=i.hasClass("active");u(n.find("td.tabledit-edit-mode")),a||t(i.parents("tr").find("td.tabledit-view-mode").get().reverse()).each(function(){r(this)}),e.handled=!0}}),n.on("click","button.tabledit-save-button",function(e){!0!==e.handled&&(e.preventDefault(),b(t(this).parents("tr").find("td.tabledit-edit-mode")),e.handled=!0)})):(n.on(a.eventType,"tr:not(.tabledit-deleted-row) td.tabledit-view-mode",function(t){!0!==t.handled&&(t.preventDefault(),u(n.find("td.tabledit-edit-mode")),r(this),t.handled=!0)}),n.on("change","select.tabledit-input:visible",function(){!0!==event.handled&&(b(t(this).parent("td")),event.handled=!0)}),t(document).on("click",function(t){var e=n.find(".tabledit-edit-mode");e.is(t.target)||0!==e.has(t.target).length||u(n.find(".tabledit-input:visible").parent("td"))})),t(document).on("keyup",function(t){var e=n.find(".tabledit-input:visible"),i=n.find(".tabledit-confirm-button");if(e.length>0)var d=e.parents("td");else{if(!(i.length>0))return;d=i.parents("td")}switch(t.keyCode){case 9:a.editButton||(b(d),r(d.closest("td").next()));break;case 13:b(d);break;case 27:u(d),c.reset(d)}}),this}}(jQuery);
+</script>
+<style>
+#td_m{
+	padding:5px;
+	margin:5%;
+	background-color:#fff;
+	
+	}
+</style>
+   <div id="response_form"><br/><br/><br/>
+              <div id="response_message" class="alert alert-success" style="padding:20px; margin-top:30px; margin-right:30px; border:2px solid #FF9900;"><img src="../images/tick.png" width="40px" height="40px" align="left" /> <p style="font-size:24px;align:right;"> Requisition  approved! </p></div>
+              </div>
+<div  id="requisition_form">
+<div class="panel-body">
+<div class="table-responsive">
+<table width="90%" border="0" id="td_m" style="font-size:12px;">
+  <tbody>
+    <tr>
+      <td width="133%"><div align="center"><strong><h2>REQUISITION</h2></strong>
+        <h4><?php echo $_SESSION['COMSYS_SiteName']; ?></h4>
+        P.O.Box <?php echo $_SESSION['COMSYS_SitePostal']; ?> <br/>
+        <?php echo $_SESSION['COMSYS_SiteAddress']; ?><br/>
+        Email: <?php echo $_SESSION['COMSYS_SiteEmail']; ?><br/>
+        Tel: <?php echo $_SESSION['COMSYS_SitePhone']; ?><br/>
+      </div></td>
+    </tr>
+    <tr>
+    <?php 
+    $req_ref = sanitize_string($_GET['req_ref']);
+
+    $req_query=mysql_query("select  app_us.fname as app_fname,app_us.lname as app_lname, us.fname, us.lname,rq.approved_by, us_req.fname as req_fname, us_req.lname as req_lname, rq.req_ref_no,rq.req_id,rq.qty,rq.req_details,rq.req_name,rq.req_status,rq.req_time,rq.req_date,
+pk.pack_name,mt.mat_name, rq.requested_by,rq.lpo_status from requisitions as rq 
+left join users as us on us.user_id = us.user_id
+left join materials as mt on mt.mat_id = rq.mat_id
+left join packages as pk on pk.pack_id = rq.pack_id
+left join users as us_req on us_req.user_id = rq.req_user_id
+left join users as app_us on app_us.user_id=rq.approved_by
+where rq.req_ref_no='".$req_ref."' group by rq.mat_id");
+$query_1 = mysql_fetch_assoc($req_query);
+
+    	//check status to define color code
+		$st = $query_1['req_status'];
+        $lpo_status = $query_1['lpo_status'];
+		switch($st){
+			case 'New' ;
+			$color_code='#ECD01E';//Yellow/Brown
+			break;
+			case 'Cancelled' ;
+			$color_code='#FF0000';//red
+			break;
+			case 'Approved' ;
+			$color_code='#3300FF';//red
+			break;
+			case 'Completed' ;
+			$color_code='#0AB53B';//Green
+			break;
+            case 'LPO Raised' ;
+			$color_code='#14B8F5';//Ocean Blue
+			break;
+		}
+		
+	//Update notifications based on approvals status
+    $check_req_app = mysql_query("select req_approval_id from requisition_approvals where req_ref_no='".$req_ref."'");
+    $num_req_app = mysql_num_rows($check_req_app);
+    if($num_req_app>=1){
+     mysql_query("update notifications set notif_status='Approved' where ref='$req_ref' and recepient_id='".$_SESSION['COMSYS_UserID']."'");	
+    }
+     //Update requisition based on approvals status
+    $check_req = mysql_query("select req_approval_id from requisition_approvals where req_ref_no='".$req_ref."'");
+    $num_req = mysql_num_rows($check_req);
+    if($lpo_status=='Pending' && $num_req==0){
+     mysql_query("update requisitions set req_status='Approved' where req_ref_no='".$req_ref."'");
+    } 
+    ?>
+
+      <td><h4><?php echo $query_1['req_name']; ?></h4></td><hr/>
+    </tr>
+    <tr>
+      <td><table width="100%" border="0" style="font-size:11px;">
+        <tbody>
+          <tr>
+            <td><div align="right"><strong>Ref No:</strong></div></td>
+            <td><code><?php echo $query_1['req_ref_no']; ?></code></td>
+            <td><div align="right"><strong>Prepared by:</strong></div></td>
+            <td><code><?php echo $query_1['fname'].' '.$query_1['lname']; ?></code></td>
+            <td><div align="right"><strong>LPO Status:</strong></div></td>
+            <td><code><?php echo '<font color="'.$color_code.'">'. $query_1['lpo_status'].'</font>'; ?></code></td>
+          </tr>
+          <tr>
+            <td><div align="right"><strong>Date:</strong></div></td>
+            <td><code><?php echo $query_1['req_date']; ?></code></td>
+            <td><div align="right"><strong>Requested by:</strong></div></td>
+            <td><code><?php echo titleCase($query_1['requested_by']); ?></code></td>
+            <td><div align="right"><strong>Status:</strong></div></td>
+            <td><code><?php echo $query_1['req_status'];?></code></td>
+          </tr>
+          <tr>
+            <td><div align="right"><strong>Time:</strong></div></td>
+            <td><code><?php echo $query_1['req_time']; ?></code></td>
+            <td><div align="right"><strong>Approved by:</strong></div></td>
+			
+			<?php
+			//get all people who approved requisition
+			$qr_app = mysql_query("select * from requisition_approvals as ra left join users as us on us.user_id = ra.req_user_id where ra.req_ref_no ='$req_ref' and ra.req_approval_status='Approved' group by req_user_id");
+			$num_app = mysql_num_rows($qr_app);
+       
+			if($num_app==0){
+			$r ='<code>Yet to be Approved</code>';
+			?>
+			<td><?php echo $r; ?></td>
+			<?php
+			}else{
+			while($qrow_app=mysql_fetch_assoc($qr_app)){
+			?>
+			<td><code><?php echo $qrow_app['fname'].' '. $qrow_app['lname'].'&nbsp;'; ?></code></td>
+			<?php
+			}
+			}
+			?>
+            
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          </tbody>
+      </table>
+      <br/>
+      </td>
+    </tr>
+    
+   
+    <tr>
+      <td>
+     </td>
+    </tr>
+  </tbody>
+</table>
+ <table width="100%" style="font-size:11px;" border="0" id="req_items" class="table table-striped table-bordered table-hover" >
+        <thead>
+          <tr>
+            <th height="26">Item Code</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+            <th>Units</th>
+            <th>Package Size</th>
+            <?php } ?>
+            <th>Remarks</th>
+            <th>Action</th>
+            </tr>
+            </thead>
+          <tbody>
+          <?php   
+           $link_referrer = "?acc_type=".$_SESSION['COMSYS_AccountType']."&site_id=".$_SESSION['COMSYS_SiteID']."&sec=req&act=view_req&req_ref=".$req_ref."";         
+		   $req_query2=mysql_query("select rq.approved_by, us_req.fname as req_fname, rq.req_ref_no,rq.req_id,rq.qty,rq.req_details,rq.req_name,rq.req_status,rq.req_time,rq.req_date,
+pk.pack_name,mt.mat_name, rq.pack_size, rq.lpo_status,rq.lpo_file_name from requisitions as rq 
+left join users as us on us.user_id = us.user_id
+left join materials as mt on mt.mat_id = rq.mat_id
+left join packages as pk on pk.pack_id = rq.pack_id
+left join users as us_req on us_req.user_id = rq.req_user_id
+where rq.req_ref_no='".$req_ref."'  group by rq.mat_id");
+          //loop through the records and display the contents of this req
+          //counter variable
+          $count = 1;
+          while($req_row=mysql_fetch_assoc($req_query2)){          
+          ?>
+          <tr>
+          <td><?php echo $req_row['req_id'] ; ?></td>
+            <td><?php echo titleCase($req_row['mat_name']) ; ?></td>
+            <td><?php echo $req_row['qty'] ; ?></td>
+            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+            <td><?php echo $req_row['pack_name'] ; ?></td>
+            <td><?php echo $req_row['pack_size'] ; ?></td>
+            <?php } ?>
+            <td><?php echo $req_row['req_details'] ; ?></td>
+			<td>
+            <?php 
+            $lpo_status = $req_row['lpo_status']; 
+            if($lpo_status=='Pending' && ($_SESSION['COMSYS_UserRole']=='LPOManager' || $_SESSION['COMSYS_UserRole']=='CompanyAdmin')){
+            ?>
+            <a href="#" class="btn btn-xs btn-warning" id="show_upload_file_<?php echo $req_row['req_id'] ; ?>">Upload LPO</a> or <a href="#" id="remove_item_<?php echo $req_row['req_id'] ; ?>" class="btn btn-xs btn-danger"> Remove Item</a>
+            <span class="delete_icon_<?php echo $req_row['req_id']; ?>"><img width="40" height="40" src="../images/loader.gif"/>Removing...</span>
+            <span class="response_delete_<?php echo $req_row['req_id']; ?>"></span>
+              <script>	
+                                        	$(document).ready(function(){
+											    $(".loader-icon-<?php echo $req_row['req_id']; ?>").hide();
+												$(".delete_icon_<?php echo $req_row['req_id']; ?>").hide();	
+											    $("#supplier_<?php echo $req_row['req_id']; ?>").select2();
+                                        	    $("#show_upload_file_<?php echo $req_row['req_id']; ?>").click(function(){
+                                        		$("#lpo_upload_modal_<?php echo $req_row['req_id']; ?>").modal('show');
+                                        	    });
+                                        	    $("#close_modal_<?php echo $req_row['req_id']; ?>").click(function(){
+                                        	       $("#lpo_upload_modal_<?php echo $req_row['req_id']; ?>").modal('hide'); 
+												   window.location.href="<?php echo $link_referrer; ?>";
+                                        	    });
+                                        	    $(".loader-icon-<?php echo $req_row['req_id']; ?>").hide();
+                                                $('#upload_save_<?php echo $req_row['req_id']; ?>').on('click', function() {
+                                                $(".response_<?php echo $req_row['req_id']; ?>").empty();  
+												$(".loader-icon-<?php echo $req_row['req_id']; ?>").fadeIn();  
+												    var ref_no = "<?php echo $req_row['req_ref_no']; ?>";
+													var req_id = <?php echo $req_row['req_id']; ?>;
+													var qty = $("#qty_<?php echo $req_row['req_id']; ?>").val(); 
+													var supplier = $("#supplier_<?php echo $req_row['req_id']; ?>").val();
+                                                    var file_data = $('#upload_lpo_file_<?php echo $req_row['req_id']; ?>').prop('files')[0]; 
+													var error = false;  
+                                                    var form_data = new FormData(); 
+													if(qty===''){
+													error = true;
+													$("#qty_<?php echo $req_row['req_id']; ?>").focus();
+													$("#qty_<?php echo $req_row['req_id']; ?>").css("border-color","red");
+													}
+													if(supplier===''){
+													error = true;
+													$("#supplier_<?php echo $req_row['req_id']; ?>").focus();
+													$("#supplier_<?php echo $req_row['req_id']; ?>").css("border-color","red");
+													}
+													if(error==true){ 
+													alert("You must select supplier and enter quantity!");
+													$(".loader-icon-<?php echo $req_row['req_id']; ?>").hide();
+													}else{                
+                                                    form_data.append('file', file_data);                          
+                                                    $.ajax({
+                                                        url: '../process/upload_lpo_file.php?ref_no='+ref_no+'&supplier='+supplier+'&qty='+qty+'&req_id='+req_id+'', // point to server-side PHP script 
+                                                        dataType: 'text',  // what to expect back from the PHP script, if anything
+                                                        cache: false,
+                                                        contentType: false,
+                                                        processData: false,
+                                                        data: form_data,                         
+                                                        type: 'post',
+                                                        success: function(response){
+                                                         $(".response_<?php echo $req_row['req_id']; ?>").append(response);
+														 $(".loader-icon-<?php echo $req_row['req_id']; ?>").hide();
+                                                        }
+                                                     });
+													 }
+                                                });
+												
+									               			//Remove item click
+												$("#remove_item_<?php echo $req_row['req_id'] ; ?>").click(function(){
+												$(".response_delete_<?php echo $req_row['req_id']; ?>").empty();
+												 var agree = confirm("Are you sure you want to remove this requisition item ?");
+												if(agree==true){
+												//we select the first link 
+												//then call the attr method to get back the href value
+												$(".delete_icon_<?php echo $req_row['req_id']; ?>").fadeIn();
+												var req_id = <?php echo $req_row['req_id']; ?>;
+												var req_ref = '<?php echo $req_row['req_ref_no']; ?>' ;
+												$.post("../process/delete_requisition_item.php",
+												{ req_id : req_id,req_ref : req_ref   },
+												function(req_id) {
+												$(".response_delete_<?php echo $req_row['req_id']; ?>").html(req_id);
+												$(".delete_icon_<?php echo $req_row['req_id']; ?>").hide();											 
+												});
+                                                }												
+												});
+                                        	});
+                 </script> 
+                 <div class="modal fade" id="lpo_upload_modal_<?php echo $req_row['req_id']; ?>" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h4 >Upload Support Document </h4> 
+                                                    </div>
+                                                    <div class="modal-body">
+                                                   
+                                                    <h3><strong><?php  echo titleCase($req_row['mat_name']);?></strong></h3><hr/>
+                                                      <strong>Select Supplier:</strong><br/>
+                                                     <select id="supplier_<?php echo $req_row['req_id']; ?>" style="width:200px;">
+                                                     <option value="">--Select Supplier--</option>
+                                                     <?php 
+                                                       //Get all suppliers 
+             										$suppliers = mysql_query("select sup_id,sup_name from suppliers order by sup_name asc");
+                                                     while($sup_row = mysql_fetch_assoc($suppliers)){
+                                                     ?>
+                                                     <option value="<?php  echo $sup_row['sup_id'];?>"><?php  echo titleCase($sup_row['sup_name']);?></option>
+                                                     <?php
+                                                     } 
+                                                     ?>
+                                                     </select><br/><br/>
+                                                     <strong>Quantity:</strong><br/>
+                                                     <input type="text" style="width:200px;" class="my-form-control"  id="qty_<?php echo $req_row['req_id']; ?>" value="<?php echo $req_row['qty']; ?>"/><br/>
+                                              <strong>Select File:</strong><br/>  
+                                              <input type="file" name="file" id="upload_lpo_file_<?php echo $req_row['req_id']; ?>"><br/><br/>
+                                                   
+                                                     <button  id="upload_save_<?php echo $req_row['req_id']; ?>" class="btn btn-success">Upload & Save <i class="glyph-icon icon-cloud-upload mrg10R"></i></button>
+                                                                                                 
+                                                      <span class="loader-icon-<?php echo $req_row['req_id']; ?>"><img width="40" height="40" src="../images/loader.gif"/>Uploading...</span><hr/>
+                                                       <div class="response_<?php echo $req_row['req_id']; ?>"></div>
+                                                        <a class="btn btn-xs btn-danger" id="close_modal_<?php echo $req_row['req_id']; ?>" href="#">Close</a> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                </div>  
+                <?php }elseif($lpo_status=='Completed'){
+                ?>
+                <a target="_blank" href="../lpo_files/<?php echo $req_row['lpo_file_name']; ?>" class="btn btn-xs btn-danger">View LPO</a>
+                <?php
+                }elseif($lpo_status=='Pending'){
+                ?>
+                <a  href="#" class="btn btn-xs btn-warning">Pending Approvals</a>
+                <?php
+                }elseif($lpo_status=='Rejected'){
+                ?>
+                <a  href="#" class="btn btn-xs btn-danger">Rejected</a>
+                <?php                
+                }
+                ?>
+            </td>
+			<?php
+			if($st=='Approved'){
+			//hide the update or remove link
+		echo '<script>
+		$(document).ready(function(){
+		$("#update_link_'.$req_row['req_id'].'").hide();
+		});
+		</script>';
+			}elseif($st=='Cancelled'){
+			//hide the update or remove link
+		echo '<script>
+		$(document).ready(function(){
+		$("#update_link_'.$req_row['req_id'].'").hide();
+		});
+		</script>';
+			}elseif($st=='Completed'){
+			
+			//hide the update or remove link
+		echo '<script>
+		$(document).ready(function(){
+		$("#update_link_'.$req_row['req_id'].'").hide();
+		});
+		</script>';
+			}
+			?>
+           </tr>
+          <?php         
+          }          
+          ?>                  
+        </tbody>
+      </table>
+ </div>
+ </div>
+<script>
+$(document).ready(function(){
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		ref_no = $("#approve_req").val();		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'ref_no='+ref_no; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/approve_requisition.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			$('#requisition_form').hide();
+			$("#response_form").show();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>
+<?php
+//only show this part if it has not been approved
+$Qr_ck = mysql_query("select * from requisition_approvals as ra left join users as us on us.user_id = ra.req_user_id
+where ra.req_user_id ='".$_SESSION['COMSYS_UserID']."' and ra.req_ref_no ='$req_ref' and ra.req_approval_status='New'");
+$num_rows = mysql_num_rows($Qr_ck);
+
+if($st!='Approved' && $num_rows>0){
+?>
+                            <form action="../process/approve_requisition.php" method="POST">
+							<input type="hidden" id="approve_req"  name="approve_req" value="<?php echo sanitize_string($_GET['req_ref']); ?>" />
+									
+							<button type="submit" id="submit" class="btn btn-blue-alt">Approve & Send</button> or <a href="#" id="show_approve_reject" class="btn btn-xs btn-danger">Reject Requisition</a>
+							<span class="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Sending, Please wait...</span>
+							<br/><div id="response"></div>
+						  </form>
+                           <div class="modal fade" id="reject_modal" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h4><font size="+1">Reason for Rejection</font> </h4> 
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <strong>Reason:</strong> <br/>
+                                                    <textarea id="reject_reason" class="form-control"></textarea><br/>                                                                                            
+                                                     <button  id="reject_requisition" class="btn btn-success">Reject  & Send <i class="glyph-icon icon-cloud-upload mrg10R"></i></button>
+                                                                                                 
+                                                      <span class="loader-icon-reject"><img width="40" height="40" src="../images/loader.gif"/>Saving...</span><hr/>
+                                                       <div class="response_reject"></div>
+                                                        <a class="btn btn-xs btn-danger" id="close_modal" href="#">Close</a> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                           </div>  
+                           <script>
+                           $(document).ready(function(){
+						   $(".loader-icon-reject").hide();
+						   $("#show_approve_reject").click(function(){
+						   $("#reject_modal").modal('show');
+						   });
+						   $("#close_modal").click(function(){
+						   $("#reject_modal").modal('hide');
+						   window.location.href="<?php echo $link_referrer; ?>";
+						   });
+						   $("#reject_requisition").click(function(){
+						   $('.response_reject').empty();
+						    reason = $("#reject_reason").val();
+							ref_no = "<?php echo $req_ref; ?>";
+							if(reason===''){
+							alert("Please specify reason for rejection");
+							$("#reject_reason").focus();
+							$("#reject_reason").css("border-color","red");
+							}else{
+							//Capture request and send to server
+							//hide submit button
+							$("#reject_requisition").fadeOut();
+							$(".loader-icon-reject").fadeIn();
+							
+							/* Ajax Request here*/
+										//data values
+								var myData = 'ref_no='+ref_no + '&reason='+reason; //build a post data structure
+								jQuery.ajax({
+								type: "POST", // Post / Get method
+								url: "../process/reject_requisition.php", //Where form data is sent on submission
+								dataType:"text", // Data type, HTML, json etc.
+								data:myData, //Form variables
+								success:function(response){
+								$(".response_reject").append(response); 
+								$('.loader-icon-reject').fadeOut();
+								$('#reject_requisition').fadeIn();
+								$('.response_reject').fadeIn();
+								}
+					
+								});
+							}
+						   
+						   });
+						   
+						   
+						   });
+                          
+						   $('#req_items').Tabledit({
+							//Delete PO Item
+							url: '../process/update_req_details_final.php', editButton: true, removeButton: true, columns: {
+								identifier: [0, 'id'], editable: [ [2, 'Quantity'], [5, 'Description']]
+							}
+							, buttons: {
+								edit: {
+									class: 'btn btn-sm btn-default', html: '<span class="glyph-icon icon-pencil-square-o"></span>Edit', action: 'edit'
+								}
+								, delete: {
+									class: 'btn btn-sm btn-default', html: '<span class="glyph-icon  icon-trash"></span>Delete', action: 'delete'
+								}
+								, save: {
+									class: 'btn btn-sm btn-success', html: 'Save'
+								}
+								, 
+								confirm: {
+									class: 'btn btn-sm btn-danger', html: 'Confirm'
+								}
+							}
+							, onDraw: function() {
+								return;
+							}
+							, onSuccess: function() {
+								return;
+							}
+							, onFail: function() {
+								return;
+							}
+							, onAlways: function() {
+								return;
+							}
+							, onAjax: function() {
+								return;
+							}
+						}
+						
+						);
+						</script>
+
+<?php
+}elseif($st!='Pending'){
+?>
+     <div class="signup-form">
+<form action="#" method="post">
+  <button onclick="printContent('td_m')">Print Requisition</button>
+</form>
+</div>                
+<?php
+
+
+
+}
+
+?>
+ </div>

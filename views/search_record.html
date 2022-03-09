@@ -1,0 +1,102 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../css/metallic.css" type="text/css">
+    <script src="../js/select2.js"></script>
+    <script type="text/javascript" src="../js/zebra_datepicker.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+	$('#first_date').Zebra_DatePicker();
+    $('#last_date').Zebra_DatePicker();
+    <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+    $('#sup_name').select2();
+    <?php } ?>
+    $('.loader').hide();
+    $('.sup_name').hide();
+   $('#spec').change(function(){
+	$('.sup_name').fadeIn();
+	//check if an item has beeb selected
+	spec_val = $('#spec').val();
+	if(spec_val===''){
+		$('.sup_name').hide();
+	}else{
+		$('.sup_name').fadeIn();	
+	}
+	if(spec_val==='Issues'){
+		$('.sup_name').hide();
+	}
+	});
+     $("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		first_date = $("#first_date").val();
+		last_date = $("#last_date").val();
+		sup_name = $("#sup_name").val();
+	    spec = $("#spec").val();
+		site_id = <?php echo sanitize_string($_GET['site_id']);?>;
+			
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'first_date='+first_date + '&last_date='+ last_date + '&spec='+ spec + '&site_id='+ site_id + '&sup_name='+ sup_name; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/search_record.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+	});
+	</script>
+
+<h3>Search Record &raquo; Stock Movement</h3><br/>
+<div class="col-sm-13">
+<div class="signup-form">
+
+<label>Query Type:</label>
+<select id="spec" name="spec" style="width:200px;">
+	<option value="">--Specify Record--</option>
+	<option value="Rec">Material Received</option>
+	<option value="Issues">Material Issued</option>
+</select>
+&nbsp;
+<select name="sup_name" id="sup_name" class="sup_name" style="width:250px">
+<option value="">--Select Supplier--</option>
+<?php
+$qr = mysql_query("select * from suppliers where status='Active' order by sup_name asc");
+while($qrow=mysql_fetch_assoc($qr)){
+?>
+<option value="<?php echo $qrow['sup_id'];?>"><?php echo $qrow['sup_name'];?></option>
+<?php
+}
+?>
+</select>
+<label>From:</label>
+<input type="text" name="first_date"  style="width:80px;padding:2px;height:40px;" id="first_date" value="<?php echo date('Y-m-d');?>" />
+&nbsp;<label>To:</label>
+<input type="text" name="last_date"  style="width:80px;padding:2px;height:40px;" id="last_date" value="<?php echo date('Y-m-d');?>" />
+<button type="submit" id="submit" class="btn btn-default">Search</button>
+</div><br/><br/><br/><br/>
+<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Searching Record...</span><br/>
+<div id="response"></div>
+
+</div>
+<?php
+
+
+?>

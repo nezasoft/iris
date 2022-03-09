@@ -1,0 +1,88 @@
+<?php
+$qr= mysql_query("select pp.file_name, mt.mat_name,mt.mat_id,mt.description,mc.mat_cat_name,sup.sup_name,mn.man_name,br.brand_name,s.size_name from materials as mt left join materials_categories as mc on mc.mat_cat_id=mt.mat_cat_id
+left join suppliers as sup on sup.sup_id = mt.sup_id
+left join product_photos as pp on pp.mat_id=mt.mat_id
+left  join manufactures as mn on mn.man_id = mt.man_id
+left join brands as br on br.brand_id = mt.brand_id
+left join sizes as s on s.size_id = mt.size_id
+group by mt.mat_id");
+?>	
+<br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Materials</h3>
+                        </div>
+						<br/><span id="matresults"></span><br/><br/>
+                        <div class="panel-body">						
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover list_materials" id="list_materials">
+                                    <thead>
+                                        <tr>
+                                            <th>Material Name</th>
+											<th>Category</th>
+											<th>Manufacturer</th>
+											<th>Brand</th>
+											<th>Size</th>
+                                            <th>Supplier</th>                                         
+                                            <th>Description</th>
+											<th>Image</th>
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+									<div id="container_image">
+                                    <tbody>									
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">                                        
+                                            <td><?php echo $qr_row['mat_name']; ?></td>
+											<td><?php echo $qr_row['mat_cat_name']; ?></td>
+											<td><?php echo $qr_row['man_name']; ?></td>
+											<td><?php echo $qr_row['brand_name']; ?></td>
+											<td><?php echo $qr_row['size_name']; ?></td>
+                                            <td><?php echo $qr_row['sup_name']; ?></td>
+                                             <td><?php echo $qr_row['description']; ?></td>
+											 <td></td>
+											 
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete store
+												$("#delmat_<?php echo $qr_row['mat_id'];?>").click(function(){												
+													$("#matresults").empty();													
+													var con = confirm("Are you sure you want to remove this material?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var mat_id = $("#delmatval_<?php echo $qr_row['mat_id'];?>").attr("rel");												
+											$.post("../process/delete_product.php",
+											 { mat_id : mat_id},
+											 function(mat_id) {
+											 $("#matresults").html(mat_id);											 
+										   });											
+												}
+														   
+												});
+											});
+                                           </script>
+										   <a href="" id="delmatval_<?php echo $qr_row['mat_id'];?>" rel="<?php echo $qr_row['mat_id'];?>"></a>
+											<td><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=man_mat&ip=edit_mat&mat_id=<?php echo $qr_row['mat_id'];?>">Edit</a></td>
+											<td><a href="#list_materials" id="delmat_<?php echo $qr_row['mat_id'];?>">Delete</a></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+								
+                                    </tbody>
+									</div>
+                                </table>
+								</div>
+                            </div>                                               
+                    </div>				 
+			<script>
+            $(document).ready(function () {
+              $('.list_materials').dataTable();
+            });
+           </script>
+	

@@ -1,0 +1,428 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+    <script src="../js/select2.js"></script>
+
+<script>
+
+$(document).ready(function(){
+startRefreshing();
+
+$("#mat_name").select2();  
+$("#by_name").select2(); 
+//hide all errors when form loads
+$("#floor_error").hide();
+$("#section_error").hide();
+$("#pack_size_error").hide();
+$("#mat_name_error").hide();
+$("#by_name_error").hide();
+$("#req_name_error").hide();
+$("#req_by_error").hide();
+$("#ref_no_error").hide();
+$("#qty_error").hide();
+$('#TransDiv').hide();
+$("#CompleteTrans").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		
+		//$("#CompleteTrans").fadeIn();
+		//error
+		error = false;
+		ref_no = $("#ref_no").val();
+		req_name = $("#req_name").val();
+		req_by = $("#req_by").val();
+		mat_name = $("#mat_name").val();
+		by_name = $("#by_name").val();
+		pack_name = $("#pack_name").val();
+		pack_size = $("#pack_size").val();
+		floor_ = $("#floor").val();
+		section = $("#section").val();
+	    qty = $("#qty").val();
+		desc = $("#desc").val();
+		 
+		 if(by_name ===''){
+		error =true;
+		$("#by_name_error").fadeIn();
+		$("#by_name").focus();
+		}else{
+		$("#by_name_error").fadeOut();
+		
+		}
+		 if(req_by ===''){
+		error =true;
+		$("#req_by_error").fadeIn();
+		$("#req_by").focus();
+		}else{
+		$("#req_by_error").fadeOut();
+		
+		}
+		if(pack_size ===''){
+		error =true;
+		$("#pack_size_error").fadeIn();
+		$("#pack_size").focus();
+		}else{
+		$("#pack_size_error").fadeOut();
+		
+		}
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+		 if(floor_ ===''){
+		error =true;
+		$("#floor_error").fadeIn();
+		$("#floor").focus();
+		}else{
+		$("#floor_error").fadeOut();
+		
+		}
+		 if(section ===''){
+		error =true;
+		$("#section_error").fadeIn();
+		$("#section").focus();
+		}else{
+		$("#section_error").fadeOut();
+		
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(req_name ===''){
+		error =true;
+		$("#req_name_error").fadeIn();
+		$("#req_name").focus();
+		}else{
+		$("#req_name_error").fadeOut();
+		
+		}
+		if(ref_no ===''){
+		error =true;
+		$("#ref_no_error").fadeIn();
+		$("#ref_no").focus();
+		}else{
+		$("#ref_no_error").fadeOut();
+		
+		}
+		
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		$("#CompleteTrans").fadeIn();
+		/* Ajax Request here*/
+					//data values
+			var myData = 'ref_no='+ref_no + '&req_name='+ req_name + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc + '&by_name='+ by_name + '&req_by='+ req_by + '&floor='+ floor_ + '&pack_size='+ pack_size + '&section='+ section; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_req.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$("#CompleteTrans").fadeIn();
+			$('#submit').fadeIn();			
+			$('#TransDiv').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+<script>
+// Config for the javascript part
+ 
+var urlForPHP 			= "../process/temp_req.php";
+var milsecondsTillRepeat 	= 1000;
+var idForReplace		= "TransDiv";
+ 
+function startRefreshing()
+{
+	setTimeout("startRefreshing()",milsecondsTillRepeat);
+	reloadPHP();
+}
+ 
+ 
+function reloadPHP()
+{
+	xmlhttp=GetXmlHttpObject();
+	if (xmlhttp==null)
+	{
+		alert ("Your Browser does not support HTTP Request");
+		return;
+	}
+	var url=urlForPHP;
+	url=url+"?random="+Math.random();
+	xmlhttp.onreadystatechange=stateChanged;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+ 
+function stateChanged()
+{
+	if (xmlhttp.readyState==4)
+	{
+	document.getElementById(idForReplace).innerHTML=xmlhttp.responseText;
+	}
+}
+ 
+function GetXmlHttpObject()
+{
+if (window.XMLHttpRequest)
+  {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  return new XMLHttpRequest();
+  }
+if (window.ActiveXObject)
+  {
+  // code for IE6, IE5
+  return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+return null;
+}
+</script>
+                  <?php
+               //get the id of the last column to make the req ref no
+               $q = mysql_fetch_array(mysql_query("select last_insert_id(req_id) as req_id from requisitions where site_code='".$_SESSION['COMSYS_SiteCode']."'
+          	 order by req_id desc limit 1"));
+
+                $req_id = $q['req_id'];
+                if($req_id==''){
+                   $req_ref_no = 1;
+                }else{
+                $req_ref_no = $req_id + 1;
+                }
+                 //create a req ref no and save it in a session
+                 $req_ref_no = $_SESSION['COMSYS_SiteCode'].'RQ'.$req_ref_no ;
+                 //create and save it in a session
+                 $_SESSION['COMSYS_ReqRefNo'] = $req_ref_no;
+                 //for ref no id
+                 ///$_SESSION['StartleQuoteId'] = $quote_id;
+             ?>
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+		    <div>
+					<div class="signup-form">
+						<h2>New Requisition</h2><hr/>
+						<form action="../process/new_req.php" method="POST">
+						<span class="error" id="ref_no_error">* Ref No</span><br/>
+						    <label>Ref No:</label>
+							<input type="text" name="ref_no" disabled id="ref_no" value="<?php echo $_SESSION['COMSYS_ReqRefNo']; ?>" />
+							 <label>Requisition Name:</label>
+							 <span class="error" id="req_name_error">* Title Requisition</span><br/>
+							<input type="text" name="req_name" id="req_name" placeholder="Requistion Name" />
+							<span class="error" id="mat_name_error">* Choose Materials</span><br/>
+							<label>Material</label>
+							<select name="mat_name" id="mat_name" style="width:100%">
+								<option value="">--Select Material--</option>
+								<?php
+								
+								$qr = mysql_query("select * from materials  group by mat_name order by mat_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['mat_id'];?>"><?php echo $qrow['mat_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>
+							<label>Package:</label>
+							<span class="error" id="pack_name_error">* Choose Package</span><br/>
+							<select name="pack_name" id="pack_name">
+								<option value="">--Select Package--</option>
+								<?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['pack_id'];?>"><?php echo $qrow['pack_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+                            <div align="left"><strong>Package Size:</strong></div>
+                            <input type="text" id="pack_size" class="my-form-control" name="pack_size" placeholder="Package Size"/><span class="error" id="pack_size_error">* Enter Package Size</span>
+		
+							<span class="error" id="qty_error">* Quantity</span><br/>
+							<label>Quantity:</label>
+							<input type="text" name="qty" id="qty" placeholder="Quantity"/>
+							<span class="error" id="desc_error">* Description</span><br/>
+							<label>Description:</label>
+							<input type="text" name="desc" id="desc" placeholder="Description"/>
+                            <div align="left"><strong>Floor:</strong></div>
+                            <input type="text" name="floor" id="floor" placeholder="Floor"/>
+                            <span class="error" id="floor_error">* Choose Floor</span>
+                            <div align="left"><strong>Section:</strong></div>
+                            <select name="section" id="section"  style="width:100%" class="my-form-control">
+                              <option value="">--Choose Section--</option>
+                              <?php
+								
+								$qr = mysql_query("select * from building_sections  order by section_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+                              <option value="<?php echo $qrow['id'];?>"><?php echo $qrow['section_name'];?></option>
+                              <?php
+								}
+								?>
+                            </select><br/><br/><span class="error" id="section_error">* Choose Section</span>
+							<input type="text" size="30" id="req_by"  class="my-form-control" name="req_by" placeholder="Requested by" />
+                             <span class="error" id="req_by_error">* Requested By</span><br/></br>
+                             <label>To be Approved By:</label>
+							 <span class="error" id="by_name_error">* Select User</span><br/>
+							<select name="by_name[]" id="by_name" multiple="multiple" style="width:100%">
+								<option value="">--Choose User--</option>
+								<?php
+								
+								$qr = mysql_query("select * from users where site_id='".$_SESSION['COMSYS_SiteID']."'  order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>	
+														
+							<button type="submit" id="submit" class="btn btn-default">Add to Cart</button>
+							<span class="loader" id="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Processing Request...</span><br/>
+							<div id="response"></div><br/>
+							<div id="TransDiv"><img src="../images/iconLoading.gif"/></div><br/>
+							
+							<?php
+							//check if any items exist in cart for this requisition
+							$ch_tr = mysql_num_rows(mysql_query("select * from temp_requisitions where req_ref_no='".$_SESSION['COMSYS_ReqRefNo']."' limit 1"));
+							if($ch_tr==1){
+							?>
+							
+							<script>
+							$(document).ready(function(){
+							$('#TransDiv').fadeIn();
+							$("#CompleteTrans").fadeIn();
+							});
+							</script>
+							<div id="CompleteTrans">
+							<a href="#" id="req_ref_no" rel="<?php echo $_SESSION['COMSYS_ReqRefNo']; ?>"></a>
+							<a href="#CompleteTrans" id="send_req_f">Send Requisition <font size="+2">&raquo; &raquo;</font></a> | <a href="" id="clear_data">Clear Data </a>
+							<span class="loader2" id="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Sending, Please wait...</span><br/>
+							<div id="response2"></div>
+							</div>
+						
+							</div>
+							<span id="response2"></span>
+							<?php
+							}else{
+							?>
+							<script>
+							$(document).ready(function(){
+							//hide the send requisition
+							$("#CompleteTrans").fadeIn();
+							$("#submit").click(function(e){
+		                     e.preventDefault();
+							 //show the send requisition link
+							 $("#CompleteTrans").fadeIn();
+							 
+							 });
+						
+							
+							});
+							
+							</script>
+							<div id="CompleteTrans">
+							<a href="#" id="req_ref_no" rel="<?php echo $_SESSION['COMSYS_ReqRefNo']; ?>"></a>
+							<a href="#CompleteTrans" class="btn btn-xs btn-success" id="send_req_f">Send Requisition <font size="+2">&raquo; &raquo;</font></a> | <a class="btn btn-xs btn-danger" href="" id="clear_data">Clear Data </a>
+							<span class="loader2" id="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Sending, Please wait...</span><br/>
+							<div id="response2"></div>
+							</div>
+						
+							<?php
+							}
+							?>
+								
+						</form>
+					</div>		
+					<script>
+					//When DOM loaded we attach click event to button
+					$(document).ready(function() {	
+						$('.loader2').hide();					
+					//send requisition
+						$("#send_req_f").click(function(){
+					
+						$('.loader2').fadeIn();
+						var ref_no_send = $("#req_ref_no").attr("rel");
+					 $("#response2").empty();
+					 var con = confirm("Submit Requisition?");
+						 if(con==true){
+						 $.post("../process/send_requisition.php",
+							{ ref_no_send: ref_no_send},
+							function(ref_no_send) {
+							$("#response2").html(ref_no_send);
+							$('.loader2').hide();
+							$('#TransDiv').hide();
+							$("#CompleteTrans").fadeIn();
+							//$('.complete_reg').hide();
+							 });
+						 }else{
+						 	$('.loader2').hide();
+						 
+						 }
+						
+						 });
+						//Clear Data
+						$("#clear_data").click(function(){
+					
+						$('.loader2').fadeIn();
+						var ref_no_send = $("#req_ref_no").attr("rel");
+					 $("#response2").empty();
+					 var con = confirm("Clear Data?");
+						 if(con==true){
+						 $.post("../process/clear_req_data.php",
+							{ ref_no_send: ref_no_send},
+							function(ref_no_send) {
+							$("#response2").html(ref_no_send);
+						
+							 });
+						 }else{
+						 	$('.loader2').hide();
+						 
+						 }
+						
+						 }); 
+			
+						 
+
+					});
+				</script>
+	 
+					</div>
+				</div>
+				
+			

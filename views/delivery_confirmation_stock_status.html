@@ -1,0 +1,51 @@
+<?php
+$qr= mysql_query("select  pk.pack_name, s.site_name, mat.mat_name, sum(dc.qty) as stock_qty from delivery_confirmations as dc 
+left join materials as mat on mat.mat_id = dc.mat_id
+left join sites as s on s.site_id = dc.site_supply_id
+left join packages as pk on pk.pack_id = dc.pack_id
+group by dc.mat_id");
+
+?>	
+<br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Stock Status </h3>
+                        </div>
+						<br/><span id="brandresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_brands">
+                                    <thead>
+                                        <tr>
+                                            <th>Material Name</th>                                                                            
+											<th>Stock</th>
+											<th>Package</th>
+											<th>Site Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                         
+                                            <td><?php echo titleCase($qr_row['mat_name']); ?></td>
+                                           <td><?php echo $qr_row['stock_qty']; ?></td>
+										   <td><?php echo $qr_row['pack_name']; ?></td>
+										   <td><?php echo $qr_row['site_name']; ?></td>
+                                
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_brands').dataTable();
+            });
+    </script>

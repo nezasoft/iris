@@ -1,0 +1,238 @@
+<?php
+$req_id = sanitize_string($_GET['req_id']);
+$qr_row = mysql_fetch_assoc(mysql_query("select * from temp_requisitions as tr 
+left join materials as mt on mt.mat_id=tr.mat_id where tr.req_id='$req_id'"));
+
+?>
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <script src="../js/select2.js"></script>
+<script>
+$(document).ready(function(){
+//Delete Requisition cart item
+$("#delreq_<?php echo $qr_row['req_id'];?>").click(function(){												
+$("#response").empty();													
+var con = confirm("Are you sure you want to remove this requisition item?");													
+	if(con==true){
+	//we select the first link 
+	//then call the attr method to get back the href value
+	var req_id = <?php echo $req_id; ?>;
+	$.post("../process/delete_requisition.php",
+	{ req_id : req_id  },
+	function(req_id) {
+	$("#response").html(req_id);											 
+	});											
+	}
+});
+
+$("#mat_name").select2();  
+//hide all errors when form loads
+$("#floor_error").hide();
+$("#section_error").hide();
+$("#pack_size_error").hide();
+$("#mat_name_error").hide();
+$("#req_name_error").hide();
+$("#ref_no_error").hide();
+$("#qty_error").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		ref_no = $("#ref_no").val();
+		req_name = $("#req_name").val();
+		mat_name = $("#mat_name").val();
+		pack_name = $("#pack_name").val();
+		pack_size = $("#pack_size").val();
+		floor_ = $("#floor").val();
+		section = $("#section").val();
+	    qty = $("#qty").val();
+		req_id = <?php echo $req_id; ?>;
+		desc = $("#desc").val();
+		
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		 if(floor_ ===''){
+		error =true;
+		$("#floor_error").fadeIn();
+		$("#floor").focus();
+		}else{
+		$("#floor_error").fadeOut();
+		
+		}
+		 if(section ===''){
+		error =true;
+		$("#section_error").fadeIn();
+		$("#section").focus();
+		}else{
+		$("#section_error").fadeOut();
+		
+		}
+		if(pack_size ===''){
+		error =true;
+		$("#pack_size_error").fadeIn();
+		$("#pack_size").focus();
+		}else{
+		$("#pack_size_error").fadeOut();
+		
+		}
+		if(req_name ===''){
+		error =true;
+		$("#req_name_error").fadeIn();
+		$("#req_name").focus();
+		}else{
+		$("#req_name_error").fadeOut();
+		
+		}
+		if(ref_no ===''){
+		error =true;
+		$("#ref_no_error").fadeIn();
+		$("#ref_no").focus();
+		}else{
+		$("#ref_no_error").fadeOut();
+		
+		}
+		
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'ref_no='+ref_no + '&req_name='+ req_name + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc + '&req_id='+ req_id + '&floor='+ floor_ + '&pack_size='+ pack_size + '&section='+ section; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_req.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+		<div class="col-sm-4">
+					<div class="signup-form">
+						<h2>Edit Requisition</h2>
+						<form action="../process/edit_req.php" method="POST">
+						<span class="error" id="ref_no_error">* Ref No</span><br/>
+						    <label>Ref No:</label>
+							<input type="text" name="ref_no" disabled id="ref_no" value="<?php echo $qr_row['req_ref_no']; ?>" />
+							 <label>Requisition Name:</label>
+							 <span class="error" id="req_name_error">* Title Requisition</span><br/>
+							<input type="text" name="req_name" id="req_name" value="<?php echo $qr_row['req_name']; ?>" />
+							<span class="error" id="mat_name_error">* Choose Materials</span><br/>
+							<label>Material</label>
+							<select name="mat_name" id="mat_name" style="width:100%">
+								<option value="<?php echo $qr_row['mat_id']; ?>"><?php echo $qr_row['mat_name']; ?></option>
+								<?php
+								
+								$qr = mysql_query("select * from materials group by mat_name order by mat_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['mat_id'];?>"><?php echo $qrow['mat_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/><br/>
+							<label>Package:</label>
+							<span class="error" id="pack_name_error">* Choose Package</span><br/>
+							<select name="pack_name" id="pack_name">
+								<option value="">--Select Package--</option>
+								<?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['pack_id'];?>"><?php echo $qrow['pack_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+		                     <div align="left"><strong>Package Size:</strong></div>
+                            <input type="text" id="pack_size" class="my-form-control" value="<?php echo $qr_row['pack_size'];?>" name="pack_size" placeholder="Package Size"/><span class="error" id="pack_size_error">* Enter Package Size</span>
+							<span class="error" id="qty_error">* Quantity</span><br/>
+							<label>Quantity:</label>
+							<input type="text" name="qty" id="qty" value="<?php echo $qr_row['qty']; ?>"/>
+							<span class="error" id="desc_error">* Description</span><br/>
+							<label>Description:</label>
+							<input type="text" name="desc" id="desc" value="<?php echo $qr_row['req_details']; ?>"/>
+                            <div align="left"><strong>Floor:</strong></div>
+                            <select name="floor" id="floor"  style="width:100%" class="my-form-control">
+                              <option value="">--Choose Floor--</option>
+                              <?php
+								
+								$qr = mysql_query("select * from building_floors order by id asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+                              <option value="<?php echo $qrow['id'];?>"><?php echo $qrow['floor_no'];?></option>
+                              <?php
+								}
+								?>
+                            </select><br/><br/>
+                            <span class="error" id="floor_error">* Choose Floor</span>
+                            <div align="left"><strong>Section:</strong></div>
+                            <select name="section" id="section"  style="width:100%" class="my-form-control">
+                              <option value="">--Choose Section--</option>
+                              <?php
+								
+								$qr = mysql_query("select * from building_sections  order by section_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+                              <option value="<?php echo $qrow['id'];?>"><?php echo $qrow['section_name'];?></option>
+                              <?php
+								}
+								?>
+                            </select><br/><br/><span class="error" id="section_error">* Choose Section</span>
+							<input type="text" size="30" id="req_by" value="<?php  echo $qr_row['requested_by'];?>"  class="my-form-control" name="req_by" placeholder="Requested by" />
+							
+							<button type="submit" id="submit" class="btn btn-default">Update Cart</button> or <a href="#DelThis" id="delreq_<?php echo $qr_row['req_id'];?>">Remove Item</a> or <a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=req&act=new_req#new_req" >View Cart</a>
+							<span class="loader" id="DelThis"><img src="../images/loader.gif" width="40px" height="40px"/>Processing Request...</span><br/>
+							<div id="response"></div><br/>
+						
+						</form>
+					</div>
+				</div>

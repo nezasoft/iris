@@ -1,0 +1,88 @@
+
+				
+				<div class="col-sm-9 padding-right">
+				
+				<h2>Local Purchase Orders</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_lpo'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=new_lpo#new_lpo" >New LPO</a></li>
+                                
+                                <?php
+                                if($atype=='edit_lpo'){
+                                
+                                ?>
+								<li <?php if($atype=='edit_lpo'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=edit_lpo#edit_lpo" >Edit LPO</a></li>
+                                <?php
+                                }
+                                ?>
+                                 <?php
+                                if($atype=='view_lpo'){
+                                
+                                ?>
+								<li <?php if($atype=='view_lpo'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=view_lpo#view_lpo" >View LPO</a></li>
+		
+                               <?php
+                               }
+                                ?>
+								<li <?php if($atype=='man_lpos'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=man_lpos#man_lpos">Manage LPOs</a></li>
+                               <li <?php if($atype=='man_mat'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=man_mat&ip=new_mat">Manage Materials</a></li>
+						
+								
+							    <?php
+                                if($atype=='up_image'){
+                                
+                                ?>
+								<li <?php if($atype=='up_image'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=up_image#up_image">Upload Product Image</a></li>
+		
+                               <?php
+                               }
+                                ?>
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_lpo':
+						include('../views/new_lpo.html');
+						break;
+						case 'man_lpos':
+						include('../views/view_lpos.html');
+						break;
+						case 'view_lpo':
+						include('../views/view_specific_lpo.html');
+						break;
+						case 'upload_lpo':
+						include('../views/upload_lpo.html');
+						break;
+						case 'edit_lpo':
+						include('../views/edit_lpo.html');
+						break;
+						case 'man_mat':
+						include('../views/manage_materials.html');
+						break;
+						case 'up_image':
+						include('../views/upload_product_photo.html');
+						break;
+						default:
+						include('../views/new_lpo.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

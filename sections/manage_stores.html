@@ -1,0 +1,82 @@
+
+				
+				<div class="col-sm-9" style="background:#fff;padding:5px;">
+				
+				<h3>Stores Section</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_store'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=new_store" >New Store</a></li>
+									<?php 
+								if($atype=='edit_store'){
+								?>
+								<li <?php if($atype=='edit_store'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=edit_store&store_id=<?php echo $_GET['store_id']; ?>">Edit Store</a></li>
+								<?php 
+									}
+								?>
+								<?php 
+								if($atype=='view_st'){
+								//select store name
+								$qr_row=mysql_fetch_assoc(mysql_query("select store_name from stores where store_id='".sanitize_string($_GET['st_id'])."'"));
+								$st_name = $qr_row['store_name'];
+								?>
+								<li <?php if($atype=='view_st'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>"><?php echo $st_name; ?></a></li>
+								<?php 
+									}
+								?>
+								<li <?php if($atype=='man_st'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=man_stores">Manage Stores</a></li>
+								<li <?php if($atype=='qs'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=qs">Quick Search</a></li>
+								
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+                        
+						case 'new_store':
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+						include('../views/new_store.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+                        include('../views/desktop/new_store.html');
+						break;
+                        }
+						case 'man_stores':
+						include('../views/desktop/view_stores.html');
+						break;
+						case 'my_store':
+						include('../views/my_store.html');
+						break;
+						case 'qs':
+						include('../views/desktop/view_quick_search.html');
+						break;
+						case 'edit_store':
+						include('../views/edit_store.html');
+						break;
+						case 'view_st':
+						include('../views/view_select_store.html');
+						break;
+						case 'act_log':
+						include('../views/stores_activity_log.html');
+						break;
+						default:
+						include('../views/view_stores.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

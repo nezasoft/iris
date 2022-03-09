@@ -1,0 +1,91 @@
+
+				
+				<div class="col-sm-9" style="background:#fff;padding:5px;">
+				<h3>Deliveries</h3><hr/>
+				
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=new_del" >New Delivery</a></li>
+								<?php 
+								if($atype=='edit_del'){
+								?>
+								<li <?php if($atype=='edit_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=edit_del&del_id=<?php echo $_GET['del_id']; ?>">Edit Delivery</a></li>
+								<?php 
+									}
+								?>
+								<?php 
+								if($atype=='view_del'){
+								?>
+								<li <?php if($atype=='view_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=view_del&del_ref=<?php echo $_GET['del_ref']; ?>">View Delivery</a></li>
+								<?php 
+									}
+								?>
+								<li <?php if($atype=='man_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=man_del#manage_del">Outgoing Deliveries</a></li>
+								<li <?php if($atype=='inc_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=inc_del#manage_del">Incoming Deliveries</a></li>
+								<li <?php if($atype=='con_del'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=con_del#delivery_confirmation">New Confirmation</a></li>
+								<li <?php if($atype=='con_dels'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=con_dels#delivery_confirmation">Confirmations</a></li>
+								<li <?php if($atype=='exp_data'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=del&act=exp_data">Stock</a></li>
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_del':
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){
+						include('../views/new_delivery_note.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+						include('../views/desktop/new_delivery_note.html');
+						break;
+                        }
+						case 'edit_del':
+						include('../views/edit_delivery_note.html');
+						break;
+						case 'view_del':
+						include('../views/view_specific_delivery.html');
+						break;
+						case 'man_del':
+						include('../views/desktop/view_deliveries.html');
+						break;
+						case 'inc_del':
+						include('../views/desktop/view_incoming_deliveries.html');
+						break;
+						case 'con_del':						
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){
+						include('../views/new_confirmation_delivery.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+						include('../views/desktop/new_confirmation_delivery.html');
+						break;
+                        }
+						case 'con_dels':
+						include('../views/desktop/view_confirmation_deliveries.html');
+						break;
+						case 'exp_data':
+						include('../views/delivery_confirmation_stock_status.html');
+						break;
+						default:
+						include('../views/view_deliveries.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

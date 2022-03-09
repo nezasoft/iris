@@ -1,0 +1,107 @@
+<?php
+$store_id = sanitize_string($_GET['store_id']);
+//get store details
+$r_st = mysql_fetch_assoc(mysql_query("select * from stores where store_id='$store_id'"));
+?>
+<script>
+$(document).ready(function(){
+//hide all errors when form loads
+$("#store_name_error").hide();
+$("#site_name_error").hide();
+$("#store_desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		site_name = $("#site_name").val();
+		store_name = $("#store_name").val();
+	    store_desc = $("#store_desc").val();
+		store_id = <?php echo $store_id;?>;
+		//validate data
+	  if(store_desc ===''){
+		error =true;
+		$("#store_desc_error").fadeIn();
+		$("#store_desc").focus();
+		}else{
+		$("#store_desc_error").fadeOut();
+		
+		}
+     if(site_name ===''){
+		error =true;
+		$("#site_name_error").fadeIn();
+		$("#site_name").focus();
+		}else{
+		$("#site_name_error").fadeOut();
+		
+		}
+		if(store_name ===''){
+		error =true;
+		$("#store_name_error").fadeIn();
+		$("#store_name").focus();
+		}else{
+		$("#store_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'site_name='+site_name + '&store_name='+ store_name + '&store_desc='+ store_desc + '&store_id='+ store_id ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_store.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h2>Edit Store</h2>
+						<form action="../process/edit_store.php" method="POST">
+						    <span class="error" id="store_name_error">* Store Name</span><br/>
+							<input type="text" name="store_name" id="store_name" value="<?php echo $r_st['store_name'];?>"/>
+							<span class="error" id="store_desc_error">* Store Desc</span><br/>
+							<input type="text" name="store_desc" id="store_desc" value="<?php echo $r_st['store_desc'];?>"/>
+								<span class="error" id="site_name_error">* Choose Site</span><br/>
+							<select name="site_name" id="site_name">
+								<option value="">--Select Site--</option>
+								<?php
+								
+								$qr = mysql_query("select * from sites where site_status='Active' order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['site_id'];?>"><?php echo $qrow['site_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+							<button type="submit" id="submit" class="btn btn-default">Update Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

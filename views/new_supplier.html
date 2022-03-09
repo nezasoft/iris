@@ -1,0 +1,124 @@
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#error_sup_name").hide();
+$("#error_email").hide();
+$("#error_invalidemail").hide();
+$("#error_postal").hide();
+$("#error_phys").hide();
+$("#error_phone").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$('#response').empty();
+		//error
+		error = false;
+		sup_name = $("#sup_name").val();
+		sup_email = $("#sup_email").val();
+		sup_postal = $("#sup_postal").val();
+		sup_phys = $("#sup_phys").val();
+		sup_phone = $("#sup_phone").val();
+		
+		//validate data
+		
+		if(sup_email ===''){
+		error =true;
+		$("#error_email").fadeIn();
+		$("#sup_email").focus();
+		}else{
+		$("#error_email").fadeOut();
+		if(sup_email.indexOf('@') == '-1'){
+		error = true;
+		$('#error_invalidemail').fadeIn();
+		$("#email").focus();
+		 }else{
+		 $('#error_invalidemail').fadeOut();
+		  }
+		
+		}
+		if(sup_postal ===''){
+		error =true;
+		$("#error_postal").fadeIn();
+		$("#sup_postal").focus();
+		}else{
+		$("#error_postal").fadeOut();
+		
+		}
+		if(sup_phys ===''){
+		error =true;
+		$("#error_phys").fadeIn();
+		$("#sup_phys").focus();
+		}else{
+		$("#error_phys").fadeOut();
+		
+		}
+		if(sup_phone ===''){
+		error =true;
+		$("#error_phone").fadeIn();
+		$("#sup_phone").focus();
+		}else{
+		$("#error_phone").fadeOut();
+		
+		}
+		if(sup_name ===''){
+		error =true;
+		$("#error_sup_name").fadeIn();
+		$("#sup_name").focus();
+		}else{
+		$("#error_sup_name").fadeOut();
+		
+		}
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'sup_name='+sup_name + '&sup_postal='+ sup_postal + '&sup_phys='+ sup_phys+ '&sup_phone='+ sup_phone+ '&sup_email='+ sup_email; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_supplier.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h3>New Supplier</h3><hr/>
+						<form action="../process/new_supplier.php" method="POST">
+						<span class="error" id="error_sup_name">* Supplier Name</span><br/>
+							<input type="text" name="sup_name" id="sup_name" placeholder="Supplier Name"/>
+							<span class="error" id="error_email">* Email Address</span><br/>
+							<span class="error" id="error_invalidemail">* Invalid Email Address</span><br/>
+							<input type="email" name="sup_email" id="sup_email" placeholder="Email Address"/>
+							<span class="error" id="error_postal">* Postal Address</span><br/>
+							<input type="text" name="sup_postal" id="sup_postal" placeholder="Postal Address"/>
+							<span class="error" id="error_phys">* Physical Address</span><br/>
+							<input type="text" name="sup_phys" id="sup_phys" placeholder="Physical Address"/>
+							<span class="error" id="error_phone">* Phone No</span><br/>
+							<input type="text" name="sup_phone" id="sup_phone" placeholder="Phone No"/>
+							<button type="submit" id="submit" class="btn btn-default">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

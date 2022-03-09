@@ -1,0 +1,383 @@
+<?php
+$lpo_no = sanitize_string($_GET['lpo_ref']);
+$query = mysql_query("select lp.exp_date,lp.lpo_status,lp.lpo_details,lp.qty,lp.lpo_ref_no,lp.lpo_date,lp.lpo_time,cs.fname as create_name,ap_us.fname as approve_name,mat.mat_name,
+lp.req_ref_no,s.site_name,s.site_phone,s.site_email,s.site_address,s.site_postal,pk.pack_name,pk.pack_size,sp.sup_name,sp.sup_postal,sp.sup_email,sp.sup_phone,
+up.lpo_file_name from lpos as lp 
+left join materials as mat on mat.mat_id = lp.mat_id
+left join requisitions as rq on rq.req_id  = lp.req_id
+left join sites as s on s.site_id = lp.site_id
+left join packages as pk on pk.pack_id = lp.pack_id
+left join suppliers as sp on sp.sup_id=lp.sup_id
+left join uploaded_lpos as up on up.lpo_ref_no = lp.lpo_ref_no
+left join users as cs on  cs.user_id = lp.lpo_user_id
+left join users as ap_us on ap_us.user_id = lp.lpo_approve_id
+where lp.lpo_ref_no='$lpo_no'
+");
+$query_row=mysql_fetch_assoc($query);
+$approved_by= $query_row['approve_name'];
+$prepared_by= $query_row['create_name'];
+$lpo_status = $query_row['lpo_status']; 
+$req_ref = $query_row['req_ref_no']; 
+?>
+<style>
+<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+
+#td_m{
+	padding:10px;
+	margin:5%;
+	background-color:#fff;
+	font-size:11px;
+	
+	}
+	
+	<?php }else{ ?>
+	
+	#td_m{
+	padding:10px;
+	margin:5%;
+	background-color:#fff;
+	font-size:8px;
+	
+	}
+	<?php } ?>
+	#tb{
+		border: 1px solid #000000;
+		padding:2px;
+		
+	
+		}
+		#head{
+			text-transform:uppercase;
+			font-size:16px;
+			font-weight:bold;
+			
+			}
+	
+	
+</style>
+<div id="td_m">
+
+<table width="100%" id="print_cont">
+  <tbody>
+    <tr>
+      <td><div align="center">
+        <strong><h3 id="head"><?php echo  $query_row['site_name']; ?></h3></strong>
+        P.O.Box <?php echo  $query_row['site_postal']; ?> <br/>
+        <?php echo $query_row['site_address']; ?><br/>
+        Email: <?php echo  $query_row['site_email']; ?><br/>
+        Tel: <?php echo  $query_row['site_phone']; ?><br/>
+      </div></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+<table width="100%" border="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="58%"><table width="85%" height="112" border="1">
+        <tbody>
+          <tr>
+            <td colspan="2"><div align="left">&nbsp;&nbsp;Supplier</div></td>
+          </tr>
+          
+          <tr>
+            <td><div align="right"><strong>Name:</strong></div></td>
+            <td><div align="left"><strong> <?php  echo $query_row['sup_name'];?></strong></div></td>
+          </tr>
+          <tr>
+            <td><div align="right"><strong>Address:</strong></div></td>
+            <td><div align="left"><code><strong>
+              P.O BOX            
+              <?php  echo $query_row['sup_postal'];?>
+            </strong></code></div></td>
+          </tr>
+          <tr>
+            <td> <div align="right"><strong>Phone:</strong></div></td>
+            <td><div align="left"><strong><?php  echo $query_row['sup_phone'];?></strong></div></td>
+          </tr>
+          <tr>
+            <td><strong>&nbsp; </strong><div align="right"><strong>Email:</strong></div></td>
+            <td><div align="left"><strong>
+              <?php  echo $query_row['sup_email'];?>
+            </strong></div></td>
+          </tr>
+        </tbody>
+      </table></td>
+      <td width="42%">
+      <h2>Local Purchase Order</h2>
+      <table width="100%" border="1">
+        <tbody>
+          <tr>
+            <td width="36%" height="31"><div >&nbsp;
+              <div align="right"><strong>L.P.O No.</strong></div>
+            </div></td>
+            <td width="64%"><div align="left"><code><strong>
+              <?php  echo $query_row['lpo_ref_no'];?>
+            </strong></code></div></td>
+          </tr>
+          <tr>
+            <td height="34" colspan="2"><div align="center">Deliver To &nbsp;&nbsp;<code><strong>
+              <?php  echo $query_row['site_name'];?>
+            </strong></code> &nbsp;Site </div></td>
+            </tr>
+          <tr>
+            <td height="34"><div>
+              <div align="right"><strong>&nbsp;L.P.O Date</strong></div>
+            </div></td>
+            <td><div align="left"><code><strong>
+              <?php  echo $query_row['lpo_date'];?>
+            </strong></code></div></td>
+          </tr>
+          <tr>
+            <td height="31"><div >
+              <div align="right"><strong>&nbsp;Expected Date</strong></div>
+            </div></td>
+            <td><code>
+              <div align="left"><strong>
+                <?php  echo $query_row['exp_date'];?>
+                </strong><code></div></td>
+          </tr>
+          <tr>
+            <td height="35"><div >
+              <div align="right"><strong>&nbsp;REQ No.</strong></div>
+            </div></td>
+            <td><div align="left"><code><strong>
+              <?php  echo $req_ref;?>
+            </strong></code></div></td>
+          </tr>
+        </tbody>
+      </table></td>
+    </tr>
+  </tbody>
+</table><br/>
+<table width="100%" border="1">
+  <tbody>
+    <tr id="tb" >
+      <td id="tb"><div align="center">No</div></td>
+      <td id="tb"><div align="center">Item</div></td>
+      <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+      <td id="tb"><div align="center">Description</div></td>
+      <td id="tb"><div align="center">Unit</div></td>
+      <?php } ?>
+      <td id="tb"><div align="center">Qty</div></td>
+      <td id="tb"><div align="center">Rate</div></td>
+      <td id="tb"><div align="center">VAT</div></td>
+      <td id="tb"><div align="center">VAT AMT</div></td>
+      <td id="tb"><div align="center">Discount</div></td>
+      <td id="tb"><div align="center">Amount</div></td>
+    </tr>
+    <?php
+    $query2 = mysql_query("select lp.price, lp.exp_date,lp.lpo_details,lp.qty,lp.lpo_ref_no,lp.lpo_date,lp.lpo_time,cs.fname as create_name,ap_us.fname as approve_name,mat.mat_name,
+rq.req_ref_no,s.site_name,s.site_phone,s.site_email,s.site_address,s.site_postal,pk.pack_name,pk.pack_size,sp.sup_name,sp.sup_postal,
+up.lpo_file_name from lpos as lp 
+left join materials as mat on mat.mat_id = lp.mat_id
+left join requisitions as rq on rq.req_id  = lp.req_id
+left join sites as s on s.site_id = lp.site_id
+left join packages as pk on pk.pack_id = lp.pack_id
+left join suppliers as sp on sp.sup_id=lp.sup_id
+left join uploaded_lpos as up on up.lpo_ref_no = lp.lpo_ref_no
+left join users as cs on  cs.user_id = lp.lpo_user_id
+left join users as ap_us on ap_us.user_id = lp.lpo_approve_id
+where lp.lpo_ref_no='$lpo_no'
+");
+
+
+       //counter variable
+          $count = 1;
+    //loop through all the records
+    while($q_row=mysql_fetch_array($query2)){
+    ?>
+    <tr>
+      <td><div align="center"><?php echo $count++;?></div></td>
+      <td><?php echo titleCase($q_row['mat_name']);?></td>
+      <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+      <td><?php echo $q_row['lpo_details'];?></td>
+      <td><div align="center"><?php echo $q_row['pack_name'];?></div></td>
+      <?php } ?>
+      <td><div align="center"><?php echo $q_row['qty'];?></div></td>
+      <td><div align="center"><?php echo $q_row['price'];?></div></td>
+      <td><div align="center">16%</div></td>
+      <td><div align="center">
+        <?php
+      $vat_rate = 0.16;
+      $qty = $q_row['qty'];
+      $price = $q_row['price'];
+      $total = $qty * $price;
+      $vat = $vat_rate * $total;
+      echo $vat;
+      
+      ?>
+      </div></td>
+      <td>---</td>
+      <td><div align="center"><?php echo number_format($total,2);  ?></div></td>
+    </tr>
+    <?php
+      }
+       ?>
+  </tbody>
+</table><br/>
+ <?php
+    $sum_q = mysql_fetch_assoc(mysql_query("select sum(total_lpo) as sm_total from lpos where lpo_ref_no='$lpo_no'"));
+    
+    ?>
+<table width="100%" border="0">
+  <tbody>
+    <tr>
+      <td width="63%" height="225"><table width="97%" height="166" border="1">
+        <tbody>
+          <tr>
+            <td height="160"> &nbsp; Approved By:-<br/><table width="100%" border="0">
+              <tbody>
+			  <?php
+			  //get all approvals
+			  $qr_app = mysql_query("select * from lpo_approvals as la left join users as us on us.user_id = la.lpo_user_id
+where  la.lpo_ref_no ='$lpo_no' and la.lpo_approval_status='Approved' group by lpo_user_id");
+				$num_app = mysql_num_rows($qr_app);
+			  if($num_app==0){
+			  echo '<span class="error">No Approvals Yet</span>';
+			  }
+				while($qr_app_row=mysql_fetch_assoc($qr_app)){
+				?>
+				
+				<tr>
+                  <td width="13%" height="53">&nbsp;Name:</td>
+                  <td width="87%"><code><?php echo $qr_app_row['fname'].' '.$qr_app_row['lname'];?></code></td>
+                </tr>
+				<?php
+				
+				
+				}
+			  ?>
+                
+             
+              </tbody>
+            </table></td>
+          </tr>
+        </tbody>
+      </table></td>
+      <td width="37%"><table width="100%" border="1">
+        <tbody>
+          <tr>
+            <td width="60%" height="41"><div align="right"><strong>&nbsp; Sub Total </strong>
+            </div>
+              <div align="right"></div></td>
+            <td width="40%"><div align="right"><code><strong><?php echo $sum_q['sm_total'];?></strong></code></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <table width="100%" border="1">
+        <tbody>
+          <tr>
+            <td width="60%" height="41">&nbsp; <div align="right"><strong>VAT Total
+              </strong>
+            </div>
+              <div align="right"></div></td>
+            <td width="40%"><div align="right"><code><strong>
+              <?php
+      $vat_rate = 0.16;
+      $sub_total = $sum_q['sm_total'];
+      $vat_total = $vat_rate * $sub_total;
+      echo number_format($vat_total,2);
+        ?>
+            </strong></code></div></td>
+          </tr>
+          </tbody>
+      </table>
+      <br/>
+      <table width="100%" border="1">
+        <tbody>
+          <tr>
+            <td width="60%" height="45"><div align="right"><strong>&nbsp;Total</strong>
+            </div>
+              <div align="right"></div></td>
+            <td width="40%"><div align="right"><code><strong>
+              <?php
+      $total = $vat_total + $sub_total;
+      echo number_format($total,2);
+       ?>
+            </strong></code></div></td>
+          </tr>
+          </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table width="706" >
+  <tbody>
+    <tr>
+      <td width="526"><p>CONDITIONS:<br/>
+        1.Delivery days STRICTLY Mondays
+        
+        to Thursdays From 2 PM to 5 PM<br/>
+        2.The Goods MUST be delivered before 11am<br/>
+        3.Goods MUST not be delivered UNLESS you receive a call from either of the Approving Officers<br/>
+        4. Our LPO No. MUST BE QUOTED on your Documents.<br/>
+        5.The delivery must be signed by atleast 2 people from the site<br/>
+      </p>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+</div>
+  <div class="signup-form">
+<form action="#" method="post">
+  <button onclick="printContent('td_m')">Print LPO</button>
+</form>
+<?php
+//check if this user can approve this lpo_approve
+
+$Qr_ck = mysql_query("select * from lpo_approvals as la left join users as us on us.user_id = la.lpo_user_id
+where la.lpo_user_id ='".$_SESSION['COMSYS_UserID']."' and la.lpo_ref_no ='$lpo_no' and la.lpo_approval_status='New'");
+$num_rows = mysql_num_rows($Qr_ck);
+if($num_rows>0){
+
+
+?>
+<form action="../process/approve_lpos.php" id="delegate_form" method="post">
+<input id="lpo_no" type="hidden" value="<?php echo $lpo_no; ?>" name="lpo_no" />
+  <button id="approve_lpo">Approve LPO</button> 
+</form>
+<script>
+$(document).ready(function(){
+$('#loader').hide();
+$('#approve_lpo').click(function(e){
+e.preventDefault();
+
+var con = confirm("Approve LPO?");
+if(con==true){
+$('#loader').fadeIn();
+$('#response').empty();
+lpo_no = $("#lpo_no").val();
+   //send request
+      var myData = 'lpo_ref_no=' + lpo_no; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/approve_lpos.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response);
+			$("#loader").fadeOut();
+			}
+	   }); 
+}
+
+
+});
+
+});
+
+</script>
+
+<span class="loader" id="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Approving...</span>
+<span id="response"></span>
+
+
+
+<?php
+}
+?>
+</div>

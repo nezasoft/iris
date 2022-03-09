@@ -1,0 +1,75 @@
+			
+				<div class="col-sm-9 padding-right">				
+				<h3>Users & Accounts</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php 
+								if($atype=='new_user'){
+									echo 'class="active"';
+								}
+								?>
+								><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=us&act=new_user#new_user" >Add User Account</a></li>
+								<li <?php 
+							
+								if($atype=='man_users'){
+									echo 'class="active"';
+								}
+								
+								?>><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=us&act=man_users#manage_users">Manage Users</a></li>
+									
+									<?php 
+								if($atype=='edit_user'){
+								?>
+								<li <?php if($atype=='edit_user'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=us&act=edit_user&user_id=<?php echo $_GET['us_id']; ?>">Edit User</a></li>
+								<?php 
+									}
+								?>
+									<!--<li <?php 
+							
+								if($atype=='account_types'){
+									echo 'class="active"';
+								}
+								
+								?>><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=us&act=account_types#account_types">Account Types</a></li> -->
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_user':						
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){
+						include('../views/new_user_account.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+						include('../views/desktop/new_user_account.html');
+						break;
+                        }
+						case 'edit_user':
+						 if($_SESSION['COMSYS_IS_MOBILE']==1){
+						include('../views/edit_user_account.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+						include('../views/desktop/edit_user_account.html');
+						break;
+                        }
+						case 'man_users':
+						include('../views/view_users.html');
+						break;
+						default:
+						include('../views/new_user_account.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

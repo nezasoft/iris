@@ -1,0 +1,508 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../css/metallic.css" type="text/css">
+    <script src="../js/select2.js"></script>
+    <script type="text/javascript" src="../js/zebra_datepicker.js"></script>
+<script>
+
+$(document).ready(function(){
+$("#response_message").hide();
+//ajaxrequest('../views/desktop/req_items.php', 'ReqItemsList');	
+ //Hit Refresh to reload the data
+ $("#refresh").click(function(e){
+ e.preventDefault();
+ ajaxrequest('../views/desktop/inward_items.php', 'InwardItemsList');
+ //Show save button
+ $("#save").fadeIn();
+ });
+ 
+//hide all errors when form loads
+$("#mat_name_error").hide();
+$("#by_name_error").hide();
+$("#del_note_error").hide();
+$("#vehicle_no_error").hide();
+$("#delivered_by_error").hide();
+$("#sup_name_error").hide();
+$("#check_name_error").hide();
+$("#confirm_name_error").hide();
+$("#req_error").hide();
+$("#ref_no_error").hide();
+$("#qty_error").hide();
+$('#TransDiv').hide();
+$("#CompleteTrans").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$(".loader").hide();
+<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+$("#confirm_name").select2(); 
+//$(".req_no").select2(); 
+$("#sup_name").select2(); 
+$("#mat_name").select2(); 
+$("#pack_name").select2(); 
+
+<?php } ?>
+
+//make inward without lpo
+$("#req_conf").change(function(){     
+    if($("#req_conf").is(":checked")){
+	$("#req_id_name").fadeIn();
+	}else {
+	$("#req_id_name").fadeOut();
+	//get all suppliers
+	$.ajax({
+		type:"post",
+		url:"../process/get_all_suppliers.php",
+		// data:"mat_name="+mat_name,
+		success:function(data){
+		 $("#sup_name").html(data);
+		 }
+    });
+	//get all materials
+		$.ajax({
+		type:"post",
+		url:"../process/get_all_mat.php",
+		// data:"mat_name="+mat_name,
+		success:function(data){
+		 $("#mat_name").html(data);
+		 }
+    });
+	
+	}
+    });
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//$("#CompleteTrans").fadeIn();
+		//error
+		error = false;
+		inward_ref_no = $("#inward_ref_no").val();
+		del_note = $("#del_note").val();
+		vehicle_no = $("#vehicle_no").val();
+		delivered_by = $("#delivered_by").val();
+		req = $(".req_no").val();
+		sup_name= $("#sup_name").val();
+		check_name = $("#check_name").val();
+		confirm_name = $("#confirm_name").val();
+		mat_name = $("#mat_name").val();
+		by_name = $("#by_name").val();
+		pack_name = $("#pack_name").val();
+	    qty = $("#qty").val();
+		 desc = $("#desc").val();
+		 
+		  if(confirm_name ===''){
+		error =true;
+		$("#confirm_name_error").fadeIn();
+		$("#confirm_name").focus();
+		}else{
+		$("#confirm_name_error").fadeOut();
+		
+		}
+		
+		  if(check_name ===''){
+		error =true;
+		$("#check_name_error").fadeIn();
+		$("#check_name").focus();
+		}else{
+		$("#check_name_error").fadeOut();
+		
+		}
+		
+		 if(by_name ===''){
+		error =true;
+		$("#by_name_error").fadeIn();
+		$("#by_name").focus();
+		}else{
+		$("#by_name_error").fadeOut();
+		
+		}
+			 if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		 if(sup_name ===''){
+		error =true;
+		$("#sup_name_error").fadeIn();
+		$("#sup_name").focus();
+		}else{
+		$("#sup_name_error").fadeOut();
+		
+		}
+		
+		
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(req ===''){
+		req = 'N/A';
+		
+		}
+		if(delivered_by ===''){
+		error =true;
+		$("#delivered_by_error").fadeIn();
+		$("#delivered_by").focus();
+		}else{
+		$("#delivered_by_error").fadeOut();
+		
+		}
+		if(vehicle_no ===''){
+		error =true;
+		$("#vehicle_no_error").fadeIn();
+		$("#vehicle_no").focus();
+		}else{
+		$("#vehicle_no_error").fadeOut();
+		
+		}
+		if(del_note ===''){
+		error =true;
+		$("#del_note_error").fadeIn();
+		$("#del_note").focus();
+		}else{
+		$("#del_note_error").fadeOut();		
+		}		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		$("#CompleteTrans").fadeIn();
+		/* Ajax Request here*/
+					//data values
+			var myData = 'inward_ref_no='+inward_ref_no + '&req='+ req + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc + '&by_name='+ by_name + '&del_note='+ del_note+ '&vehicle_no='+ vehicle_no + '&delivered_by='+ delivered_by + '&sup_name='+ sup_name
+			+ '&check_name='+ check_name + '&confirm_name='+ confirm_name; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_inward.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			ajaxrequest('../views/desktop/inward_items.php', 'InwardItemsList');	
+			$('#submit').fadeIn();			
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+  <script>
+    $(document).ready(function(){
+        //supplier
+               $(".req_no").change(function(){
+                     var req_no=$(".req_no").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_supplier_name.php",
+                        data:"req_no="+req_no,
+                        success:function(data){
+
+                         $("#sup_name").html(data);
+                        }
+                     });
+               });
+               //material supplied by the supplier
+                  $(".req_no").change(function(){
+                     var req_no=$(".req_no").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_mat_name.php",
+                        data:"req_no="+req_no,
+                        success:function(data){
+                         $("#mat_name").html(data);
+                        }
+                     });
+               });
+			   
+			   	 //Get quantity based on material select
+					 $("#mat_name").change(function(){
+					 var req_no=$(".req_no").val();
+					 var supplier=$("#sup_name").val();
+					 var mat=$("#mat_name").val();
+					 var myData = "req_no="+req_no+"&supplier="+supplier+"&mat="+mat;
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_req_mat_qty.php",
+                        data:myData,
+                        success:function(data){		
+                         $("#qty").val(data);
+                        }
+					 });
+	            });
+				
+	});
+    </script>
+                  			 <script>
+			 //get all materials if no requisition is found
+			   $("#req_conf").change(function(){ 
+			    if($("#req_conf").is(":not(:checked)")){
+				mat_name = '';
+				//get all materials
+					   $.ajax({
+                        type:"post",
+                        url:"../process/get_all_mat.php",
+                        data:"mat_name="+mat_name,
+                        success:function(data){
+
+                         $("#mat_name").html(data);
+                        }
+                     });
+					}else{
+					var req_name=$(".req_no").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_req_mat_name.php",
+                        data:"req_name="+req_name,
+                        success:function(data){
+
+                         $("#mat_name").html(data);
+                        }
+                     });
+					}
+					
+				
+			 
+			 </script>                  
+             <?php
+               //get the id of the last column to make the req ref no
+               $q = mysql_fetch_array(mysql_query("select last_insert_id(g_inward_id) as g_inward_id from goods_inwards where site_code='".$_SESSION['COMSYS_SiteCode']."'
+          	 order by g_inward_id desc limit 1"));
+
+                $g_inward_id = $q['g_inward_id'];
+                if($g_inward_id==''){
+                   $inward_ref_no = 1;
+                }else{
+                $inward_ref_no = $g_inward_id + 1;
+                }
+                 //create a inward ref no and save it in a session
+                 $inward_ref_no = $_SESSION['COMSYS_SiteCode'].'INW'.$inward_ref_no ;
+                 //create and save it in a session
+                 $_SESSION['COMSYS_InwardRefNo'] = $inward_ref_no;
+               
+             ?>
+		
+<div class="col-sm-10" style="background-color:#fff;border:2px solid #616A6B; padding:20px;" id="display_table">
+
+ <div class="signup-form"> 
+ <div>             
+<table width="100%" border="0" style="font-size:12px;">
+<thead>
+  <tr>
+    <th colspan="5"><div align="left">New Inward</div></th>
+  </tr>
+  </thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Ref. No:</strong></div></td>
+    <td colspan="2"><input type="text" class="my-form-control" name="inward_ref_no" disabled="disabled" id="inward_ref_no" value="<?php echo $_SESSION['COMSYS_InwardRefNo']; ?>" /></td>
+    <td><div align="right"><strong>Received by:</strong></div></td>
+    <td><input type="text" class="my-form-control" name="by_name" id="by_name" placeholder="Received by" />
+    <span class="error" id="by_name_error">* Enter Name</span></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Del. Note:</strong></div></td>
+    <td colspan="2"><input class="my-form-control" type="text" name="del_note"  id="del_note"  placeholder="Delivery Note No"/>
+    <span class="error" id="del_note_error">* Delivery Note No</span></td>
+    <td><div align="right"><strong>Checked by:</strong></div></td>
+    <td><input type="text" class="my-form-control" name="check_name" id="check_name" placeholder="Checked by" />
+    <span class="error" id="check_name_error">* Enter Name</span></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Vehicle No:</strong></div></td>
+    <td colspan="2"><input type="text" name="vehicle_no"  id="vehicle_no"  placeholder="Vehicle No"/>
+    <span class="error" id="vehicle_no_error">* Vehicle No</span></td>
+    <td><div align="right"><strong>To approved by:</strong></div></td>
+    <td><select name="confirm_name[]" id="confirm_name" multiple="multiple" style="width:200px;">
+      <option value="">--Choose User--</option>
+      <?php
+								
+								$qr = mysql_query("select * from users where site_id='".$_SESSION['COMSYS_SiteID']."' order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+      <option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+      <?php
+								}
+								?>
+    </select>
+    <span class="error" id="confirm_name_error">* Select User</span></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Delivered by:</strong></div></td>
+    <td colspan="2"><input type="text" class="my-form-control" name="delivered_by"  id="delivered_by"  placeholder="Delivered By"/>
+    <span class="error" id="delivered_by_error">* Delivered By</span></td>
+    <td><div align="right"><strong>Description:</strong></div></td>
+    <td><input type="text" class="my-form-control" name="desc" id="desc" placeholder="Description(Pref Book Inw No)"/>
+    <span class="error" id="desc_error">* Description</span></td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>From Requisition?</strong></div></td>
+    <td><input type="checkbox" id="req_conf" checked="checked" name="req_conf" value="Yes" /></td>
+    <td><div id="req_field"><select name="req" id="req" class="req_no" style="width:100%">
+      <option value="">--Select Requisition--</option>
+                             <?php
+								
+								$qr = mysql_query("select * from requisitions where site_id='".$_SESSION['COMSYS_SiteID']."' and lpo_status='Completed' group by req_ref_no order by req_id desc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+      <option value="<?php echo $qrow['req_ref_no'];?>"><?php echo $qrow['req_ref_no'];?></option>
+      <?php
+								}
+								?>
+    </select>
+    </div>
+      <span class="error" id="req_error">* Choose Requisition</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Supplier:</strong></div></td>
+    <td colspan="2"><select name="sup_name" id="sup_name" style="width:100%">
+      <option value="">--Select Supplier--</option>
+    </select>
+     <span class="error" id="sup_name_error">* Choose Supplier</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Material:</strong></div></td>
+    <td colspan="2"><select name="mat_name" id="mat_name" style="width:100%">
+      <option value="">--Select Material--</option>
+    </select>
+      <span class="error" id="mat_name_error">* Choose Material</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Package:</strong></div></td>
+    <td colspan="2"><select name="pack_name" id="pack_name" style="width:200px;">
+      <option value="">--Select Package--</option>
+      <?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+      <option value="<?php echo $qrow['pack_id'];?>"><?php echo $qrow['pack_name'];?></option>
+      <?php
+								}
+								?>
+    </select>
+      <span class="error" id="pack_name_error">* Choose Package</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td><div align="right"><strong>Quantity:</strong></div></td>
+    <td colspan="2"><input type="text" class="my-form-control" name="qty" id="qty" placeholder="Quantity"/>
+      <span class="error" id="qty_error">* Quantity</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr height="40">
+    <td>&nbsp;</td>
+    <td colspan="2"><button type="submit" id="submit" class="btn btn-blue-alt">Add to Inward</button> | <a href="#" id="refresh" class="btn btn-xs btn-success">Refresh</a>
+      <span class="loader" id="loader2"><img src="../images/loader.gif" alt="x" width="40px" height="40px"/>Processing Request...</span><br/>
+     </td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<div id="response"></div><br/>
+<div id="InwardItemsList"></div><br/>	
+</div>					
+</div>
+	
+</div><br/><br/><br/>
+<div id="response_form">
+<div id="response_message" class="alert alert-success" style="padding:20px; margin-top:30px; margin-right:30px; border:2px solid #FF9900;">
+<img src="../images/tick.png" width="40px" height="40px" align="left" /> <p style="font-size:24px;align:right;"> Inward  successfully sent! </p>
+</div>
+
+<script>
+// sends data to a php file, via POST, and displays the received answer
+function ajaxrequest(php_file, tagID) {
+  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');  // XMLHttpRequest object
+  var  the_data = '';       // here you can set data to be send to the server (pairs index=value)
+  request.open("POST", php_file, true);			// set the request
+ // adds  a header to tell the PHP script to recognize the data as is sent via POST
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(the_data);		// calls the send() method with data as parameter
+  // Check request status
+  // If the response is received completely, will be transferred to the HTML tag with tagID
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      var resp = request.responseText;        // get the response from php
+      document.getElementById(tagID).innerHTML = resp;       // add the response into the tag with the ID from "tagID"
+      // calls the parseScript() function, with the response from PHP as argument
+      parseScript(resp);
+    }
+  }
+}
+
+// this function create an Array that contains the JS code of every <script> tag in parameter
+// then apply the eval() to execute the code in every script collected
+function parseScript(strcode) {
+  var scripts = new Array();         // Array which will store the script's code
+  // Strip out tags
+  while(strcode.indexOf("<script") > -1 || strcode.indexOf("</script") > -1) {
+    var s = strcode.indexOf("<script");
+    var s_e = strcode.indexOf(">", s);
+    var e = strcode.indexOf("</script", s);
+    var e_e = strcode.indexOf(">", e);  
+    // Add to scripts array
+    scripts.push(strcode.substring(s_e+1, e));
+    // Strip from strcode
+    strcode = strcode.substring(0, s) + strcode.substring(e_e+1);
+  }  
+  // Loop through every script collected and eval it
+  for(var i=0; i<scripts.length; i++) {
+    try {
+      eval(scripts[i]);
+    }
+    catch(ex) {
+      // do what you want here when a script fails
+    }
+  }
+}
+
+</script>
+                

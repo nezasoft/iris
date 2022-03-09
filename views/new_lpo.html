@@ -1,0 +1,562 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../css/metallic.css" type="text/css">
+    <script src="../js/select2.js"></script>
+    <script type="text/javascript" src="../js/zebra_datepicker.js"></script>
+<?php
+$lpo_site_id = sanitize_string($_GET['site_id']);
+//lets get the site code fro lpo id
+$qr_site = mysql_fetch_assoc(mysql_query("select site_name, site_code from sites where site_id ='$lpo_site_id' limit 1"));
+$site_code = $qr_site['site_code'];
+$site_name = $qr_site['site_name'];
+?>
+<script>
+
+$(document).ready(function(){
+startRefreshing();
+$('#select_all_state').click(function() {
+$('#state_id option').prop('selected', true);
+});
+
+$('#unselect_all_state').click(function() {
+$('#state_id option').prop('selected', false);
+});
+$('#lpo_date').Zebra_DatePicker();
+$('#exp_date').Zebra_DatePicker();
+<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+$("#mat_name").select2();  
+$("#by_name").select2(); 
+$("#sup_name").select2(); 
+$("#req_name").select2(); 
+<?php } ?>
+//hide all errors when form loads
+//lets identify the site id
+site_id = $("#site_id").val();
+//$("#req_id_name").hide();
+if(site_id===''){
+$('#lpo_DATA').hide();
+$('#site_name').fadeIn();
+}else{
+$('#site_label').fadeOut();
+$('#site_name').fadeOut();
+$('#lpo_DATA').fadeIn();
+//$('#req_con_id').hide();
+}
+//on change of site name
+$('#site_name').change(function(){
+site_name = $("#site_name").val();
+
+window.location.href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=" + site_name + "&sec=lpos&act=new_lpo#new_lpo"
+
+});
+   //make lpo without requisition
+   $("#req_conf").change(function(){     
+    if($("#req_conf").is(":checked")){
+	$("#req_id_name").fadeIn();
+	}else {
+	$("#req_id_name").fadeOut();
+	}
+    });
+
+$("#site_name_error").hide();
+$("#mat_name_error").hide();
+$("#lpo_date_error").hide();
+$("#exp_date_error").hide();
+$("#by_name_error").hide();
+$("#price_error").hide();
+$("#req_name_error").hide();
+$("#sup_name_error").hide();
+$("#lpo_no_error").hide();
+//$("#ref_no_error").hide();
+$("#qty_error").hide();
+$('#TransDiv').hide();
+$("#CompleteTrans").hide();
+$("#pack_name_error").hide();
+$("#desc_error").hide();
+$("#response").hide();
+$("#loadermain").hide();
+// $('#loader').hide();
+$('#response_main').hide(); 
+
+//check if submit button has been clicked
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response_main").empty();
+		//$("#CompleteTrans").fadeIn();
+		//error
+		error = false;
+		lpo_no = $("#lpo_no").val();
+		lpo_file_no = $("#lpo_file_no").val();
+		req_name = $("#req_name").val();
+		req_conf = $("#req_conf").val();
+		lpo_date = $("#lpo_date").val();
+		exp_date = $("#exp_date").val();
+		mat_name = $("#mat_name").val();
+		price = $("#price").val();
+		sup_name = $("#sup_name").val();
+		by_name = $("#by_name").val();
+		pack_name = $("#pack_name").val();
+	    qty = $("#qty").val();
+		desc = $("#desc").val();
+		 
+		 if(by_name ===''){
+		error =true;
+		$("#by_name_error").fadeIn();
+		$("#by_name").focus();
+		}else{
+		$("#by_name_error").fadeOut();
+		
+		}
+		
+	    if(desc ===''){
+		error =true;
+		$("#desc_error").fadeIn();
+		$("#desc").focus();
+		}else{
+		$("#desc_error").fadeOut();
+		
+		}
+		 if(price ===''){
+		error =true;
+		$("#price_error").fadeIn();
+		$("#price").focus();
+		}else{
+		$("#price_error").fadeOut();
+		
+		}
+		 if(lpo_file_no ===''){
+		error =true;
+		$("#lpo_file_no_error").fadeIn();
+		$("#lpo_file_no").focus();
+		}else{
+		$("#lpo_file_no_error").fadeOut();
+		}
+	   if(qty ===''){
+		error =true;
+		$("#qty_error").fadeIn();
+		$("#qty").focus();
+		}else{
+		$("#qty_error").fadeOut();
+		}
+		if(sup_name ===''){
+		error =true;
+		$("#sup_name_error").fadeIn();
+		$("#sup_name").focus();
+		}else{
+		$("#sup_name_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		
+		 if($("#req_conf").is(":checked")){
+			if(req_name ===''){
+			error =true;
+			$("#req_name_error").fadeIn();
+			$("#req_name").focus();
+			}else{
+			$("#req_name_error").fadeOut();
+			
+			}
+		}else{
+		$("#req_name_error").fadeOut();
+		
+		}
+		if(exp_date ===''){
+		error =true;
+		$("#exp_date_error").fadeIn();
+		$("#exp_date").focus();
+		}else{
+		$("#exp_date_error").fadeOut();
+		
+		}
+		if(lpo_date ===''){
+		error =true;
+		$("#lpo_date_error").fadeIn();
+		$("#lpo_date").focus();
+		}else{
+		$("#lpo_date_error").fadeOut();
+		
+		}
+		if(lpo_no ===''){
+		error =true;
+		$("#lpo_no_error").fadeIn();
+		$("#lpo_no").focus();
+		}else{
+		$("#lpo_no_error").fadeOut();
+		
+		}
+		
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$("#loadermain").fadeIn();
+		/* Ajax Request here*/
+					//data values
+			var myData = 'lpo_no='+lpo_no + '&req_name='+ req_name + '&sup_name='+ sup_name  + '&mat_name='+ mat_name+'&pack_name='+ pack_name+ '&qty='+ qty+ '&desc='+ desc +
+			'&by_name='+ by_name + '&lpo_date='+ lpo_date + '&exp_date='+ exp_date + '&price='+ price + '&site_id='+ site_id + '&req_conf='+ req_conf + '&lpo_file_no='+ lpo_file_no ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_lpo.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response_main").append(response);
+			$('#submit').fadeIn();
+			$('#response_main').fadeIn();			
+		    $('#loadermain').fadeOut();			
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+<script>
+// Config for the javascript part
+ 
+var urlForPHP 			= "../process/temp_lpo.php";
+var milsecondsTillRepeat 	= 1000;
+var idForReplace		= "TransDiv";
+ 
+function startRefreshing()
+{
+	setTimeout("startRefreshing()",milsecondsTillRepeat);
+	reloadPHP();
+}
+ 
+ 
+function reloadPHP()
+{
+	xmlhttp=GetXmlHttpObject();
+	if (xmlhttp==null)
+	{
+		alert ("Your Browser does not support HTTP Request");
+		return;
+	}
+	var url=urlForPHP;
+	url=url+"?random="+Math.random();
+	xmlhttp.onreadystatechange=stateChanged;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+ 
+function stateChanged()
+{
+	if (xmlhttp.readyState==4)
+	{
+	document.getElementById(idForReplace).innerHTML=xmlhttp.responseText;
+	}
+}
+ 
+function GetXmlHttpObject()
+{
+if (window.XMLHttpRequest)
+  {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  return new XMLHttpRequest();
+  }
+if (window.ActiveXObject)
+  {
+  // code for IE6, IE5
+  return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+return null;
+}
+</script>
+    <?php
+               //get the id of the last column to make the lpo ref no
+               $q = mysql_fetch_array(mysql_query("select last_insert_id(lpo_id) as lpo_id from lpos where site_id='$lpo_site_id'
+          	 order by lpo_id desc limit 1"));
+
+                $lpo_id = $q['lpo_id'];
+                if($lpo_id==''){
+                   $lpo_ref_no = 1;
+                }else{
+                $lpo_ref_no = $lpo_id + 1;
+                }
+                 //create a lpo ref no and save it in a session
+                 $lpo_ref_no = $site_code.'LPO00'.$lpo_ref_no ;
+                 //create and save it in a session
+                 $_SESSION['COMSYS_LpoRefNo'] = $lpo_ref_no;
+                 
+             ?>
+            
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h2>New LPO</h2><hr/>
+						<form action="../process/new_lpo.php" method="POST">
+						 <span class="error" id="site_name_error">* Choose Site</span><br/>
+							<label id="site_label">Specify Site( You must specify the site you want to make this LPO)</label> 
+							<select name="site_name" id="site_name"  class="site_name"style="width:100%">
+								<option value="">--Select Site--</option>
+								<?php
+								
+								$qr = mysql_query("select * from sites order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['site_id'];?>"><?php echo titleCase($qrow['site_name']);?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+						<input type="hidden" name="site_id"  id="site_id"  value="<?php echo $lpo_site_id; ?>" />
+						<span class="error" id="lpo_no_error">* LPO No</span><br/>
+						   <div id="lpo_DATA">
+						    <label>LPO Ref No:</label>
+							<input type="text" name="lpo_no"  id="lpo_no" disabled value="<?php echo $_SESSION['COMSYS_LpoRefNo']; ?>" />
+							<label>LPO File No:</label>
+							<input type="text" name="lpo_file_no"  id="lpo_file_no"  />
+                            <label>LPO Date:</label>
+                            <span class="error" id="lpo_date_error">* LPO Date</span><br/><br/><br/>
+							<input type="text" name="lpo_date"  id="lpo_date" value="<?php echo date('Y-m-d');?>" disabled />
+                           <span class="error" id="exp_date_error">* Expected Date</span><br/>
+                                <label>Expected Date:</label>
+							<input type="text" name="exp_date"  id="exp_date" placeholder="Expected Date" />
+            <script>
+           $(document).ready(function(){
+        //supplier
+               $("#req_name").change(function(){
+                     var req_name=$("#req_name").val();
+					
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_req_mat_name.php",
+                        data:"req_name="+req_name,
+                        success:function(data){
+
+                         $("#mat_name").html(data);
+                        }
+                     });
+               });
+			   //get all materials if no requisition is found
+			   $("#req_conf").change(function(){ 
+			    if($("#req_conf").is(":not(:checked)")){
+				mat_name = '';
+				//get all materials
+					   $.ajax({
+                        type:"post",
+                        url:"../process/get_all_mat.php",
+                        data:"mat_name="+mat_name,
+                        success:function(data){
+
+                         $("#mat_name").html(data);
+                        }
+                     });
+					}else{
+					var req_name=$("#req_name").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_req_mat_name.php",
+                        data:"req_name="+req_name,
+                        success:function(data){
+
+                         $("#mat_name").html(data);
+                        }
+                     });
+					
+					}
+	            });
+               //quantity of the item
+                  $("#mat_name").change(function(){
+                     var mat_id=$("#mat_name").val();
+					 var req_name = $("#req_name").val();
+                     $.ajax({
+                        type:"post",
+                        url:"../process/get_qty.php",
+                        data:"mat_id="+mat_id + "&req_name="+req_name,
+                        success:function(data){
+                         //$("#pack_name").html(data);
+						 var qty_2= $(".qty").val(data);
+                            $(".qty").val() = qty_2;
+                        }
+                     });
+               });
+	});
+    </script>                <div id="req_con_id">
+	                          <label>From Requisition?</label>
+	                          <input type="checkbox" id="req_conf" checked name="req_conf" value="Yes" />
+							  </div>
+                            <span class="error" id="req_name_error">* Choose Requisition</span><br/>
+							<div id="req_id_name">
+							<label>Requisition</label>
+							<select name="req_name" id="req_name"  class="req_name"style="width:100%">
+								<option value="">--Select Requisition--</option>
+								<?php
+								
+								$qr = mysql_query("select * from requisitions where req_status='Approved' and site_id='$site_id' group by req_ref_no order by req_id desc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['req_ref_no'];?>"><?php echo $qrow['req_ref_no'].' '. $qrow['req_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+					</div>
+							<span class="error" id="mat_name_error">* Choose Materials</span><br/>
+							<label>Material</label>
+							<select name="mat_name" id="mat_name" class="mat_name" style="width:100%">
+								<option value="">--Select Material--</option>
+							
+							</select><br/><br/>
+							<label>Package:</label>
+							<span class="error" id="pack_name_error">* Choose Package</span><br/>
+							<select name="pack_name" id="pack_name">
+								<option value="">--Select Package--</option>
+								<?php
+								
+								$qr = mysql_query("select * from packages group by pack_name order by pack_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['pack_id'];?>"><?php echo titleCase($qrow['pack_name']);?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+                            
+                            <span class="error" id="sup_name_error">* Choose Supplier</span><br/>
+							<label>Supplier</label>
+							<select name="sup_name" id="sup_name" class="sup_name" style="width:100%">
+								<option value="">--Select Supplier--</option>
+							<?php
+								
+								$qr = mysql_query("select * from suppliers where status='Active' order by sup_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['sup_id'];?>"><?php echo $qrow['sup_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+		
+							<span class="error" id="qty_error">* Quantity</span><br/>
+							<label>Quantity:</label>
+							<input type="text" name="qty" id="qty" class="qty"  placeholder="Quantity" />
+							<span class="error" id="price_error">* Price</span><br/>
+							<label>Price:</label>
+							<input type="text" name="price" id="price" class="price"  placeholder="Price" />
+							<span class="error" id="desc_error">* Description</span><br/>
+							<label>Description:</label>
+							<input type="text" name="desc" id="desc" placeholder="Description"/>
+                             <label>To Be Approved By:</label>
+							 <span class="error" id="by_name_error">* Select User</span><br/>
+							<select name="by_name[]" id="by_name" multiple="multiple" style="width:100%">
+								
+								<?php
+								
+								$qr = mysql_query("select * from users where user_role = 'CompanyAdmin' or user_role='SiteAdmin' or user_role='SiteManager'  order by fname asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['user_id'];?>"><?php echo $qrow['fname'].' '.$qrow['lname'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>	<br/>
+								
+							<button type="submit" id="submit" class="btn btn-default">Add to Cart</button>
+							<span  id="loadermain"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span><br/>
+							<div id="response_main"></div><br/>
+							<div id="TransDiv"><img src="../images/iconLoading.gif"/></div><br/>
+							
+							<?php
+							//check if any items exist in cart for this requisition
+							$ch_tr = mysql_num_rows(mysql_query("select * from temp_lpos where lpo_ref_no='".$_SESSION['COMSYS_LpoRefNo']."' limit 1"));
+							if($ch_tr==1){
+							?>
+							<script>
+							$(document).ready(function(){
+							$('#TransDiv').fadeIn();
+							$("#Complete1").fadeIn();
+							$("#Complete2").fadeIn();							
+							});
+							</script>
+							<div id="CompleteTrans" id="Complete1">
+							<a href="#" id="lpo_ref_no" rel="<?php echo $_SESSION['COMSYS_LpoRefNo']; ?>"></a>
+							<a href="#CompleteTrans" id="send_lpo_f">Send LPO <font size="+2">&raquo; &raquo;</font></a>
+							<span class="loader" id="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Sending, Please wait...</span><br/>
+							<div id="response"></div>
+							</div>
+						
+							</div>
+					
+							<?php
+							
+							}
+							?>
+								<hr/><div id="CompleteTrans" class="Complete2">
+							<a href="#" id="lpo_ref_no" rel="<?php echo $_SESSION['COMSYS_LpoRefNo']; ?>"></a>
+							<a href="#CompleteTrans" class="btn btn-xs btn-success" id="send_lpo_f">Send LPO <font size="+2">&raquo; &raquo;</font></a>
+							<span class="loader" id="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Saving, Please wait...</span><br/>
+							<div id="response"></div>
+							</div>
+							</div>
+						</form>
+
+	
+					<script>
+					//When DOM loaded we attach click event to button
+					$(document).ready(function() {
+					
+						$('.Complete2').hide();	
+						//save to cart
+						$("#submit").click(function(){
+						//empty contents of response
+						$("#response").empty();
+						//show submit button
+						$("#submit").fadeIn();
+						//loading icon
+						$("#loadermain").fadeOut();
+						//response
+						$("#response_main").fadeIn();
+						//show save lpo button
+						$("#CompleteTrans").fadeIn();
+						//hide loading icon
+						$("#loader").fadeOut();
+						//show transaction div
+						$("#TransDiv").fadeIn();
+						});
+						
+					//send lpo
+						$("#send_lpo_f").click(function(){
+						$('.loader').fadeIn();
+							//empty response
+						$("#response_main").empty();
+						var lpo_no_send = $("#lpo_ref_no").attr("rel");
+					 $("#response").empty();
+						$.post("../process/send_lpo.php",
+						{ lpo_no_send: lpo_no_send},
+						function(lpo_no_send) {
+						$("#response").html(lpo_no_send);
+						$('.loader').hide();
+						$('#TransDiv').hide();
+						$("#CompleteTrans").fadeIn();
+					   $('#response').fadeIn();
+						 });
+						 });
+
+					});
+				</script>
+					</div>
+				</div>

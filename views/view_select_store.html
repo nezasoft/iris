@@ -1,0 +1,74 @@
+<h2 style="font-color:yellow;"><?php echo $st_name; ?></h2>
+<hr/>
+ <a class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=new_mat">Add New Material</a>  
+  <a class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=in_stock">Material Stock</a>  
+  <a  class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=add_stock">Add New Stock</a>  
+  <a class="btn btn-xs btn-info"  href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=update_stock">Update Stock</a>  
+    <a class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=update_stock_inward">Update Stock from inward</a>  
+   <a  class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=issue_mat">Issue Material</a>  
+    <a class="btn btn-xs btn-info" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $_GET['st_id']; ?>&sa=trans_hist">Transactions</a> 
+
+ 
+ <?php
+ //get store action
+ $sa = sanitize_string($_GET['sa']); 
+ switch($sa){
+  case 'st_trans':
+  include('../views/stock_trans.html');
+  break;
+  case 'add_stock':
+  if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+  include('../views/add_stock.html');
+  break;
+  }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+  include('../views/desktop/add_stock.html');
+  break;
+  } 
+  case 'update_stock':
+  if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+  include('../views/update_stock.html');
+  break;
+  }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+  include('../views/desktop/update_stock.html');
+  break;
+  }
+  case 'update_stock_inward':
+  include('../views/update_stock_inward.html');
+  break;
+  case 'issue_mat':
+  if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+  include('../views/issue_material.html');
+  break;
+  }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+  include('../views/desktop/issue_material.html');
+  break;
+  }
+  
+  case 'trans_hist':
+  include('../views/search_record.html');
+  break;
+  if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+  include('../views/search_record.html');
+  break;
+  }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+  include('../views/desktop/search_record.html');
+  break;
+   }
+  case 'new_mat':
+  if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+  include('../views/new_product.html');
+  break;
+  }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+  include('../views/desktop/new_product.html');
+  break;
+   }
+  case 'in_stock':
+  include('../views/desktop/view_stock.html');
+  break;
+  case 'up_image':
+ include('../views/upload_product_photos.html');
+  default:
+  include('../views/desktop/view_stock.html');
+  break;
+ }
+ ?>

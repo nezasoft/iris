@@ -1,0 +1,81 @@
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#pack_name_error").hide();
+$("#psize_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		pack_name = $("#pack_name").val();
+	    psize = $("#psize").val();
+
+		//validate data
+	  if(psize ===''){
+		error =true;
+		$("#psize_error").fadeIn();
+		$("#psize").focus();
+		}else{
+		$("#psize_error").fadeOut();
+		
+		}
+		if(pack_name ===''){
+		error =true;
+		$("#pack_name_error").fadeIn();
+		$("#pack_name").focus();
+		}else{
+		$("#pack_name_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'pack_name='+pack_name + '&psize='+ psize ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_package.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-6" style="background-color:#fff;border:2px solid #616A6B;margin:20px;">
+					<div class="signup-form">
+						<h2>New Package Type</h2>
+						<form action="../process/new_package.php" method="POST">
+						    <span class="error" id="pack_name_error">* Package Name</span><br/>
+							<input type="text" name="pack_name" id="pack_name" placeholder="Package Name"/>
+							<span class="error" id="psize_error">* Package Size</span><br/>
+							<input type="text" name="psize" id="psize" placeholder="Package Size"/>
+						
+							<button type="submit" id="submit" class="btn btn-blue-alt">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

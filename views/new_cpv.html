@@ -1,0 +1,142 @@
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../css/metallic.css" type="text/css">
+ <script src="../js/select2.js"></script>
+ <script type="text/javascript" src="../js/zebra_datepicker.js"></script>
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#ref_no_error").hide();
+$("#supplier_name_error").hide();
+$("#total_amount_error").hide();
+$("#lpo_no_error").hide();
+$("#invoice_no_error").hide();
+$("#response").hide();
+$(".loader").hide();
+$("#supplier_name").select2();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		ref_no = $("#ref_no").val();
+		supplier_name = $("#supplier_name").val();
+		total_amount = $("#total_amount").val();
+		lpo_no = $("#lpo_no").val();
+		invoice_no = $("#invoice_no").val();
+	   
+		if(ref_no ===''){
+		error =true;
+		$("#ref_no_error").fadeIn();
+		$("#ref_no").focus();
+		}else{
+		$("#ref_no_error").fadeOut();
+		
+		}
+		if(supplier_name ===''){
+		error =true;
+		$("#supplier_name_error").fadeIn();
+		$("#supplier_name").focus();
+		}else{
+		$("#supplier_name_error").fadeOut();
+		
+		}
+		if(total_amount ===''){
+		error =true;
+		$("#total_amount_error").fadeIn();
+		$("#total_amount").focus();
+		}else{
+		$("#total_amount_error").fadeOut();
+		
+		}
+		if(lpo_no ===''){
+		error =true;
+		$("#lpo_no_error").fadeIn();
+		$("#lpo_no").focus();
+		}else{
+		$("#lpo_no_error").fadeOut();
+		
+		}
+		if(invoice_no ===''){
+		error =true;
+		$("#invoice_no_error").fadeIn();
+		$("#invoice_no").focus();
+		}else{
+		$("#invoice_no_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'ref_no='+ ref_no + 
+			'&supplier_name=' + supplier_name + 
+			'&total_amount=' + total_amount +
+			'&lpo_no=' + lpo_no + 
+			'&invoice_no=' + invoice_no; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/new_cpv.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h2>New Cheque Payment Voucher</h2><hr/>
+						<form action="../process/new_cpv.php" method="POST">
+						<label>Voucher No</label>
+						    <span class="error" id="ref_no_error">* Ref No</span><br/>
+							<input type="text" name="ref_no" id="ref_no" placeholder="Voucher No"/>
+							<label>Payee</label>
+							<span class="error" id="supplier_name_error">* Choose Supplier</span><br/>
+							<select name="supplier_name" id="supplier_name"  class="supplier_name"style="width:100%">
+								<option value="">--Select Supplier--</option>
+								<?php
+								
+								$qr = mysql_query("select * from suppliers order by sup_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['sup_id'];?>"><?php echo $qrow['sup_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+							<label>Total Amount</label>
+							<span class="error" id="total_amount_error">* Total Amount</span><br/>
+							<input type="text" name="total_amount" id="total_amount" placeholder="Total Amount"/>
+							<label>LPO(s)  (Comma-separated if many)</label>
+							<span class="error" id="lpo_no_error">* LPO No(s)--Comma Separated</span><br/>
+							<input type="text" name="lpo_no" id="lpo_no" placeholder="LPO No(s)"/>
+							<label>Invoice No(s)  (Comma-separated if many)</label>
+							<span class="error" id="invoice_no_error">* Invoice No(s)--Comma Separated</span><br/>
+							<input type="text" name="invoice_no" id="invoice_no" placeholder="Invoice No(s)"/>
+						
+							<button type="submit" id="submit" class="btn btn-default">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

@@ -1,0 +1,977 @@
+[02-Aug-2018 23:43:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:43:47 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:44:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:46:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:46:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:47:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:47:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:49:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:49:07 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:49:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:50:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:51:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:51:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:52:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:53:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 61
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 67
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 9
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 14
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 24
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 34
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 36
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/desktop/view_req.html on line 63
+[02-Aug-2018 23:54:14 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 207
+[02-Aug-2018 23:54:14 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 229
+[02-Aug-2018 23:54:14 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 229
+[02-Aug-2018 23:54:14 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 229
+[02-Aug-2018 23:54:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:56:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:56:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:56:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:57:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:57:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:58:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:59:07 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:59:41 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:59:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[02-Aug-2018 23:59:49 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:04:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:04:09 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:04:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:04:22 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:04:58 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:04:58 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:05:05 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:05:05 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:06:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:06:15 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:07:03 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:07:03 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:09:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:09:28 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:10:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:10:08 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:11:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:11:30 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:11:34 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:11:34 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:11:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:11:37 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:12:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:12:19 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:12:50 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:12:50 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:12:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:12:57 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:13:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:13:21 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:13:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:13:25 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:13:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 73
+[03-Aug-2018 00:13:32 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:14:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:14:40 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:14:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:14:45 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:15:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:15:06 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:15:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:15:10 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:15:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:15:15 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:17:03 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:17:03 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:17:07 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:17:07 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:17:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:17:12 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:17:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:17:18 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 00:18:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:18:24 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:18:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:18:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:18:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:19:58 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:34 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:20:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:21:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:22:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:22:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:22:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:22:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:22:52 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:23:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:23:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 00:23:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:14:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:17:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 62
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 68
+[03-Aug-2018 01:19:02 America/Chicago] PHP Notice:  Undefined index: pack_id in /home/nezakeny/elegant.nezakenya.com/views/view_confirmation_deliveries.html on line 122
+[03-Aug-2018 01:22:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:25:50 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 01:26:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:42:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:42:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:43:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:43:44 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:43:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:43:54 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:44:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:45:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:15 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:46:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:15 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:46:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:44 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:44 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:46:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:45 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:46:54 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:46:54 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:47:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:47:01 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 03:52:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:52:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:52:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:52:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:58 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:53:58 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:54:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:54:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:54:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:54:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:55:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:56:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:58:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:58:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:42 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:42 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 03:59:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:00:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:00:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:00:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:00:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:02:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:02:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:04:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:04:04 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:05:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:05:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:07:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:07:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:07:47 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:07:47 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:10:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:10:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:11:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:11:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:12:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:12:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:14:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:14:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:15:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:17:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:17:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:17:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:17:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:21:34 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:21:34 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:22:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:22:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:23:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:26 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 04:24:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:24:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:25:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:25:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:25:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:25:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:27:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:27:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:27:41 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:27:41 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:27:41 America/Chicago] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 58
+[03-Aug-2018 04:27:41 America/Chicago] PHP Notice:  Undefined variable: color_code in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 89
+[03-Aug-2018 04:27:41 America/Chicago] PHP Notice:  Undefined index: del_status in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 120
+[03-Aug-2018 04:28:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:28:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:28:48 America/Chicago] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 60
+[03-Aug-2018 04:28:48 America/Chicago] PHP Notice:  Undefined variable: color_code in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 91
+[03-Aug-2018 04:28:48 America/Chicago] PHP Notice:  Undefined index: del_status in /home/nezakeny/elegant.nezakenya.com/views/view_specific_delivery.html on line 122
+[03-Aug-2018 04:29:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:29:14 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:29:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:29:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:30:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 04:30:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:10:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:11:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 06:11:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 08:53:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 08:53:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:39:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:41:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:41:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:42:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 14:42:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 9
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 14
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 24
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 34
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 36
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteName in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 27
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SitePostal in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 28
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteAddress in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 29
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteEmail in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 30
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SitePhone in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 31
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 144
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 154
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 154
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 171
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 171
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 386
+[03-Aug-2018 22:59:05 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[03-Aug-2018 22:59:05 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 22:59:05 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 22:59:05 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 22:59:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 22:59:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:00:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:02:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 9
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 14
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 24
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 34
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 36
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 47
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 50
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 8
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 18
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 145
+[03-Aug-2018 23:48:01 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[03-Aug-2018 23:48:01 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 23:48:01 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 23:48:01 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[03-Aug-2018 23:48:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:47 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:47 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:48:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:38 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:38 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:49:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:51:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:51:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:53:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:53:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:54:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:54:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:54:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:54:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:57:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[03-Aug-2018 23:57:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 9
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/desktop/view_inwards.html on line 62
+[04-Aug-2018 00:36:35 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 00:36:35 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 00:36:35 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 00:36:35 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 00:37:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:37:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:37:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:37:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:37:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:37:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:03 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:03 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:52 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:52 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:38:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:29 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:43 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:39:59 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:40:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:40:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:41:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 00:41:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:24:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:24:35 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:28:36 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:29:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:29:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:29:13 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:29:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:29:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:29:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:29:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:33:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:33:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 9
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 60
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 63
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 36
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 300
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 310
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 356
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 382
+[04-Aug-2018 01:34:07 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 01:34:07 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 01:34:07 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 01:34:07 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 01:34:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:50 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:34:50 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:37 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:56 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:35:56 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:37:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:08 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:37:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:31 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:37:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:37:51 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:38:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:09 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:09 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:38:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:18 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:18 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 01:38:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:53 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:38:53 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:42 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:42 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:53 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:41:53 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:00 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:42:28 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:20 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:54:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:55:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:55:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:55:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:55:13 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:56:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:56:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:56:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:56:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:57:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:57:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:58:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:58:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:02 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:10 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:24 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:24 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 01:59:33 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:06:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:06:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:06:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:06:31 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:10:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:10:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:10:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:10:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:12:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:12:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:12:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:12:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:13:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:13:26 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:14:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:14:21 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:15:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:15:51 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:19:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:19:55 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:21:05 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:21:05 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:22:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:22:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:24:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:24:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:29:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:29:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:29:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:29:17 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:44 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:44 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:54 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:54 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:31:57 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:42:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:42:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:45:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:45:46 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:15 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 02:46:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:19 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:25 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 02:46:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:46:39 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:49:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:49:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:49:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:49:11 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:49:11 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 02:49:11 America/Chicago] PHP Notice:  Undefined variable: color_code in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 94
+[04-Aug-2018 02:52:38 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 02:52:38 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:52:38 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:52:38 America/Chicago] PHP Notice:  Undefined variable: color_code in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 94
+[04-Aug-2018 02:56:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:56:30 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:56:30 America/Chicago] PHP Notice:  Undefined variable: color_code in /home/nezakeny/elegant.nezakenya.com/views/view_specific_req.html on line 94
+[04-Aug-2018 02:56:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 02:56:45 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:05:24 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:05:24 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:05:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:05:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:05:32 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 03:23:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:23:01 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 03:23:01 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 9
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 60
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 63
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 36
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 300
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 310
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 356
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_inward.html on line 382
+[04-Aug-2018 04:07:16 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 04:07:16 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 04:07:16 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 04:07:16 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 9
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 14
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/sections/manage_inwards.html on line 51
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/views/desktop/view_inwards.html on line 62
+[04-Aug-2018 05:29:22 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 05:29:22 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:22 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:22 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 9
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 14
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 24
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 34
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 36
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 47
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_IS_MOBILE in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 50
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 8
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteCode in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 18
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/desktop/new_req.html on line 145
+[04-Aug-2018 05:29:23 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 05:29:23 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:23 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:23 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_AccountType in /home/nezakeny/elegant.nezakenya.com/connect_db/connect_db.php on line 39
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 62
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 68
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_SiteID in /home/nezakeny/elegant.nezakenya.com/views/notifications.html on line 14
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserID in /home/nezakeny/elegant.nezakenya.com/views/notifications.html on line 14
+[04-Aug-2018 05:29:25 America/Chicago] PHP Notice:  Undefined index: COMSYS_UserRole in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 247
+[04-Aug-2018 05:29:25 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:25 America/Chicago] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:29:25 America/Chicago] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 269
+[04-Aug-2018 05:53:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:53:49 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:12 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:23 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:27 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:54:48 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:55:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:55:36 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:55:36 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 05:56:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:56:08 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 05:56:08 America/Chicago] PHP Notice:  Undefined index: req_id in /home/nezakeny/elegant.nezakenya.com/sections/manage_requisitions.html on line 29
+[04-Aug-2018 06:04:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 06:04:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 06:54:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 06:54:15 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 06:54:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Aug-2018 06:54:40 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:19:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:19:22 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:19:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:19:32 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:22:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[06-Aug-2018 01:22:06 America/Chicago] PHP Notice:  Undefined index: HTTPS in /home/nezakeny/elegant.nezakenya.com/compadm/index.php on line 74
+[04-Mar-2022 06:40:44 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:40:44 UTC] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/nezasoft/elegant.nezasoft.net/views/view_lpos.html on line 114
+[04-Mar-2022 06:40:44 UTC] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/nezasoft/elegant.nezasoft.net/views/view_lpos.html on line 114
+[04-Mar-2022 06:41:48 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:42:00 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:42:07 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:42:50 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:42:56 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:42:58 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:43:02 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:43:48 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:43:49 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:43:56 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:03 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:18 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:22 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:31 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:34 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:44:37 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:45:02 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:45:13 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:45:20 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:45:28 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:45:32 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:46:32 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:46:34 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:46:36 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:46:38 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 06:52:23 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 07:22:12 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[04-Mar-2022 07:23:50 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[05-Mar-2022 06:16:09 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[05-Mar-2022 06:16:10 UTC] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[05-Mar-2022 06:16:10 UTC] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[05-Mar-2022 06:16:10 UTC] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[08-Mar-2022 10:00:14 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 10:00:14 UTC] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[08-Mar-2022 10:00:14 UTC] PHP Warning:  include(../sidebars/default_sidebar.html): failed to open stream: No such file or directory in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[08-Mar-2022 10:00:14 UTC] PHP Warning:  include(): Failed opening '../sidebars/default_sidebar.html' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/nezasoft/elegant.nezasoft.net/compadm/index.php on line 267
+[08-Mar-2022 10:00:33 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 12:45:42 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:00 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:03 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:08 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:14 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:18 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:22 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:13:52 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:14:00 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:45:11 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:45:54 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:45:54 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:30 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:32 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:36 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:39 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:42 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:47:50 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:49:27 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:49:35 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:49:41 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:49:44 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 13:49:50 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 14:03:00 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 14:13:37 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 14:48:16 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 14:48:23 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 15:04:44 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11
+[08-Mar-2022 15:04:46 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/nezasoft/elegant.nezasoft.net/connect_db/connect_db.php on line 11

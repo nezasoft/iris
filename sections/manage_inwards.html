@@ -1,0 +1,89 @@
+
+				
+					<div class="col-sm-9" style="background:#fff;padding:10px;">
+				
+				<h3>Inward Goods</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_inw'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID'];  ?>&sec=inw&act=new_inw#new_inw" >New Inward</a></li>
+								<?php
+								if($atype=='edit_inw'){
+								
+								?>
+								<li <?php if($atype=='edit_inw'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID'];  ?>&sec=inw&act=edit_inw#edit_inw" >Edit Inward</a></li>
+								<?php
+								
+								}
+								
+								?>
+								<?php
+								if($atype=='view_inw'){
+								
+								?>
+									<li <?php if($atype=='view_inw'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID'];  ?>&sec=inw&act=view_inw#view_inw" >View Inward</a></li>	
+								<?php
+								
+								}
+								
+								?>
+								<?php
+								if($atype=='upload_inw'){
+								
+								?>
+									<li <?php if($atype=='upload_inw'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID'];  ?>&sec=inw&act=upload_inw#upload_inw" >Upload Inward</a></li>	
+								<?php
+								
+								}
+								
+								?>
+								
+												
+								<li <?php if($atype=='man_inw'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID'];  ?>&sec=inw&act=man_inw#man_inw">Manage Inwards</a></li>
+							
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){                   
+						case 'new_inw':
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+						include('../views/new_inward.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+                        include('../views/desktop/new_inward.html');
+						break;
+                        }
+						case 'man_inw':
+						include('../views/desktop/view_inwards.html');
+						break;                    
+						case 'view_inw':
+						include('../views/view_specific_inward.html');
+						break;
+						case 'edit_inw':
+						include('../views/edit_inward.html');
+						break;
+						case 'upload_inw':
+						include('../views/upload_delivery_note.html');
+						break;
+						default:
+						include('../views/new_inward.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

@@ -1,0 +1,101 @@
+<?php
+$qr= mysql_query("select * from users as us left join sites as s on s.site_id=us.site_id");
+?>	
+<br/><br/><br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>User Accounts</h3>
+                        </div>
+						<br/><span id="userresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_users">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+											<th>Last Name</th>
+											<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th>Site Name</th>											
+                                            <th>Role </th>											
+                                            <th>Date Created</th>
+                                            <?php } ?>
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $qr_row['fname']; ?></td>
+                                            <td><?php echo $qr_row['lname']; ?></td>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					                        <td><?php echo $qr_row['email']; ?></td>					                        
+                                            <td><?php echo $qr_row['account_status']; ?></td>
+                                            <td><?php echo $qr_row['site_name']; ?></td>											
+                                            <td><?php echo $qr_row['user_role']; ?></td>
+										   <a href="" id="deluserval_<?php echo $qr_row['user_id'];?>" rel="<?php echo $qr_row['user_id'];?>"></a>
+                                            <td><?php echo $qr_row['date_created']; ?></td>
+                                            <?php } ?>
+                                            <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {																							
+												$("#deluserlink_<?php echo $qr_row['user_id'];?>").click(function(){												
+													$("#userresults").empty();													
+													var con = confirm("Are you sure you want to deactivate this user?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var user_id = $("#deluserval_<?php echo $qr_row['user_id'];?>").attr("rel");												
+											$.post("../process/deactivate_user.php",
+											 { user_id : user_id  },
+											 function(user_id) {
+											 $("#userresults").html(user_id);											 
+										   });											
+												}
+														   
+												});
+												$("#reactivate_<?php echo $qr_row['user_id'];?>").click(function(){												
+													$("#userresults").empty();													
+													var con = confirm("Are you sure you want to reactivate this user?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var user_id = $("#deluserval_<?php echo $qr_row['user_id'];?>").attr("rel");												
+											$.post("../process/reactivate_user.php",
+											 { user_id : user_id  },
+											 function(user_id) {
+											 $("#userresults").html(user_id);											 
+										   });											
+												}
+														   
+												});
+												
+											});
+                                           </script>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=us&act=edit_user&user_id=<?php echo $qr_row['user_id']; ?>">Edit</a></td>
+											<td> 
+											<?php if($qr_row['account_status']=='Active'){ ?>
+											    <a class="btn btn-xs btn-danger" href="#" id="deluserlink_<?php echo $qr_row['user_id'];?>">Deactivate</a> 
+											    <?php }else{?>
+											    <a  class="btn btn-xs btn-success"href="#" id="reactivate_<?php echo $qr_row['user_id'];?>">Activate</a></td>
+											    
+											    <?php } ?>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_users').dataTable();
+            });
+    </script>

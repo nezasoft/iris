@@ -1,0 +1,215 @@
+
+<script type="text/javascript" src="../js/tableExport.js"></script>
+<script type='text/javascript' src="../js/jquery.base64.js"></script>
+ <link href="../css/select2.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../css/metallic.css" type="text/css">
+    <script src="../js/select2.js"></script>
+    <script type="text/javascript" src="../js/zebra_datepicker.js"></script>
+	
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$('#from_date_period').Zebra_DatePicker();
+$('#to_date_period').Zebra_DatePicker();
+$("#mat_name_error").hide();
+$("#site_name_to_error").hide();
+$("#site_name_from_error").hide();
+$("#from_date_period_error").hide();
+$("#to_date_period_error").hide();
+$("#site_name_from").select2();
+$("#site_name_to").select2();
+$("#mat_name").select2();
+$("#site_name").select2();  
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		mat_name = $("#mat_name").val();
+		site_name_from = $("#site_name_from").val();
+		site_name_to = $("#site_name_to").val();
+		from_date_period = $("#from_date_period").val();
+		to_date_period = $("#to_date_period").val();
+	   
+		if(mat_name ===''){
+		error =true;
+		$("#mat_name_error").fadeIn();
+		$("#mat_name").focus();
+		}else{
+		$("#mat_name_error").fadeOut();
+		
+		}
+		if(site_name_from ===''){
+		error =true;
+		$("#site_name_from_error").fadeIn();
+		$("#site_name_from").focus();
+		}else{
+		$("#site_name_from_error").fadeOut();
+		
+		}
+		if(site_name_to ===''){
+		error =true;
+		$("#site_name_to_error").fadeIn();
+		$("#site_name_to").focus();
+		}else{
+		$("#site_name_to_error").fadeOut();
+		
+		}
+			if(to_date_period ===''){
+		error =true;
+		$("#to_date_period_error").fadeIn();
+		$("#to_date_period").focus();
+		}else{
+		$("#to_date_period_error").fadeOut();
+		
+		}
+			if(from_date_period ===''){
+		error =true;
+		$("#from_date_period_error").fadeIn();
+		$("#from_date_period").focus();
+		}else{
+		$("#from_date_period_error").fadeOut();
+		
+		}
+		
+	
+		
+		});
+});	
+
+</script>
+<?php
+if(isset($_POST['export-excel'])){
+//Variables
+$mat_name = sanitize_string($_POST['mat_name']);
+$from_site = sanitize_string($_POST['site_name_from']);
+$to_site = sanitize_string($_POST['site_name_to']);
+$to_date = sanitize_string($_POST['to_date_period']);
+$from_date =sanitize_string($_POST['from_date_period']);
+
+
+if($mat_name=='All'){
+$mat_name = '';
+}else{
+$mat_name = $mat_name;
+
+}
+
+$sql = mysql_query("select st.site_name as sitefrom, s.site_name as siteto , dc.del_con_id, dc.del_no,dc.price, dc.inward_no, 
+dc.details, dc.qty, dc.balance, dc.confirm_code, dc.price, pk.pack_name, s.site_name,
+mt.mat_name, us.fname, us.lname, dc.date_received,dc.date_entered from delivery_confirmations as dc 
+left join materials as mt on mt.mat_id=dc.mat_id
+left join packages as pk on pk.pack_id = dc.pack_id
+left join sites as s on s.site_id = dc.site_supply_id
+left join users as us on us.user_id = dc.user_id
+left join sites as st on st.site_id = dc.site_id
+left join confirmation_approvals as ca on ca.confirm_code = dc.confirm_code
+");
+
+
+$out = '';
+
+// Get all fields names in table "mytablename" in database "mydb".
+$fields = mysql_list_fields($sql);
+
+// Count the table fields and put the value into $columns.
+$columns = mysql_num_fields($fields);
+
+// Put the name of all fields to $out.
+for ($i = 0; $i < $columns; $i++) {
+$l=mysql_field_name($fields, $i);
+$out .= '"'.$l.'",';
+}
+$out .="\n";
+
+// Add all values in the table to $out.
+while ($l = mysql_fetch_array($sql)) {
+for ($i = 0; $i < $columns; $i++) {
+$out .='"'.$l["$i"].'",';
+}
+$out .="\n";
+}
+
+// Open file export.csv.
+$f = fopen ('export.csv','w');
+
+// Put all values from $out to export.csv.
+fputs($f, $out);
+fclose($f);
+
+header('Content-type: application/csv');
+header('Content-Disposition: attachment; filename="export.csv"');
+readfile('export.csv');
+
+}
+?>	
+
+
+		<div class="col-sm-4">
+					<div class="signup-form">
+						<h2>Export Confirmation Delivery to Excel Spreadsheet</h2>
+						<form action="?acc_type=CompanyAdmin&sec=del&act=exp_data"  method="POST">
+						         <label>Material</label><br/>
+							   <span class="error" id="mat_name_error" style="width:50%">* Material Name</span><br/><br/>
+							<select name="mat_name" id="mat_name" style="width:50%">
+								<option value="">--Select Material--</option>
+								<option value="All">All Materials</option>
+								<?php
+								
+								$qr = mysql_query("select * from materials  group by mat_name order by mat_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['mat_id'];?>"><?php echo $qrow['mat_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/></br>
+									<label>From Site Name</label><br/>
+							<span class="error" id="site_name_from_error" style="width:50%">* Site Name</span><br/><br/>
+							<select name="site_name_from" id="site_name_from" style="width:50%">
+								<option value="">--Select Site--</option>
+								<?php
+								
+								$qr = mysql_query("select * from sites order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['site_id'];?>"><?php echo $qrow['site_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+									<label>To Site Name</label><br/>
+							<span class="error" id="site_name_to_error" style="width:50%">* Site Name</span><br/><br/>
+							<select name="site_name_to" id="site_name_to" style="width:50%">
+								<option value="">--Select Site--</option>
+								<?php
+								
+								$qr = mysql_query("select * from sites order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['site_id'];?>"><?php echo $qrow['site_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+							<span class="error" id="from_date_period_error" style="width:50%">* From Date Period</span><br/><br/>
+                                <label>From Received Date Period:</label>
+							<input type="text" name="from_date_period"  style="width:50%" id="from_date_period" placeholder="Received Date" />
+							<span class="error" id="to_date_period_error" style="width:50%">* To Date Period</span><br/><br/>
+                                <label>To Received Date Period:</label>
+							<input type="text" name="to_date_period" style="width:50%" id="to_date_period" placeholder="Received Date" />
+						
+							<input type="submit" name="export-excel" style="width:20%" value="Export Data" />
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

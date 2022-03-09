@@ -1,0 +1,65 @@
+    <?php
+$qr= mysql_query("select * from brands ");
+
+?>	
+<br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Brands </h3>
+                        </div>
+						<br/><span id="brandresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_brands">
+                                    <thead>
+                                        <tr>
+                                            <th>Brand Name</th>                                                                            
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo titleCase($qr_row['brand_name']); ?></td>
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete store
+												$("#delbrand_<?php echo $qr_row['brand_id'];?>").click(function(){												
+													$("#brandresults").empty();													
+													var con = confirm("Are you sure you want to remove this Brand?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var brand_id = $("#delbrandval_<?php echo $qr_row['brand_id'];?>").attr("rel");													
+													$.post("../process/delete_brand.php",
+													 { brand_id : brand_id },
+													 function(brand_id) {
+													 $("#brandresults").html(brand_id);											 
+												   });											
+												}
+														   
+												});
+											});
+                                           </script>
+										   <a href="" id="delbrandval_<?php echo $qr_row['brand_id'];?>" rel="<?php echo $qr_row['brand_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=edit_brand&brand_id=<?php echo $qr_row['brand_id'];?>">Edit</a></td>
+											<td><a class="btn btn-xs btn-danger" href="#list_brands" id="delbrand_<?php echo $qr_row['brand_id'];?>">Delete</a></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                //$('#list_brands').dataTable();
+            });
+    </script>

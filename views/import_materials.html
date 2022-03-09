@@ -1,0 +1,54 @@
+<h2>Import Excel Data</h2>
+
+<?php  
+
+   set_include_path(get_include_path() . PATH_SEPARATOR . '../classes/');  
+   include 'PHPExcel/IOFactory.php';  
+   $uploadedStatus = 0;  
+   if ( isset($_POST["submit"]) ) {  
+      if ( isset($_FILES["file"])) {  
+         //if there was an error uploading the file  
+         if ($_FILES["file"]["error"] > 0) {  
+            echo "Return Code: " . $_FILES["file"]["error"] . "<br />";  
+         }  
+         else {  
+            $imagename = $_FILES["file"]["name"] ;  
+            move_uploaded_file($_FILES["file"]["tmp_name"], $imagename);  
+            try {  
+               $objPHPExcel = PHPExcel_IOFactory::load($imagename);  
+            } catch(Exception $e) {  
+            
+              die('Error loading file "'.pathinfo($imagename,PATHINFO_BASENAME).'": '.$e->getMessage());  
+            }  
+            $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);  
+            $arrayCount = count($allDataInSheet); // Here get total count of row in that Excel sheet  
+            for($i=2;$i<=$arrayCount;$i++){  
+               $materials = trim($allDataInSheet[$i]["B"]);  
+               //$userMobile = trim($allDataInSheet[$i]["B"]);  
+               $import=mysql_query("insert into materials (mat_name) values('".$materials."')");  
+            }  
+            //echo "Please check your database " .mysql_error().""; 
+
+if($import){
+echo '<span class="success">All Data Imported Successfully</span>';
+}else{
+echo '<span class="error">There was an error importing data.</span>';
+}			
+         }  
+      } else {  
+            echo "No file selected <br />";  
+         }  
+      }  
+?>
+<br/> <br/>  <br/>   
+<div >
+<form  id="uploadimage"  action="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=lpos&act=man_mat&ip=import_mat" method="post" enctype="multipart/form-data">
+<div id="selectImage">           
+     <label>Upload File</label>     
+      <input type="file" name="file" id="file" /><br/>
+<input type="submit" name="submit" value="Import Data" />
+</div>	  
+          
+ 
+</form>
+</div>

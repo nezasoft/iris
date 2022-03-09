@@ -1,0 +1,95 @@
+
+				
+					<div class="col-sm-9" style="background:#fff;padding:10px;">
+				
+				<h3>Requisitions</h3><hr/>
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']==0){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_req'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=new_req#new_req" >New Requisition</a></li>
+								<li <?php if($atype=='edit_req'){echo 'class="active"';}?>>
+								<?php 
+								if($atype=='edit_req'){
+								?>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=edit_req#new_req" >Edit Requisition</a></li>
+								<?php 
+									}
+								?>
+								<li <?php if($atype=='man_req'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=man_req#man_req">Manage Requisitions</a></li>
+								<?php 
+								if($atype=='view_req'){
+								?>
+								<li <?php if($atype=='view_req'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=req&act=view_req&req_id=<?php echo $_GET['req_id']; ?>">View Requisition</a></li>
+								<?php 
+									}
+								?>
+								<li <?php if($atype=='new_cpv'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=new_cpv#new_cpv" >New C.P.V</a></li>
+								<li <?php if($atype=='man_cpv'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=man_cpv#man_cpv" >Manage C.P.V(s)</a></li>
+								
+							</ul>
+						</div>
+						<?php 
+						}
+					  ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_req':
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){ 
+						include('../views/new_req.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+                        include('../views/desktop/new_req.html');
+						break;
+                        }
+                        
+                        case 'man_req':
+                        /*if($_SESSION['COMSYS_IS_MOBILE']==1){ 						
+						include('../views/view_req.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){     
+                        include('../views/desktop/view_req.html');
+						break;
+                        }*/
+                        include('../views/desktop/view_req.html');
+						break;
+                        case 'edit_final_req':
+						include('../views/edit_final_req.html');
+						break;
+						case 'view_req':
+						include('../views/view_specific_req.html');
+						break;
+						case 'edit_req':
+						include('../views/edit_req.html');
+						break;
+                        case 'new_cpv':
+                        if($_SESSION['COMSYS_IS_MOBILE']==1){
+						include('../views/new_cpv.html');
+						break;
+                        }elseif($_SESSION['COMSYS_IS_MOBILE']==0){
+						include('../views/desktop/new_cpv.html');
+						break;
+                        }
+						case 'man_cpv':
+						include('../views/desktop/view_cpv.html');
+						break;
+						default:
+						include('../views/new_req.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

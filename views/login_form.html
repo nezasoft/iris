@@ -1,0 +1,88 @@
+<script>
+$(document).ready(function(){
+$("#password_error").hide();
+$("#email_error").hide();
+$("#invalidemail_error").hide();
+$("#response").hide();
+$(".loader").hide();
+
+      $("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		
+			email = $("#email").val();
+			password = $("#password").val();
+			
+			error = false;
+		
+	 if(password ===''){
+		error =true;
+		$("#password_error").fadeIn();
+		$("#password").focus();
+		}else{
+		$("#password_error").fadeOut();
+		
+		}
+
+      if(email ===''){
+		error =true;
+		$("#email_error").fadeIn();
+		$("#email").focus();
+		}else{
+		$("#email_error").fadeOut();
+			if(email.indexOf('@') == '-1'){
+			error = true;
+			$('#invalidemail_error').fadeIn();
+			$("#email").focus();
+			 }else{
+			 $('#invalidemail_error').fadeOut();
+			  }
+		}
+		
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'email='+ email + '&password='+ password ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "process/process_login.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}		
+		
+	});
+});
+
+</script>
+
+
+<div  id="border_lines" <?php if($_SESSION['COMSYS_IS_MOBILE']==1){ ?> style="width:80%;" <?php } ?> >
+					<div  style="background-color:#fff;" class="login-form"><!--login form-->
+						<h2>Login to your account</h2>
+						<form action="process/process_login.php" method="POST">
+						    <span class="error" id="email_error">* Email Address</span><br/>
+							<span class="error" id="invalidemail_error">* Invalid Email Address</span><br/>
+							<input type="email" class="input-text" id="email"  name="email" placeholder="Email Address" />
+							<span class="error" id="password_error">* Password</span><br/>
+							<input type="password" class="input-text" id="password" name="password" placeholder="Password" />
+							<div align="left">
+							<button type="submit" id="submit" class="btn btn-default">Login</button> <br/> <a href="?forgot_pass"><i class="fa fa-lock"></i> Forgot Password?</a></br>
+							<span class="loader"><img src="images/loader.gif" width="40px" height="40px"/>Signing in...</span>
+							<div id="response"></div><br/><br/><br/>
+							</div>
+							<br/>
+						</form>
+    </div><!--/login form-->
+</div>

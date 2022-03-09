@@ -1,0 +1,112 @@
+    <?php
+$qr= mysql_query("select * from stores where site_id='".$_SESSION['COMSYS_SiteID']."'");
+
+?>	
+<br/><br/><br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Stores &raquo;<?php echo $_SESSION['COMSYS_SiteName'];?></h3>
+                        </div>
+						<br/><span id="storeresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_sites">
+                                    <thead>
+                                        <tr>
+                                            <th>Store Name</th>
+                                            <th>Store Desc</th>
+                                            <th>Site </th>
+                                            <th>Status</th>
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><a class="btn btn-xs btn-success" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=st&act=view_st&st_id=<?php echo $qr_row['store_id']; ?>"><?php echo $qr_row['store_name']; ?></a></td>
+                                            <td><?php echo $qr_row['store_desc']; ?></td>
+                                            <td><?php echo $qr_row['site_name']; ?></td>
+                                            <td><?php echo $qr_row['store_status']; ?></td>
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete store
+												$("#delstore_<?php echo $qr_row['store_id'];?>").click(function(){												
+													$("#storeresults").empty();													
+													var con = confirm("Are you sure you want to remove this store?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var store_id = $("#delstoreval_<?php echo $qr_row['store_id'];?>").attr("rel");												
+											$.post("../process/delete_store.php",
+											 { store_id : store_id  },
+											 function(store_id) {
+											 $("#storeresults").html(store_id);											 
+										   });											
+												}
+														   
+												});
+												//Deactivate store
+												$("#deactivate_<?php echo $qr_row['store_id'];?>").click(function(){												
+													$("#storeresults").empty();													
+													var con = confirm("Are you sure you want to deactivate this store?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var store_id = $("#delstoreval_<?php echo $qr_row['store_id'];?>").attr("rel");												
+											$.post("../process/deactivate_store.php",
+											 { store_id : store_id  },
+											 function(store_id) {
+											 $("#storeresults").html(store_id);											 
+										   });											
+												}
+														   
+												});
+												//Reactivate Store
+													$("#reactivate_<?php echo $qr_row['store_id'];?>").click(function(){												
+													$("#storeresults").empty();													
+													var con = confirm("Are you sure you want to reactivate this store?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var store_id = $("#delstoreval_<?php echo $qr_row['store_id'];?>").attr("rel");												
+											$.post("../process/reactivate_store.php",
+											 { store_id : store_id  },
+											 function(store_id) {
+											 $("#storeresults").html(store_id);											 
+										   });											
+												}
+														   
+												});
+												
+											});
+                                           </script>
+										   <a href="" id="delstoreval_<?php echo $qr_row['store_id'];?>" rel="<?php echo $qr_row['store_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=st&act=edit_store&store_id=<?php echo $qr_row['store_id']; ?>">Edit</a></td>
+											<td>
+											 <a class="btn btn-xs btn-danger" href="#" id="delstore_<?php echo $qr_row['store_id'];?>">Delete</a>
+											 <?php if($qr_row['store_status']=='Active'){ ?>
+											<a class="btn btn-xs btn-warning" href="#" id="deactivate_<?php echo $qr_row['store_id'];?>">Deactivate</a>
+											
+											<?php }else{?>
+											<a class="btn btn-xs btn-success" href="#" id="reactivate_<?php echo $qr_row['store_id'];?>">Reactivate</a></td>
+											
+											<?php } ?>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_sites').dataTable();
+            });
+    </script>

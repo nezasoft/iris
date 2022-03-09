@@ -1,0 +1,99 @@
+<?php
+$qr= mysql_query("select * from sites");
+?>	
+<br/><br/><br/>
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Sites &raquo;<?php echo $_SESSION['COMSYS_SiteName'];?></h3>
+                        </div>
+						<br/><span id="siteresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_sites">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <th>Email</th>
+                                            <th>Postal </th>
+                                            <th>Physical </th>
+                                            <th>Phone No</th>
+                                            <?php } ?>
+											<th>Status</th>
+											 <th>Code</th>
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $qr_row['site_name']; ?></td>
+                                            <?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+                                            <td><?php echo $qr_row['site_email']; ?></td>
+                                            <td><?php echo $qr_row['site_postal']; ?></td>
+                                            <td><?php echo $qr_row['site_address']; ?></td>
+                                            <td><?php echo $qr_row['site_phone']; ?></td>
+                                            <?php } ?>
+											<td><?php echo $qr_row['site_status']; ?></td>
+											<td><?php echo $qr_row['site_code']; ?></td>
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete site
+												$("#delsite_<?php echo $qr_row['site_id'];?>").click(function(){												
+													$("#siteresults").empty();													
+													var con = confirm("Are you sure you want to remove this site?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var site_id = $("#delsiteval_<?php echo $qr_row['site_id'];?>").attr("rel");												
+											$.post("../process/delete_site.php",
+											 { site_id : site_id  },
+											 function(site_id) {
+											 $("#siteresults").html(site_id);											 
+										   });											
+												}
+														   
+												});
+												//Deactivate site
+												$("#deactivate_<?php echo $qr_row['site_id'];?>").click(function(){												
+													$("#siteresults").empty();													
+													var con = confirm("Are you sure you want to deactivate this site?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var site_id = $("#delsiteval_<?php echo $qr_row['site_id'];?>").attr("rel");												
+											$.post("../process/deactivate_site.php",
+											 { site_id : site_id  },
+											 function(site_id) {
+											 $("#siteresults").html(site_id);											 
+										   });											
+												}
+														   
+												});
+												
+											});
+                                           </script>
+										   <a href="" id="delsiteval_<?php echo $qr_row['site_id'];?>" rel="<?php echo $qr_row['site_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $_SESSION['COMSYS_SiteID']; ?>&sec=sites&act=edit_site&site_id=<?php echo $qr_row['site_id']; ?>">Edit</a></td>
+											<td>
+											    <a class="btn btn-xs btn-danger" href="#" id="delsite_<?php echo $qr_row['site_id'];?>">Delete</a>  
+											    <a href="#" class="btn btn-xs btn-warning" id="deactivate_<?php echo $qr_row['site_id'];?>">Deactivate</a></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+                $('#list_sites').dataTable();
+            });
+    </script>

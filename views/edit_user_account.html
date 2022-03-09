@@ -1,0 +1,151 @@
+<?php
+//get user
+$user_id = sanitize_string($_GET['user_id']);
+$qr_row = mysql_fetch_assoc(mysql_query("select * from users where user_id='$user_id'"));
+?>
+<script>
+$(document).ready(function(){
+//hide all errors when form loads
+$("#fname_error").hide();
+$("#lname_error").hide();
+$("#email_error").hide();
+$("#role_error").hide();
+$("#site_error").hide();
+$("#invalidemail_error").hide();
+
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		fname = $("#fname").val();
+		lname = $("#lname").val();
+		email = $("#email").val();
+		site = $("#site").val();
+		role = $("#role").val();
+		user_id = <?php echo $user_id;  ?>;
+		
+		if(role ===''){
+		error =true;
+		$("#role_error").fadeIn();
+		$("#role").focus();
+		}else{
+		$("#role_error").fadeOut();
+		
+		}
+		if(site ===''){
+		error =true;
+		$("#site_error").fadeIn();
+		$("#site").focus();
+		}else{
+		$("#site_error").fadeOut();
+		
+		}
+		
+		if(email ===''){
+		error =true;
+		$("#email_error").fadeIn();
+		$("#email").focus();
+		}else{
+		$("#email_error").fadeOut();
+		if(email.indexOf('@') == '-1'){
+		error = true;
+		$('#invalidemail_error').fadeIn();
+		$("#email").focus();
+		 }else{
+		 $('#invalidemail_error').fadeOut();
+		  }
+		
+		}
+		if(lname ===''){
+		error =true;
+		$("#lname_error").fadeIn();
+		$("#lname").focus();
+		}else{
+		$("#lname_error").fadeOut();
+		
+		}
+		if(fname ===''){
+		error =true;
+		$("#fname_error").fadeIn();
+		$("#fname").focus();
+		}else{
+		$("#fname_error").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'fname='+fname + '&lname='+ lname + '&email='+ email+ '&site='+ site + '&role='+ role+ '&user_id='+ user_id; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_user_account.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+				<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form"><!--sign up form-->
+						<h3>Update User's Details</h3><hr/>
+						<form action="../edit_user_account.php" method="POST">
+						    <span class="error" id="fname_error">* First Name</span><br/>
+							<input type="text" name="fname" id="fname"  value="<?php echo $qr_row['fname'];?>"/>
+							<span class="error" id="lname_error">* Last Name</span><br/>
+							<input type="text" name="lname" id="lname"  value="<?php echo $qr_row['lname'];?>"/>
+							<span class="error" id="email_error">* Email Address</span><br/>
+							<span class="error" id="invalidemail_error">* Invalid Email Address</span><br/>
+							<input type="email" name="email" id="email"  value="<?php echo $qr_row['email'];?>"/>
+							<span class="error" id="site_error">* Choose Site</span><br/>
+							<select name="site" id="site">
+								<option value="">--Select Site--</option>
+								<?php
+								
+								$qr = mysql_query("select * from sites order by site_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['site_id'];?>"><?php echo $qrow['site_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+							<span class="error" id="role_error">* Choose Role</span><br/>
+							<select name="role" id="role">
+								<option value="">--Select Role--</option>
+							   <option value="SiteManager">Site Manager</option>
+							   <option value="SiteAdmin">Site Administrator</option>
+							   <option value="StoreManager">Store Manager</option>
+							   <option value="LPOManager">LPO Manager</option>
+							   <option value="ContractorAdmin">Contractor Administrator</option>
+							   <option value="CompanyAdmin">Company Administrator</option>
+							   <option value="RequisitionManager">Requisition Manager</option>
+							   <option value="RegularUser">Regular User</option>>
+							</select><br/>
+							<button type="submit" id="submit" class="btn btn-default">Update Details</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div><!--/sign up form-->
+				</div>

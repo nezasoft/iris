@@ -1,0 +1,71 @@
+    <?php
+$qr= mysql_query("select * from materials_categories ");
+
+?>	
+
+			<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Materials Categories </h3>
+                        </div>
+						<br/><span id="catresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_categories">
+                                    <thead>
+                                        <tr>
+                                            <th>Category Name</th>
+                                            <th>Category Desc</th>
+                                   
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">
+                                         
+                                            <td><?php echo titleCase($qr_row['mat_cat_name']); ?></td>
+                                            <td><?php echo titleCase($qr_row['mat_cat_desc']); ?></td>
+                                          
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete store
+												$("#delcat_<?php echo $qr_row['mat_cat_id'];?>").click(function(){												
+													$("#catresults").empty();													
+													var con = confirm("Are you sure you want to remove this category?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var cat_id = $("#delcatval_<?php echo $qr_row['mat_cat_id'];?>").attr("rel");
+													
+											$.post("../process/delete_category.php",
+											 { cat_id : cat_id },
+											 function(cat_id) {
+											 $("#catresults").html(cat_id);											 
+										   });											
+												}
+														   
+												});
+											});
+                                           </script>
+										   <a href="" id="delcatval_<?php echo $qr_row['mat_cat_id'];?>" rel="<?php echo $qr_row['mat_cat_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=edit_cat&cat_id=<?php echo $qr_row['mat_cat_id'];?>">Edit</a></td>
+											<td><a class="btn btn-xs btn-danger" href="#list_categories" id="delcat_<?php echo $qr_row['mat_cat_id'];?>">Delete</a></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+               // $('#list_categories').dataTable();
+            });
+    </script>

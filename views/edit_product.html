@@ -1,0 +1,212 @@
+<?php
+$mat_id = sanitize_string($_GET['mat_id']);
+$qr1=mysql_fetch_assoc(mysql_query("select mc.mat_cat_id,sup.sup_id,mn.man_id,br.brand_id,s.size_id, mt.mat_name,mt.mat_id,mt.description,mc.mat_cat_name,sup.sup_name,mn.man_name,br.brand_name,s.size_name from materials as mt left join materials_categories as mc on mc.mat_cat_id=mt.mat_cat_id
+left join suppliers as sup on sup.sup_id = mt.sup_id
+left  join manufactures as mn on mn.man_id = mt.man_id
+left join brands as br on br.brand_id = mt.brand_id
+left join sizes as s on s.size_id = mt.size_id where mt.mat_id='$mat_id'"));
+
+?>
+ <link href="../css/select2.css" rel="stylesheet"/>
+<script src="../js/select2.js"></script>
+<script>
+$(document).ready(function(){
+$("#sup_name").select2();  
+$("#man_name").select2(); 
+$("#brand_name").select2(); 
+$("#size_name").select2();
+//hide all errors when form loads
+$("#prod_name_error").hide();
+$("#cat_name_error").hide();
+$("#man_name_error").hide();
+$("#size_name_error").hide();
+$("#brand_name_error").hide();
+$("#prod_desc_error").hide();
+$("#sup_name_error").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		prod_name = $("#prod_name").val();
+		cat_name = $("#cat_name").val();
+	    prod_desc = $("#prod_desc").val();
+		sup_name = $("#sup_name").val();
+		man_name = $("#man_name").val();
+		brand_name = $("#brand_name").val();
+		size_name = $("#size_name").val();
+		mat_id = <?php echo sanitize_string($_GET['mat_id']);?>;
+		
+		//validate data
+		
+	  if(prod_desc ===''){
+		error =true;
+		$("#prod_desc_error").fadeIn();
+		$("#prod_desc").focus();
+		}else{
+		$("#prod_desc_error").fadeOut();
+		
+		}
+		if(sup_name ===''){
+		error =true;
+		$("#sup_name_error").fadeIn();
+		$("#sup_name").focus();
+		}else{
+		$("#sup_name_error").fadeOut();
+		
+		}
+				if(man_name ===''){
+		error =true;
+		$("#man_name_error").fadeIn();
+		$("#man_name").focus();
+		}else{
+		$("#man_name_error").fadeOut();
+		
+		}
+			if(brand_name ===''){
+		error =true;
+		$("#brand_name_error").fadeIn();
+		$("#brand_name").focus();
+		}else{
+		$("#brand_name_error").fadeOut();
+		
+		}
+		if(prod_name ===''){
+		error =true;
+		$("#prod_name_error").fadeIn();
+		$("#prod_name").focus();
+		}else{
+		$("#prod_name_error").fadeOut();
+		
+		}
+		if(cat_name ===''){
+		error =true;
+		$("#cat_name_error").fadeIn();
+		$("#cat_name").focus();
+		}else{
+		$("#cat_name_error").fadeOut();
+		
+		}
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();		
+		/* Ajax Request here*/
+		//data values
+		var myData = 'prod_name='+prod_name + '&prod_desc='+ prod_desc + '&sup_name='+ sup_name + '&cat_name='+ cat_name + '&mat_id='+ mat_id  + '&man_name='+ man_name + '&size_name='+ size_name + '&brand_name='+ brand_name ;//build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_product.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+<div class="col-sm-6" style="background-color:#fff;border:2px solid #616A6B;margin:20px;">
+					<div class="signup-form">
+						<h2>Edit Material</h2>
+						<form action="../process/edit_product.php" method="POST">
+						<span class="error" id="prod_name_error">* Material Name</span><br/>
+							<label>Material Name</label>
+							<input type="text" name="prod_name" id="prod_name" value="<?php echo $qr1['mat_name'];?>"/><br/>
+								<span class="error" id="cat_name_error">* Choose Category</span><br/>
+							<label>Category</label>
+							<select name="cat_name" id="cat_name">
+								<option value="<?php echo $qr1['mat_cat_id'];?>"><?php echo $qr1['mat_cat_name'];?></option>
+								<?php
+								
+								$qr = mysql_query("select * from materials_categories group by mat_cat_name order by mat_cat_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['mat_cat_id'];?>"><?php echo $qrow['mat_cat_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+							<label>Manufacturer</label>
+							  <span class="error" id="man_name_error">* Manufacturer Name</span><br/>
+							<select name="man_name" id="man_name" class="man_name" style="width:100%">
+								<option value="<?php echo $qr1['man_id'];?>"><?php echo $qr1['man_name'];?></option>
+								<?php
+								
+								$qr = mysql_query("select * from manufactures order by man_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['man_id'];?>"><?php echo $qrow['man_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/><br/>
+							<label>Brand</label>
+							<span class="error" id="brand_name_error">* Brand Name</span><br/>
+							<select name="brand_name" id="brand_name" class="brand_name" style="width:100%">
+								<option value="<?php echo $qr1['brand_id'];?>"><?php echo $qr1['brand_name'];?></option>
+								<?php
+								
+								$qr = mysql_query("select * from brands  order by brand_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['brand_id'];?>"><?php echo $qrow['brand_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/><br/>
+							<label>Size</label>
+							<span class="error" id="size_name_error">* Size Name</span><br/>
+							<select name="size_name" id="size_name" class="size_name" style="width:100%">
+								<option value="<?php echo $qr1['size_id'];?>"><?php echo $qr1['size_name'];?></option>
+								<?php
+								
+								$qr = mysql_query("select * from sizes  order by size_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['size_id'];?>"><?php echo $qrow['size_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/>
+						    
+							<span class="error" id="sup_name_error">* Choose Supplier</span><br/>
+							<label>Supplier</label>
+							<select name="sup_name" id="sup_name" class="sup_name" style="width:100%">
+								<option value="<?php echo $qr1['sup_id'];?>"><?php echo $qr1['sup_name'];?></option>
+								<?php
+								
+								$qr = mysql_query("select * from suppliers  order by sup_name asc");
+								while($qrow=mysql_fetch_assoc($qr)){
+								
+								?>
+								<option value="<?php echo $qrow['sup_id'];?>"><?php echo $qrow['sup_name'];?></option>
+								<?php
+								}
+								?>
+							</select><br/><br/>
+							<label>Description</label>
+							<span class="error" id="prod_desc_error">* Material Description</span><br/>
+							<input type="text" name="prod_desc" id="prod_desc" value="<?php echo $qr1['description'];?>"/>						
+							<button type="submit" id="submit" class="btn btn-blue-alt">Save Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="50px" height="50px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

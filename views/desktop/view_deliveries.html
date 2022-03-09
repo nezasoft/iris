@@ -1,0 +1,133 @@
+<script type="text/javascript">
+        //lets have a function to auto suggest searches invoices
+    $(document).ready(function(){
+        $('#suggest_list').hide();
+        $('#suggest_list_div').hide();      
+        $("#suggest_delivery").keyup(function(e){
+            e.preventDefault();           
+            //hide table data
+            $("#delivery_data").hide();
+            //hide pagination
+            $("#paginated_data").hide();
+            //hide records found
+            $("#rec_found").hide();
+			//$("#invoice_reports").hide();
+            var min_length = 0; // min caracters to display the autocomplete
+            var keyword = $('#suggest_delivery').val();
+            if (keyword.length > min_length) {
+                $.ajax({
+                    url: '../process/suggest_delivery.php',
+                    type: 'POST',
+                    data: {keyword:keyword},
+                    success:function(data){
+                        //show suggestions
+                        $('#suggest_list_div').show();
+                        $('#suggest_list').show();
+                        $('#suggest_list').html(data);
+                    }
+                });
+            }else{
+                //hide suggestions
+                $('#suggest_list').hide();
+                $('#suggest_list_div').hide();
+                //show table data
+                $("#datatable-fixedcolumns").show();
+                //show pagination
+                $("#paginated_data").hide();
+                //show records found
+                $("#rec_found").show();
+				//$("#invoice_reports").hide();
+				$("#delivery_data").show();
+            }
+
+        });
+
+        function set_item(item) {
+            // change input value
+            $('#suggest_delivery').val(item);
+            // hide proposition list
+            $('#suggest_list').hide();
+        }
+
+    });
+    $(document).keypress(
+            function(event){
+                if (event.which == '13') {
+                    event.preventDefault();
+            }
+   });
+</script>
+<div>
+<?php
+if($_SESSION['COMSYS_IS_MOBILE']!=1){
+?>
+
+	<hr/><h3> Delivery Reports</h3><hr/>
+            <table width="100%" border="0">
+            <tr height="40" style="background-color:#17202A;">				         
+            <td width="5%"><div align="right"><strong><font color="#FFFFFF">Search:</font></strong></div></td> 
+				  <td width="40%">   
+                  <input type="text" class="form-control"   name="search_delivery" id="suggest_delivery"  placeholder="Search by Delivery No , Delivery Date , Status " />			
+				  </td>
+					<td width="5%"><a href="#"><font color="#FFFFFF"><i class="glyph-icon tooltip-button demo-icon icon-search" title="Advanced Search"></i></font></a> </td>                  
+                    <td width="5%"><div align="right"><strong><font color="#FFFFFF">Filter:</font></strong></div></td> 
+					<td width="15%">
+                    <select name="filter"  class="my-form-control" id="filter">
+                        <option selected value="">Default</option>
+                        <option   value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                  </select>
+				  </td> 
+				  <td width="5%">&nbsp;</td> 
+                </tr>
+           </table>
+        <?php  }else{ echo "<h3> Delivery  Reports</h3>";}?> <hr/>
+            <div id="suggest_list_div"><div id="suggest_list"></div></div><br/>
+			<div id="loader"><span class="loader-icon-2"><img width="50" height="50" src="../images/loader.gif"/><h3>Loading data, please wait...</h3></span></div>
+			<div id="delivery_data"></div>			
+			<script>
+			$(document).ready(function(){
+			 // $("#invoice_data").empty();
+			  $("#loader").show();
+				getdata(1);
+				function getdata(pageno){
+				// source of data	
+				var myData = 'page=' + pageno;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "../views/loads/load_delivery_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 $("#delivery_data").html(response);
+			     $("#loader").hide();
+                 }
+			 });
+			}		
+			});
+						
+			//filter change event
+			$("#filter").change(function(){
+			filter_val = $("#filter").val();
+			pageno = 1;
+			$("#delivery_data").hide();
+			$("#delivery_data").empty();
+			$("#loader").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "../views/loads/load_delivery_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 //parseScript(response);
+				 $("#delivery_data").html(response);
+			     $("#loader").hide();
+			     $("#delivery_data").show();
+                 }
+				});
+			});			
+			</script>
+</div>

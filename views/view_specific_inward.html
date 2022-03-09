@@ -1,0 +1,234 @@
+<?php
+$inw_ref = sanitize_string($_GET['inw_ref']);
+
+$query = mysql_query("select tm.g_inward_id,tm.in_status,tm.g_ref_no,tm.g_date,tm.g_time,tm.delivery_note_no,tm.vehicle_no,
+tm.g_delivered_by,tm.g_desc,mt.mat_name,pk.pack_name,tm.g_qty, 
+con_us.fname as confirm_user,sup.sup_name,s.site_name,s.site_phone,s.site_postal,s.site_address,s.site_email,tm.checked_by,tm.received_by
+from goods_inwards as tm 
+left join materials as mt on mt.mat_id = tm.g_mat_id
+left join packages as pk on pk.pack_id = tm.pack_id
+left join users as con_us on con_us.user_id = tm.confirmed_by
+left join suppliers as sup on sup.sup_id = tm.sup_id
+left join sites as s on s.site_id = tm.site_id
+where  tm.site_id='$site_id' and tm.g_ref_no='$inw_ref'");
+$query_row=mysql_fetch_assoc($query);
+
+?>
+<script>
+if("undefined"==typeof jQuery)throw new Error("Tabledit requires jQuery library.");!function(t){"use strict";t.fn.Tabledit=function(e){if(!this.is("table"))throw new Error("Tabledit only works when applied to a table.");var n=this,i={url:window.location.href,inputClass:"form-control input-sm",toolbarClass:"btn-toolbar",groupClass:"btn-group btn-group-sm",dangerClass:"danger",warningClass:"warning",mutedClass:"text-muted",eventType:"click",rowIdentifier:"id",hideIdentifier:!1,autoFocus:!0,editButton:!0,deleteButton:!0,saveButton:!0,restoreButton:!0,buttons:{edit:{class:"btn btn-sm btn-default",html:'<span class="glyphicon glyphicon-pencil"></span>',action:"edit"},delete:{class:"btn btn-sm btn-default",html:'<span class="glyphicon glyphicon-trash"></span>',action:"delete"},save:{class:"btn btn-sm btn-success",html:"Save"},restore:{class:"btn btn-sm btn-warning",html:"Restore",action:"restore"},confirm:{class:"btn btn-sm btn-danger",html:"Confirm"}},onDraw:function(){},onSuccess:function(){},onFail:function(){},onAlways:function(){},onAjax:function(){}},a=t.extend(!0,i,e),d="undefined",s="undefined",o={identifier:function(){a.hideIdentifier&&n.find("th:nth-child("+parseInt(a.columns.identifier[0])+"1), tbody td:nth-child("+parseInt(a.columns.identifier[0])+"1)").hide(),n.find("tbody td:nth-child("+(parseInt(a.columns.identifier[0])+1)+")").each(function(){var e='<span class="tabledit-span tabledit-identifier">'+t(this).text()+"</span>",n='<input class="tabledit-input tabledit-identifier" type="hidden" name="'+a.columns.identifier[1]+'" value="'+t(this).text()+'" disabled>';t(this).html(e+n),t(this).parent("tr").attr(a.rowIdentifier,t(this).text())})},editable:function(){for(var e=0;e<a.columns.editable.length;e++){n.find("tbody td:nth-child("+(parseInt(a.columns.editable[e][0])+1)+")").each(function(){var n=t(this).text();a.editButton||t(this).css("cursor","pointer");var i='<span class="tabledit-span">'+n+"</span>";if(void 0!==a.columns.editable[e][2]){var d='<select class="tabledit-input '+a.inputClass+'" name="'+a.columns.editable[e][1]+'" style="display: none;" disabled>';t.each(jQuery.parseJSON(a.columns.editable[e][2]),function(t,e){d+=n===e?'<option value="'+t+'" selected>'+e+"</option>":'<option value="'+t+'">'+e+"</option>"}),d+="</select>"}else d='<input class="tabledit-input '+a.inputClass+'" type="text" name="'+a.columns.editable[e][1]+'" value="'+t(this).text()+'" style="display: none;" disabled>';t(this).html(i+d),t(this).addClass("tabledit-view-mode")})}},toolbar:function(){if(a.editButton||a.deleteButton){var t="",e="",i="",d="",s="";0===n.find("th.tabledit-toolbar-column").length&&n.find("tr:first").append('<th class="tabledit-toolbar-column"></th>'),a.editButton&&(t='<button type="button" class="tabledit-edit-button '+a.buttons.edit.class+'" style="float: none;">'+a.buttons.edit.html+"</button>"),a.deleteButton&&(e='<button type="button" class="tabledit-delete-button '+a.buttons.delete.class+'" style="float: none;">'+a.buttons.delete.html+"</button>",s='<button type="button" class="tabledit-confirm-button '+a.buttons.confirm.class+'" style="display: none; float: none;">'+a.buttons.confirm.html+"</button>"),a.editButton&&a.saveButton&&(i='<button type="button" class="tabledit-save-button '+a.buttons.save.class+'" style="display: none; float: none;">'+a.buttons.save.html+"</button>"),a.deleteButton&&a.restoreButton&&(d='<button type="button" class="tabledit-restore-button '+a.buttons.restore.class+'" style="display: none; float: none;">'+a.buttons.restore.html+"</button>");var o='<div class="tabledit-toolbar '+a.toolbarClass+'" style="text-align: left;">\n                                           <div class="'+a.groupClass+'" style="float: none;">'+t+e+"</div>\n                                           "+i+"\n                                           "+s+"\n                                           "+d+"\n                                       </div></div>";n.find("tr:gt(0)").append('<td style="white-space: nowrap; width: 1%;">'+o+"</td>")}}},l=function(e){var n=t(e).parent("tr");t(e).parent("tr").find(".tabledit-input.tabledit-identifier").prop("disabled",!0),t(e).find(".tabledit-input").blur().hide().prop("disabled",!0),t(e).find(".tabledit-span").show(),t(e).addClass("tabledit-view-mode").removeClass("tabledit-edit-mode"),a.editButton&&(n.find("button.tabledit-save-button").hide(),n.find("button.tabledit-edit-button").removeClass("active").blur())},r=function(e){c.reset(e);var n=t(e).parent("tr");n.find(".tabledit-input.tabledit-identifier").prop("disabled",!1),t(e).find(".tabledit-span").hide();var i=t(e).find(".tabledit-input");i.prop("disabled",!1).show(),a.autoFocus&&i.focus(),t(e).addClass("tabledit-edit-mode").removeClass("tabledit-view-mode"),a.editButton&&(n.find("button.tabledit-edit-button").addClass("active"),n.find("button.tabledit-save-button").show())},u=function(e){t(e).each(function(){var e=t(this).find(".tabledit-input"),n=t(this).find(".tabledit-span").text();e.is("select")?e.find("option").filter(function(){return t.trim(t(this).text())===n}).attr("selected",!0):e.val(n),l(this)})},b=function(e){!1!==f(a.buttons.edit.action)&&(t(e).each(function(){var e=t(this).find(".tabledit-input");e.is("select")?t(this).find(".tabledit-span").text(e.find("option:selected").text()):t(this).find(".tabledit-span").text(e.val()),l(this)}),d=t(e).parent("tr"))},c={reset:function(t){n.find(".tabledit-confirm-button").hide(),n.find(".tabledit-delete-button").removeClass("active").blur()},submit:function(e){c.reset(e),t(e).parent("tr").find("input.tabledit-identifier").attr("disabled",!1);var n=f(a.buttons.delete.action);t(e).parents("tr").find("input.tabledit-identifier").attr("disabled",!0),!1!==n&&(t(e).parent("tr").addClass("tabledit-deleted-row"),t(e).parent("tr").addClass(a.mutedClass).find(".tabledit-toolbar button:not(.tabledit-restore-button)").attr("disabled",!0),t(e).find(".tabledit-restore-button").hide(),s=t(e).parent("tr"))},confirm:function(e){n.find("td.tabledit-edit-mode").each(function(){u(this)}),t(e).find(".tabledit-delete-button").addClass("active"),t(e).find(".tabledit-confirm-button").show()},restore:function(e){t(e).parent("tr").find("input.tabledit-identifier").attr("disabled",!1);var n=f(a.buttons.restore.action);t(e).parents("tr").find("input.tabledit-identifier").attr("disabled",!0),!1!==n&&(t(e).parent("tr").removeClass("tabledit-deleted-row"),t(e).parent("tr").removeClass(a.mutedClass).find(".tabledit-toolbar button").attr("disabled",!1),t(e).find(".tabledit-restore-button").hide(),t(e).parent("tr"))}};function f(e){var i=n.find(".tabledit-input").serialize()+"&action="+e;if(!1===a.onAjax(e,i))return!1;var o=t.post(a.url,i,function(t,i,s){e===a.buttons.edit.action&&(d.removeClass(a.dangerClass).addClass(a.warningClass),setTimeout(function(){n.find("tr."+a.warningClass).removeClass(a.warningClass)},1400)),a.onSuccess(t,i,s)},"json");return o.fail(function(t,n,i){e===a.buttons.delete.action?(s.removeClass(a.mutedClass).addClass(a.dangerClass),s.find(".tabledit-toolbar button").attr("disabled",!1),s.find(".tabledit-toolbar .tabledit-restore-button").hide()):e===a.buttons.edit.action&&d.addClass(a.dangerClass),a.onFail(t,n,i)}),o.always(function(){a.onAlways()}),o}return o.identifier(),o.editable(),o.toolbar(),a.onDraw(),a.deleteButton&&(n.on("click","button.tabledit-delete-button",function(e){if(!0!==e.handled){e.preventDefault();var n=t(this).hasClass("active"),i=t(this).parents("td");c.reset(i),n||c.confirm(i),e.handled=!0}}),n.on("click","button.tabledit-confirm-button",function(e){if(!0!==e.handled){e.preventDefault();var n=t(this).parents("td");c.submit(n),e.handled=!0}})),a.restoreButton&&n.on("click","button.tabledit-restore-button",function(e){!0!==e.handled&&(e.preventDefault(),c.restore(t(this).parents("td")),e.handled=!0)}),a.editButton?(n.on("click","button.tabledit-edit-button",function(e){if(!0!==e.handled){e.preventDefault();var i=t(this),a=i.hasClass("active");u(n.find("td.tabledit-edit-mode")),a||t(i.parents("tr").find("td.tabledit-view-mode").get().reverse()).each(function(){r(this)}),e.handled=!0}}),n.on("click","button.tabledit-save-button",function(e){!0!==e.handled&&(e.preventDefault(),b(t(this).parents("tr").find("td.tabledit-edit-mode")),e.handled=!0)})):(n.on(a.eventType,"tr:not(.tabledit-deleted-row) td.tabledit-view-mode",function(t){!0!==t.handled&&(t.preventDefault(),u(n.find("td.tabledit-edit-mode")),r(this),t.handled=!0)}),n.on("change","select.tabledit-input:visible",function(){!0!==event.handled&&(b(t(this).parent("td")),event.handled=!0)}),t(document).on("click",function(t){var e=n.find(".tabledit-edit-mode");e.is(t.target)||0!==e.has(t.target).length||u(n.find(".tabledit-input:visible").parent("td"))})),t(document).on("keyup",function(t){var e=n.find(".tabledit-input:visible"),i=n.find(".tabledit-confirm-button");if(e.length>0)var d=e.parents("td");else{if(!(i.length>0))return;d=i.parents("td")}switch(t.keyCode){case 9:a.editButton||(b(d),r(d.closest("td").next()));break;case 13:b(d);break;case 27:u(d),c.reset(d)}}),this}}(jQuery);
+</script>
+<style>
+<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+
+#td_m{
+	padding:5px;
+	margin:5%;
+	background-color:#fff;
+	font-size:11px;
+	
+	}
+	
+	<?php }else{ ?>
+	
+	#td_m{
+	padding:5px;
+	margin:5%;
+	background-color:#fff;
+	font-size:12px;
+	
+	
+	}
+	<?php } ?>
+	#tb{
+		border: 1px solid #000000;
+		padding:2px;
+		
+	
+		}
+		#head{
+			text-transform:uppercase;
+			font-size:16px;
+			font-weight:bold;
+			
+			}
+	
+	
+</style>
+<div id="td_m">
+<div class="panel-body">
+<div class="table-responsive">
+<table width="100%" style="font-size:12px;" >
+  <tbody>
+    <tr>
+      <td colspan="3"><div align="center"><strong><h3>INWARD GOODS RECEIPT</h3></strong><hr/>
+        <h4><strong><?php echo $query_row['site_name']; ?></strong><br/></h4>
+        P.O.Box <?php echo $query_row['site_postal']; ?> <br/>
+        <?php  echo $query_row['site_address']; ?><br/>
+        Email: <?php echo $query_row['site_email']; ?><br/>
+        Tel: <?php echo $query_row['site_phone']; ?><br/>
+      </div>      </td>
+    </tr>
+    <tr>
+      <td width="11%">&nbsp;</td>
+      <td width="66%">&nbsp;</td>
+      <td width="23%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Supplier:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['sup_name']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Received By:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['received_by']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Checked By:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['checked_by']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Confirmed By:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['confirm_user']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Delivery No:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['delivery_note_no']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Vehicle No:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['vehicle_no']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td id="td_m"><div align="right"><strong>Delivered By:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['g_delivered_by']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+	  <tr>
+      <td id="td_m"><div align="right"><strong>Status:</strong></div></td>
+      <td id="td_m"><div align="left"><strong><code><?php echo $query_row['in_status']; ?></code></strong></div></td>
+      <td>&nbsp;</td>
+    </tr>
+      <tr>
+      <td id="td_m"><div align="right"><strong>Date:</strong></div></td>
+      <td id="td_m"><div align="left"><code><?php echo $query_row['g_date']; ?></code></div></td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<hr/>
+<table width="100%" border="1" style="font-size:12px;" id="inward_items" class="table table-striped  table-hover">
+  <thead>
+    <tr>
+      <th><div align="center"><strong>Item Code</strong></div></th>
+      <th><div align="center"><strong>Material</strong></div></th>
+      <th><div align="center"><strong>Description</strong></div></th>
+      <th><div align="center"><strong>Package Type</strong></div></th>
+      <th><div align="center"><strong>Quantity</strong></div></th>
+    </tr>
+ </thead>
+    <?php
+    $query2 = mysql_query("select tm.g_inward_id,tm.in_status,tm.g_ref_no,tm.g_date,tm.g_time,tm.delivery_note_no,tm.vehicle_no,
+        tm.g_delivered_by,tm.g_desc,mt.mat_name,pk.pack_name,tm.g_qty, c_us.fname as checked_us, r_us.fname as received_us,
+        con_us.fname as confirm_user,sup.sup_name,s.site_name,s.site_phone,s.site_postal,s.site_address,s.site_email
+        from goods_inwards as tm 
+        left join materials as mt on mt.mat_id = tm.g_mat_id
+        left join packages as pk on pk.pack_id = tm.pack_id
+        left join users as c_us on c_us.user_id = tm.checked_by
+        left join users as r_us on r_us.user_id = tm.received_by
+        left join users as con_us on con_us.user_id = tm.confirmed_by
+        left join suppliers as sup on sup.sup_id = tm.sup_id
+        left join sites as s on s.site_id = tm.site_id
+        where  tm.site_id='$site_id' and tm.g_ref_no='$inw_ref'");
+    $count = 1;
+    while($qr_row=mysql_fetch_assoc($query2)){
+    ?>
+    <tr>
+      <td height="34"><?php echo $qr_row['g_inward_id'];?></td>
+       <td>&nbsp;<?php echo titleCase($qr_row['mat_name']);?></td>
+      <td>&nbsp;<?php echo $qr_row['g_desc'];?></td>
+      <td>&nbsp;<?php echo $qr_row['pack_name'];?></td>
+      <td>&nbsp;<?php echo $qr_row['g_qty'];?></td>
+    </tr>
+    <?php
+    }
+    ?>
+  </tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<?php
+
+    //Update inwards based on approvals status
+    $check_inw_app = mysql_query("select inw_approval_id from inward_approvals  where inw_ref_no='$inw_ref' and inw_approval_status='Approved' and inw_user_id='".$_SESSION['COMSYS_UserID']."'");
+    $num_inw_app = mysql_num_rows($check_inw_app);
+    if($num_inw_app>=1){
+     mysql_query("update notifications set notif_status='Approved'  where ref='".$inw_ref."' and recepient_id='".$_SESSION['COMSYS_UserID']."' ");
+     
+    } 
+  //Update inwards based on approvals status
+    $check_inw = mysql_query("select inw_approval_id from inward_approvals  where inw_ref_no='$inw_ref'");
+    $num_inw = mysql_num_rows($check_inw);
+    if($num_inw==0){
+     mysql_query("update inward_approvals set inw_approval_status='Approved' where inw_ref_no='".$inw_ref."'");
+     mysql_query("update notifications set notif_status='Approved'  where ref='".$inw_ref."' and recepient_id='".$_SESSION['COMSYS_UserID']."' ");
+    } 
+//check if this user can approve this lpo_approve
+$Qr_ck = mysql_query("select * from inward_approvals as la left join users as us on us.user_id = la.inw_user_id
+where la.inw_user_id ='".$_SESSION['COMSYS_UserID']."' and la.inw_ref_no ='$inw_ref' and la.inw_approval_status='New'");
+$num_rows = mysql_num_rows($Qr_ck);
+if($num_rows>0){
+?>
+ <div class="signup-form">
+<form action="../process/approve_inward.php" id="delegate_form" method="post">
+<input id="inw_ref" type="hidden" value="<?php echo $inw_ref; ?>" name="inw_ref" />
+  <button id="approve_inward" class="btn btn-blue-alt">Approve Inward</button> 
+</form>
+</div>
+<script>
+$(document).ready(function(){
+$('#loader').hide();
+$('#approve_inward').click(function(e){
+e.preventDefault();
+
+var con = confirm("Approve Inward?");
+if(con==true){
+$('#loader').fadeIn();
+$('#response').empty();
+inw_ref = $("#inw_ref").val();
+   //send request
+      var myData = 'inw_ref=' + inw_ref; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/approve_inward.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response);
+			$("#loader").fadeOut();
+			}
+	   }); 
+}
+
+});
+});
+$('#inward_items').Tabledit({//Delete PO Item
+url:'../process/update_inward_details_final.php',editButton: true,removeButton: true,columns: { identifier: [0,'id'],editable: [ [2,'Description'],[4,'Quantity']] },buttons: { edit: { class: 'btn btn-sm btn-default',html: '<span class="glyph-icon icon-pencil-square-o"></span>Edit',action: 'edit' },delete: { class: 'btn btn-sm btn-default',html: '<span class="glyph-icon  icon-trash"></span>Delete',action: 'delete' },save: { class: 'btn btn-sm btn-success',html: 'Save' },confirm: { class: 'btn btn-sm btn-danger',html: 'Confirm' } },onDraw: function() { return; },onSuccess: function() { return; },onFail: function() { return; },onAlways: function() { return; },onAjax: function() { return; }});
+</script>
+<span class="loader" id="loader"><img src="../images/loader.gif" width="40px" height="40px"/>Approving...</span>
+<span id="response"></span>
+
+</div>
+<?php
+}else{
+?>
+</div>
+ <button onclick="printContent('td_m')" class="btn btn-warning">Print Inward</button>
+<?php } ?>
+
+		

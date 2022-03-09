@@ -1,0 +1,134 @@
+
+<?php
+//get site
+$site_id = sanitize_string($_GET['site_id']);
+$qr_row = mysql_fetch_assoc(mysql_query("select * from sites where site_id='$site_id'"));
+?>
+
+<script>
+
+$(document).ready(function(){
+//hide all errors when form loads
+$("#error_site_name").hide();
+$("#error_email").hide();
+$("#error_invalidemail").hide();
+$("#error_postal").hide();
+$("#error_phys").hide();
+$("#error_phone").hide();
+$("#response").hide();
+$(".loader").hide();
+//check if submit button has been clicked
+
+		$("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();
+		//error
+		error = false;
+		site_name = $("#site_name").val();
+		site_email = $("#site_email").val();
+		site_postal = $("#site_postal").val();
+		site_phys = $("#site_phys").val();
+		site_phone = $("#site_phone").val();
+		site_id = <?php echo $site_id;?>;
+		
+		//validate data
+		
+		if(site_email ===''){
+		error =true;
+		$("#error_email").fadeIn();
+		$("#sup_email").focus();
+		}else{
+		$("#error_email").fadeOut();
+		if(site_email.indexOf('@') == '-1'){
+		error = true;
+		$('#error_invalidemail').fadeIn();
+		$("#email").focus();
+		 }else{
+		 $('#error_invalidemail').fadeOut();
+		  }
+		
+		}
+		if(site_postal ===''){
+		error =true;
+		$("#error_postal").fadeIn();
+		$("#site_postal").focus();
+		}else{
+		$("#error_postal").fadeOut();
+		
+		}
+		if(site_phys ===''){
+		error =true;
+		$("#error_phys").fadeIn();
+		$("#site_phys").focus();
+		}else{
+		$("#error_phys").fadeOut();
+		
+		}
+		if(site_phone ===''){
+		error =true;
+		$("#error_phone").fadeIn();
+		$("#site_phone").focus();
+		}else{
+		$("#error_phone").fadeOut();
+		
+		}
+		if(site_name ===''){
+		error =true;
+		$("#error_site_name").fadeIn();
+		$("#site_name").focus();
+		}else{
+		$("#error_site_name").fadeOut();
+		
+		}
+		
+		//if no errors send request to server
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'site_name='+site_name + '&site_postal='+ site_postal + '&site_phys='+ site_phys+ '&site_phone='+ site_phone+ '&site_email='+ site_email + '&site_id='+ site_id; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "../process/edit_site.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}
+		
+		});
+});	
+
+</script>	
+
+
+		<div class="col-sm-4" style="background-color:#fff;border:2px solid #616A6B;">
+					<div class="signup-form">
+						<h3>Edit Site Details</h3><hr/>
+						<form action="../process/edit_site.php" method="POST">
+						<span class="error" id="error_site_name">* Site Name</span><br/>
+							<input type="text" name="site_name" id="site_name" value="<?php echo $qr_row['site_name'];?>"/>
+							<span class="error" id="error_email">* Email Address</span><br/>
+							<span class="error" id="error_invalidemail">* Invalid Email Address</span><br/>
+							<input type="email" name="site_email" id="site_email" value="<?php echo $qr_row['site_email'];?>"/>
+							<span class="error" id="error_postal">* Postal Address</span><br/>
+							<input type="text" name="site_postal" id="site_postal" value="<?php echo $qr_row['site_postal'];?>"/>
+							<span class="error" id="error_phys">* Physical Address</span><br/>
+							<input type="text" name="site_phys" id="site_phys" value="<?php echo $qr_row['site_address'];?>"/>
+							<span class="error" id="error_phone">* Phone No</span><br/>
+							<input type="text" name="site_phone" id="site_phone" value="<?php echo $qr_row['site_phone'];?>"/>
+							<button type="submit" id="submit" class="btn btn-default">Update Record</button>
+							<span class="loader"><img src="../images/loader.gif" width="80px" height="80px"/>Processing Request...</span>
+							<div id="response"></div>
+						</form>
+					</div>
+				</div>

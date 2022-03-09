@@ -1,0 +1,64 @@
+<?php
+$qr= mysql_query("select * from sizes ");
+?>	
+	<div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h3>Sizes </h3>
+                        </div>
+						<br/><span id="sizeresults"></span><br/><br/>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="list_sizes">
+                                    <thead>
+                                        <tr>
+                                            <th>Size Name</th>                                                                            
+											<th></th>
+											<th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+									while($qr_row=mysql_fetch_assoc($qr)){
+									?>
+                                        <tr class="odd gradeX">                                       
+                                            <td><?php echo titleCase($qr_row['size_name']); ?></td>                                                                 
+											  <script>
+											//When DOM loaded we attach click event to button
+											$(document).ready(function() {	
+													//Delete store
+												$("#delsize_<?php echo $qr_row['size_id'];?>").click(function(){												
+													$("#sizeresults").empty();													
+													var con = confirm("Are you sure you want to remove this Size?");													
+													if(con==true){
+												//we select the first link 
+													//then call the attr method to get back the href value
+													var size_id = $("#delsizeval_<?php echo $qr_row['size_id'];?>").attr("rel");
+													
+											$.post("../process/delete_size.php",
+											 { size_id : size_id },
+											 function(size_id) {
+											 $("#sizeresults").html(size_id);											 
+										   });											
+												}
+														   
+												});
+											});
+                                           </script>
+										   <a href="" id="delsizeval_<?php echo $qr_row['size_id'];?>" rel="<?php echo $qr_row['size_id'];?>"></a>
+											<td><a class="btn btn-xs btn-warning" href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=settings&act=man_mat&ip=edit_size&size_id=<?php echo $qr_row['size_id'];?>">Edit</a></td>
+											<td><a class="btn btn-xs btn-danger" href="#list_sizes" id="delsize_<?php echo $qr_row['size_id'];?>">Delete</a></td>
+                                        </tr>
+								 <?php
+								 }
+								 ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+					<script>
+            $(document).ready(function () {
+               // $('#list_sizes').dataTable();
+            });
+    </script>

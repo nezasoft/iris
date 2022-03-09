@@ -1,0 +1,61 @@
+
+				
+				<div class="col-sm-9">
+				<h2>Suppliers</h3><hr/>
+				
+					<?php
+					$atype = sanitize_string($_GET['act']);
+					?>
+					<?php if($_SESSION['COMSYS_IS_MOBILE']!=1){ ?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li <?php if($atype=='new_sup'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sup&act=new_sup" >New Supplier</a></li>
+								
+								<?php 
+								if($atype=='edit_sup'){
+								?>
+								<li <?php if($atype=='edit_sup'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sup&act=edit_sup&sup_id=<?php echo $_GET['sup_id']; ?>">Edit Supplier</a></li>
+								<?php 
+									}
+								?>
+								<li <?php if($atype=='man_sup'){echo 'class="active"';}?>>
+
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sup&act=man_sup">Manage Suppliers</a></li>
+									<li <?php if($atype=='import_data'){echo 'class="active"';}?>>
+								<a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&sec=sup&act=import_data">Import Data</a></li>
+								
+							</ul>
+						</div>
+						<?php } ?>
+					<?php
+					//choose page to insert
+					switch($atype){
+						case 'new_sup':
+						include('../views/new_supplier.html');
+						break;
+						case 'man_sup':
+						include('../views/view_suppliers.html');
+						break;
+						case 'edit_sup':
+						include('../views/edit_supplier.html');
+						break;
+						case 'import_data':
+						include('../views/import_suppliers.html');
+						break;
+						case 'activity_log':
+						include('../views/suppliers_activity_log.html');
+						break;
+						default:
+						include('../views/view_suppliers.html');
+						break;
+					}
+					
+					
+					?>
+					</div><!--/category-tab-->
+			
+					
+				</div>

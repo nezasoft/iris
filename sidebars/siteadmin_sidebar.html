@@ -1,0 +1,73 @@
+<nav id="menu" style="width:200px;">
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><span>Requisitions 
+                    	<?php 
+						//lets get count of  all the requisitions that are pending
+						$count_r = mysql_num_rows(mysql_query("select * from requisitions 
+						where req_status = 'New' and site_id='".$_SESSION['COMSYS_SiteID']."' group by req_ref_no "));
+						if($count_r>0){
+						?>
+						 <span class="label label-primary pull-right"><?php echo $count_r;?></span>
+						<?php
+						}
+						?>
+						</span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=new_req#new_req">New Requisition</a></li>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=req&act=man_req#man_req">Requisitions Reports</a></li>
+					    </ul>
+					</li>
+					<li><span>Inwards
+						<?php 
+											//lets get count of  all the requisitions that are pending
+											$count_inw = mysql_num_rows(mysql_query("select * from goods_inwards where in_status = 'New' and site_id='".$_SESSION['COMSYS_SiteID']."' group by g_ref_no "));
+											if($count_inw>0){
+											?>
+											  <span class="label label-primary pull-right"><?php echo $count_inw; ?></span>
+											<?php
+											}
+											?>
+					</span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=inw&act=new_inw#new_inw">New Inward</a></li>
+							<li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=inw&act=man_inw#man_inw">Inwards Reports</a></li>
+					    </ul>
+					</li>
+					<li><span>Deliveries	
+                    <?php 
+					//lets get count of  all the requisitions that are pending
+					/*	$count_del = mysql_num_rows(mysql_query("select * from delivery_note where delivery_status = 'New' and site_id='".$_SESSION['COMSYS_SiteID']."' group by delivery_no "));
+					 if($count_del>0){
+					 ?>
+						<span class="label label-primary pull-right"><?php echo $count_del; ?></span>
+						<?php
+						}*/
+						?></span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=del&act=new_del#new_del">New Delivery</a></li>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=del&act=con_del#con_del">New Delivery Confirmation</a></li>
+							<li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=del&act=man_del#man_del">Manage Deliveries</a></li>							
+					    </ul>
+					</li>
+					<li><span>Stores</span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=st&act=new_store#new_store">New Store</a></li>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=st&act=man_stores#man_stores">Manage Stores</a></li>
+					    </ul>
+					</li>
+					<li><span>Users</span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=us&act=new_user#new_user">New User</a></li>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=us&act=man_users#man_users">Manage Users</a></li>
+					    </ul>
+					</li>
+					<li><span>My Account</span>
+					    <ul>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=prof&act=change_pass#ch_pass">Change Password</a></li>
+					        <li><a href="?acc_type=<?php echo $_SESSION['COMSYS_AccountType']; ?>&site_id=<?php echo $site_id; ?>&sec=prof&act=my_profile#user_profile">My Profile</a></li>
+					    </ul>
+					</li>
+					<li><a href="../logout?action=logout">Logout</a></li>
+				</ul>				
+			</nav>
