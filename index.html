@@ -1,0 +1,249 @@
+<?php require_once("connection/connect.php"); ?>
+<!DOCTYPE html>
+<html lang="en">
+	<!--begin::Head-->
+	
+<head>
+		<title>Iris - Powered by Nezasoft</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="Automate your processes with Ease using Iris. The stand alone solutions for real estate and construction companies" />
+		<meta name="keywords" content="Iris, Nezasoft, Software, Billing, Inventory, Nairobi, Kenya, Uganda, Tanzania" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Iris- The ultimate billing solution powered by Nezasoft" />
+		<meta property="og:url" content="https://www.nezasoft.net/iris" />
+		<meta property="og:site_name" content="Iris | Construction Management Platform" />
+		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<!--begin::Fonts-->
+		<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />-->
+		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Page Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="js/system.js"></script>
+		<style>
+		.pagination>li.dot {
+    padding: 3px 0
+}
+
+.pagination>li>a.current_page {
+    background: #0d92e1;
+    color: #fff;
+    text-decoration: none
+}
+.pagination>li>a,
+.pagination>li>span {
+    background-color: #fff;
+    border: 1px solid #ddd
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    z-index: 2;
+    border-color: #ddd
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    cursor: default
+}
+
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover {
+    border-color: #ddd
+}
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 2
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0
+}
+
+.pager li,
+.pagination>li {
+    display: inline
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    line-height: 1.42857143;
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid
+}
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover {
+    cursor: not-allowed;
+    color: #999;
+    background-color: #fff
+}
+
+.bsdatepicker:after,.bsdatepicker:before{
+    position:absolute;
+    display:inline-block;
+    content:''
+}
+.bsdatepicker{
+    top:0;
+    left:0;
+    margin-top:1px;
+    padding:4px!important
+}
+.bsdatepicker:before{
+    top:-7px;
+    left:6px;
+    border-right:7px solid transparent;
+    border-bottom:7px solid transparent;
+    border-bottom-color:transparent;
+    border-left:7px solid transparent
+}
+.bsdatepicker:after{
+    top:-6px;
+    left:7px;
+    border-right:6px solid transparent;
+    border-bottom:6px solid #fff;
+    border-left:6px solid transparent
+}
+.bsdatepicker>div{
+    display:none
+}
+.bsdatepicker table{
+    width:100%;
+    margin:0
+}
+.bsdatepicker td,.bsdatepicker th{
+    width:20px;
+    height:20px;
+    margin:3px;
+    text-align:center
+}
+.bsdatepicker td.day:hover{
+    cursor:pointer
+}
+.bsdatepicker td.day.disabled{
+    color:#eee
+}
+.bsdatepicker td span.old,.bsdatepicker td.new,.bsdatepicker td.old{
+    color:#999
+}
+.bsdatepicker td span{
+    line-height:44px;
+    display:block;
+    float:left;
+    width:54px;
+    height:44px;
+    margin:2px;
+    cursor:pointer
+}
+.bsdatepicker th.switch{
+    width:145px
+}
+.bsdatepicker th.next,.bsdatepicker th.prev{
+    font-size:21px
+}
+.bsdatepicker thead tr:first-child th{
+    cursor:pointer
+}
+
+.bsdatepicker td span:hover,.bsdatepicker td.active,.bsdatepicker td.day.active:hover,.bsdatepicker th.next:hover,.bsdatepicker th.prev:hover,.btn-primary.active,.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,.daterangepicker .calendar th.next:hover,.daterangepicker .calendar th.prev:hover,.daterangepicker td.active,.daterangepicker td.available.active:hover,.hover-primary:hover,.label-primary[href]:focus,.label-primary[href]:hover,.open .dropdown-toggle.btn-primary,.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover,.ui-accordion-header.ui-accordion-header-active.ui-state-hover,.ui-datepicker .ui-datepicker-next.ui-state-hover,.ui-datepicker .ui-datepicker-prev.ui-state-hover,.ui-datepicker td a:hover,.ui-dialog-buttonset button:hover,.ui-rangeSlider-bar:active,.ui-rangeSlider-bar:hover,.ui-slider-handle.ui-state-active,.ui-slider-handle.ui-state-hover{
+    color:#fff;
+    border-color:#00b19b;
+    background-color:#0153c7
+}
+.bsdatepicker td span,.bsdatepicker td.day:hover,.bsdatepicker thead tr:first-child th.switch:hover,.chosen-container-multi .chosen-choices li.search-choice,.chosen-container-single .chosen-single div,.daterangepicker .ranges li:hover,.daterangepicker td.available:hover,.nav>li>a:focus,.nav>li>a:hover,.pager li>a:focus,.pager li>a:hover,.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover,.selector i,.ui-datepicker-title,a.list-group-item:focus,a.list-group-item:hover{
+    color:#fff;
+    background:#0153c7
+}
+#scroll_content{height:100%;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}#scroll_content::-webkit-scrollbar{width:10px}#scroll_content::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);-webkit-border-radius:10px;border-radius:10px}#scroll_content::-webkit-scrollbar-thumb{background-color:#0ae;background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(.5,rgba(255,255,255,.2)),color-stop(.5,transparent),to(transparent))}#scroll_content::-webkit-scrollbar-thumb:window-inactive{background:rgba(255,0,0,.4)}
+#scroll_content_small{height:100%;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}#scroll_content_small::-webkit-scrollbar{width:10px}#scroll_content_small::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);-webkit-border-radius:10px;border-radius:10px}#scroll_content_small::-webkit-scrollbar-thumb{background-color:#0ae;background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(.5,rgba(255,255,255,.2)),color-stop(.5,transparent),to(transparent))}#scroll_content_small::-webkit-scrollbar-thumb:window-inactive{background:rgba(255,0,0,.4)}
+.show_suggest {
+    display: block !important
+}
+.show_suggest,
+.show_suggest:hover>a {
+    color: #ff5733
+}
+.show_suggest {
+    color: #000;
+    background-color: #f2f2f2;
+	margin-top:3px;
+	padding:3px;
+
+
+}
+
+.show_suggest:hover {
+    background-color: #bdbdbd;
+    cursor: pointer;
+}
+		</style>
+		<!--end::Global Stylesheets Bundle-->
+		<!--Begin::Google Tag Manager -->
+
+		<!--End::Google Tag Manager -->
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">		
+		<!--begin::Main-->
+		<!--All Content goes here-->
+		<?php 
+		if(isset($_SESSION['IRIS_USER_ID']) && $_SESSION['IRIS_USER_ID']!=''){
+		include("views/home.html");		
+		}else{
+		include("views/signin.html");
+		}
+		?>
+		<!--begin::Javascript-->
+		<script>var hostUrl = "assets/index.html";</script>		
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Vendors Javascript(used by this page)-->
+		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Page Vendors Javascript-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script src="assets/js/widgets.bundle.js"></script>
+		<script src="assets/js/custom/widgets.js"></script>
+		<script src="assets/js/custom/apps/chat/chat.js"></script>
+		<script src="assets/js/custom/intro.js"></script>
+		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+		<!--end::Page Custom Javascript-->
+		<!--end::Javascript-->
+	</body>
+	<!--end::Body-->
+
+</html>
