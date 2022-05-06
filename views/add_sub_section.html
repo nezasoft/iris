@@ -1,0 +1,112 @@
+<?php
+require_once("../connection/connect.php");
+//get sections
+$sections = $conn->prepare("SELECT id AS item_id, section_name FROM building_sections ORDER BY section_name ASC");
+$sections->execute();
+$section_rows = $sections->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
+														<div class="modal-header" id="kt_modal_add_user_header">
+															<h2 class="fw-bolder">Add Sub Section</h2>
+															<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+																		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+																	</svg>
+																</span>
+															</div>
+														</div>
+														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+															<div id="form_section">
+															<div class="fv-row mb-7">
+															   <label class="required fw-bold fs-6 mb-5">Section</label>
+																	<div class=" fv-row">
+																		<select class="form-select form-select-solid" id="section" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+																			<option value="">{--Select Section--}</option>
+																			<?php 
+																			foreach($section_rows as $row){
+																			?>
+																			<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['section_name']); ?></option>
+																			<?php
+																			}
+																			?>		
+																		</select>
+																		<span id="section_error" style="color:red;"> *Select Section</span>
+																		</div>
+																</div>
+															
+																<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+																
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Sub Section Name</label>
+																		<input type="text" name="fname" id="sub_section_name" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Sub Section Name"  />
+																		<span id="sub_section_name_error" style="color:red;"> *Enter sub section</span>
+																	</div>
+																	
+																</div>
+																<div>
+																	<button type="submit" id="save_request" class="btn btn-primary" data-kt-users-modal-action="submit">
+																		<span class="indicator-label">Save</span>							
+																	</button>
+																	<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
+																	
+																</div>
+															</div>
+														<div id="response"></div><br/>
+														</div>
+													</div>
+<script>
+//hide errors
+$("#sub_section_name_error").hide();
+$("#section_error").hide();
+$(".loader").hide();
+$(document).ready(function(){
+$('#section').select2({
+dropdownParent: $("#ModalContentAddNew")
+});
+
+$("#save_request").click(function(e){
+e.preventDefault();
+section = $("#section").val();
+sub_section_name = $("#sub_section_name").val();
+error = false;
+$("#response").empty();
+if(sub_section_name ===''){
+error =true;
+$("#sub_section_name_error").fadeIn();
+$("#sub_section_name").focus();
+}else{
+$("#sub_section_name_error").fadeOut();
+}
+if(section ===''){
+error =true;
+$("#section_error").fadeIn();
+$("#section").focus();
+}else{
+$("#section_error").fadeOut();
+}
+if(error ==false){
+//hide submit button
+$("#submit").fadeOut();
+$(".loader").fadeIn();
+var myData = 'sub_section_name='+ escape(sub_section_name) + '&section=' + section ; //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/add_sub_section.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#response").append(response); 
+$('.loader').fadeOut();
+$('#submit').fadeIn();
+$('#response').fadeIn();
+}
+});
+}
+});
+});
+</script>													
+													

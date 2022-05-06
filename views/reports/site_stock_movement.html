@@ -1,0 +1,157 @@
+<?php
+include("../../connection/connect.php");include_once("../../modules/permissions.php");
+$site_id = sanitize_string($_GET['site_id']);
+?>
+	<!--begin::Post-->
+						<div class="row g-6 g-xl-9">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Card-->
+								<div class="card">
+								<hr/>
+<div class="table-responsive">
+<table width="100%" border="0">
+  <tr>
+    <td><div align="right"><strong>Trans Type:</strong></div></td>
+    <td>
+	<div class="input-group input-group-sm mb-5">
+	<select class="form-select form-select-solid" id="t_type" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+	<option value="ALL">{--ALL--}</option>
+	<option value="D">Materials Received</option>
+	<option value="C">Materials Issued</option>
+	</select>
+	</div>
+	</td>
+    <td><div align="right"><strong>From:</strong></div></td>
+    <td><div class="input-group input-group-sm mb-5"><input class="form-control form-control-solid" value="<?php echo date("Y-m-d"); ?>" name="calendar_event_start_date"  id="start_date" /></div></td>
+    <td><div align="right"><strong>To:</strong></div></td>
+    <td><div class="input-group input-group-sm mb-5"><input class="form-control form-control-solid" value="<?php echo date("Y-m-d"); ?>" name="calendar_event_start_date" id="end_date" /></div></td>
+	<td><div align="right"><strong>Filter:</strong></div></td>
+    <td  width="15%">
+	<div class="input-group input-group-sm mb-5">
+	<select class="form-select form-select-solid" id="filter" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+	<option value="50">50</option>
+	<option value="200">200</option>
+	<option value="500">500</option>
+	</select>
+	<button  class="btn btn-sm btn-primary" id="search">Search</button>
+	</div>
+	</td>
+	
+  </tr>
+</table>
+</div><hr/>
+<div id="loader_site_detail"><span class="loader-icon-2"><img width="30" height="30" src="images/loader.gif" />Loading data, please wait...</div>
+<div id="scroll_content" style="min-height:400px;">
+<div id="content_data_site_detail" style="padding:20px;"></div>
+</div>
+</div>
+<script>
+$("#start_date").daterangepicker({
+singleDatePicker: true,
+showDropdowns: true,
+locale: {format: "YYYY-MM-DD"}
+});
+$("#end_date").daterangepicker({
+singleDatePicker: true,
+showDropdowns: true,
+locale: {format: "YYYY-MM-DD"}
+});
+</script>
+
+		<script>
+			$(document).ready(function(){
+			  $("#loader_site_detail").show();
+				getdata(1);
+				function getdata(pageno){
+				site_id = <?php echo $site_id; ?>;
+				// source of data	
+				var myData = 'page=' + pageno + '&site_id=' + site_id;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/reports/loads/load_stock_movement_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 //parseScript(response);
+				 $("#content_data_site_detail").html(response);
+			     $("#loader_site_detail").hide();
+                 }
+			 });
+			}
+		   //filter change event
+			$("#filter").change(function(){
+			filter_val = $("#filter").val();
+			start_date = $("#start_date").val();
+			end_date = $("#end_date").val();
+			t_type = $("#t_type").val();
+			site_id = <?php echo $site_id; ?>;
+			pageno = 1;
+			$("#content_data_site_detail").empty();
+			$("#loader").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val + '&start_date=' + start_date + '&end_date=' + end_date + '&t_type=' + t_type  + '&site_id=' + site_id;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/reports/loads/load_stock_movement_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 $("#content_data_site_detail").html(response);				
+			     $("#loader_site_detail").hide();
+                 }
+			   });
+			});	
+
+			//search change event
+			$("#search").click(function(){
+				filter_val = $("#filter").val();
+				t_type= $("#t_type").val();
+				from = $("#start_date").val();
+				to = $("#end_date").val();
+				pageno = 1;
+				site_id = <?php echo $site_id; ?>;
+				$("#content_data_site_detail").empty();
+				$("#loader_site_detail").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val  + '&t_type=' + t_type  + '&from=' + from  + '&to=' + to  + '&site_id=' + site_id + '&filter_form_data=true';
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/reports/loads/load_stock_movement_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 $("#content_data_site_detail").html(response);
+			     $("#loader_site_detail").hide();
+				 $("#content_data_site_detail").fadeIn();
+                 }
+			   });
+			});	
+			
+			});
+   </script>
+   								<!--end::Card-->
+							</div>
+							<!--end::Container-->
+						</div>
+ <div class="modal fade" id="ModalContentAddUser" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered mw-650px">
+	  <div class="modal-content">
+	  <span id="loader_add_new_content"><img width="30" height="30" src="images/loader.gif" />Loading...</span>
+	  <div id="modal_add_new_content"></div>
+	  </div>
+	  </div>
+	  </div>  
+	   <script>
+	  $(document).ready(function(){
+	  $("#loader_add_new").hide();
+	  });
+	  function viewTransaction(ref_no){
+	   $("#loader_add_new_content").show();
+	   $("#modal_add_new_content").load("views/view_transaction_detail.html?ref_no="+ref_no,function(responseTxt, statusTxt, jqXHR){
+	   if(statusTxt == "success"){$("#loader_add_new_content").hide();}
+		 if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		 });
+	  }
+   </script> 
+   

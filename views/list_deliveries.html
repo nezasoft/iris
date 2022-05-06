@@ -1,0 +1,289 @@
+<?php 
+ include("../connection/connect.php");
+ include_once("../modules/permissions.php");
+ //Get sites
+ $sites = $conn->prepare("SELECT id AS item_id, site_name FROM sites WHERE id!='".$_SESSION['IRIS_SITE_ID']."' ORDER BY site_name ASC");
+ $sites->execute();
+ $site_rows = $sites->fetchAll(PDO::FETCH_ASSOC);
+ 
+ ?>
+ 
+ <script type="text/javascript">
+  $("#loader_search").hide();
+    $(document).ready(function () {
+        $("#suggest_list").hide();
+        $("#suggest_list_div").hide();
+        $("#search_item").keypress(function (d) {
+            //d.preventDefault();
+			if (d.which == "13") {
+            $("#content_data").hide();
+            $("#paginated_data").hide();
+            $("#rec_found").hide();
+            var c = 0;
+            var b = $("#search_item").val();
+            if (b.length > c) {
+			 $("#loader_search").show();
+                $.ajax({
+                    url: "process/suggest_delivery_note.php",
+                    type: "POST",
+                    data: { keyword: b},
+                    success: function (e) {
+                        $("#suggest_list_div").show();
+                        $("#suggest_list").show();
+                        $("#suggest_list").html(e);
+						 $("#loader_search").hide();
+                    },
+                });
+            } else {
+                $("#suggest_list").hide();
+                $("#suggest_list_div").hide();
+                $("#content_data").show();
+                $("#paginated_data").hide();
+                $("#rec_found").show();
+            }
+			
+			}
+        });
+	$("#search_item").keydown(function (a) {
+		var key = event.keyCode || event.charCode;
+        if(key == 8 || key == 46){
+				$("#suggest_list").hide();
+                $("#suggest_list_div").hide();
+                $("#content_data").fadeIn();
+                $("#paginated_data").show();
+                $("#rec_found").show();
+        }		
+		});	
+    });
+
+</script>
+ 
+ 					<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Card-->
+								<div class="card">
+										  <!--begin::Compact form-->
+											<div class="d-flex align-items-center" style="margin:10px;" id="quick_search_content">
+											<?php if($item32==1){ ?>
+												<div class="position-relative w-md-600px ">
+													<span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+															<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+														</svg>
+													</span>
+													<input type="text" id="search_item" autocomplete="off" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search By Document. No, Site, Material" />
+												    <div id="loader_search"><span class="loader-icon-2"><img width="20" height="20" src="images/loader.gif" />Searching...</div>
+												</div>
+												<?php } ?>
+												<?php if($item33==1){ ?>
+												<div class="d-flex align-items-center" style="margin-left:10px;">
+													
+													<a id="show_advanced" class="btn btn-link" data-bs-toggle="collapse" href="#">Advanced Search</a>
+													<a id="hide_advanced" class="btn btn-link" data-bs-toggle="collapse" href="#">Hide Advanced Search</a>
+												</div>
+												<?php } ?>
+												<hr/>
+											</div>
+											<!--end::Compact form-->
+											<script>
+											$(document).ready(function(){
+											$("#hide_advanced").hide();
+											$("#advanced_search_content").hide();
+											});
+											
+											$("#show_advanced").click(function(){
+											$("#hide_advanced").show();
+											$("#show_advanced").hide();
+											$("#quick_search_content").hide();
+											$("#advanced_search_content").show();
+											$("#suggest_list_div").hide();
+											$("#content_data").fadeIn();
+											});
+											$("#hide_advanced").click(function(){
+											$("#hide_advanced").hide();
+											$("#show_advanced").show();
+											$("#quick_search_content").show();
+											$("#advanced_search_content").hide();
+											$("#suggest_list_div").hide();
+											$("#content_data").fadeIn();
+											});
+											
+											</script>
+						<div class="table-responsive">
+						<div id="advanced_search_content">
+						<table width="100%" border="0">
+						  <tr>
+						    <td><div align="right"><strong>Site To:</strong></div></td>
+							<td>
+							<div class="input-group input-group-sm mb-5">
+							<select class="form-select form-select-solid" id="site" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="ALL">{--All Sites--}</option>
+							<?php foreach($site_rows as $row){ ?>
+							<option value="<?php  echo $row['item_id'];?>"><?php  echo titleCase($row['site_name']);?></option>
+							<?php } ?>
+							</select>
+							</div>
+							</td>
+							<td><div align="right"><strong>From:</strong></div></td>
+							<td><div class="input-group input-group-sm mb-5"><input class="form-control form-control-solid" value="<?php echo date("Y-m-d"); ?>" name="calendar_event_start_date"  id="start_date" /></div></td>
+							<td><div align="right"><strong>To:</strong></div></td>
+							<td><div class="input-group input-group-sm mb-5"><input class="form-control form-control-solid" value="<?php echo date("Y-m-d"); ?>" name="calendar_event_start_date" id="end_date" /></div></td>
+							<td><div align="right"><strong>Filter:</strong></div></td>
+							<td width="15%">
+							<div class="input-group input-group-sm mb-5">
+							<select class="form-select form-select-solid" id="filter" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="50">50</option>
+							<option value="200">200</option>
+							<option value="500">500</option>
+							</select>
+							<button  class="btn btn-sm btn-primary" id="search">Search</button>
+							</div>
+							</td>
+						  </tr>
+						</table>
+						</div>
+						</div>
+						<hr/>
+			<div id="suggest_list_div" style="padding-left:10px;padding-right:10%;"><div id="scroll_content_small"><div id="suggest_list"></div></div></div><br/>
+			<div id="loader"><span class="loader-icon-2"><img width="30" height="30" src="images/loader.gif" />Loading content, please wait...</div>
+			<div id="scroll_content" style="min-height:400px;">
+			<div id="content_data" style="padding:10px;"></div>
+             </div>
+<script>
+$("#start_date").daterangepicker({
+singleDatePicker: true,
+showDropdowns: true,
+locale: {format: "YYYY-MM-DD"}
+});
+$("#end_date").daterangepicker({
+singleDatePicker: true,
+showDropdowns: true,
+locale: {format: "YYYY-MM-DD"}
+});
+</script>
+
+		<script>
+			$(document).ready(function(){
+			  //$("#purchases_vat_data").empty();
+			  $("#loader").show();
+				getdata(1);
+				function getdata(pageno){
+				// source of data	
+				var myData = 'page=' + pageno;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/loads/load_deliveries_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 //parseScript(response);
+				 $("#content_data").html(response);
+			     $("#loader").hide();
+                 }
+			 });
+			}
+		   //filter change event
+			$("#filter").change(function(){
+			filter_val = $("#filter").val();
+			start_date = $("#start_date").val();
+			end_date = $("#end_date").val();
+			site = $("#site").val();
+			pageno = 1;
+			$("#content_data").hide();
+			$("#content_data").empty();
+			$("#loader").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val + '&start_date=' + '&site=' + site +  start_date + '&to=' + end_date;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/loads/load_deliveries_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 //parseScript(response);
+				 $("#content_data").html(response);				
+			     $("#loader").hide();
+				  $("#content_data").fadeIn();
+                 }
+			   });
+			});	
+
+			//search change event
+			$("#search").click(function(){
+				filter_val = $("#filter").val();
+				from = $("#start_date").val();
+				to = $("#end_date").val();
+				site = $("#site").val();
+				pageno = 1;
+				$("#content_data").hide();
+				$("#content_data").empty();
+				$("#loader").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val  + '&from=' + from   + '&site=' + site + '&to=' + to  + '&filter_form_data=true';
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/loads/load_deliveries_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 //parseScript(response);
+				 $("#content_data").html(response);
+			     $("#loader").hide();
+				 $("#content_data").fadeIn();
+                 }
+			   });
+			});	
+			
+			});
+   </script>		
+			
+								<!--end::Card-->
+							</div>
+							<!--end::Container-->
+						</div>
+						
+      <div class="modal fade" id="ModalContentAddNew" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+	  <div class="modal-content">
+	  <span id="loader_add_new_content"><img width="30" height="30" src="images/loader.gif" />Loading...</span>
+	  <div id="modal_add_new_content"></div>
+	  </div>
+	  </div>
+	  </div>
+
+	  <div class="modal fade" id="ModalContentViewItem" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered mw-900px">
+	  <div class="modal-content">
+	  <span id="loader_add_new_content_view"><img width="30" height="30" src="images/loader.gif" />Loading...</span>
+	  <div id="modal_add_new_content_view"></div>
+	  </div>
+	  </div>
+	  </div>  
+	   <script>
+	  $(document).ready(function(){
+	  $("#loader_add_new").hide();
+	  $("#loader_add_new_req").hide();
+	  });
+	  function createNewLPO(){
+	   $("#loader_add_new_content").show();
+	   $("#modal_add_new_content").load("views/new_delivery_note.html",function(responseTxt, statusTxt, jqXHR){
+	   if(statusTxt == "success"){$("#loader_add_new_content").hide();}
+		 if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		 });
+	  }
+	   function viewDocument(order_no){
+	   $("#loader_add_new_content_view").show();
+	   $("#modal_add_new_content_view").load("views/view_delivery_note.html?order_no="+order_no,function(responseTxt, statusTxt, jqXHR){
+	   if(statusTxt == "success"){$("#loader_add_new_content_view").hide();}
+		 if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		 });
+	  }
+	  
+$('#supplier').select2();	  
+$('#sites').select2();
+   </script>
+  	
+    

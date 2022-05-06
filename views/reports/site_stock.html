@@ -1,0 +1,128 @@
+<?php include("../../connection/connect.php");include_once("../../modules/permissions.php");
+$site_id = sanitize_string($_GET['site_id']);
+?>
+<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Card-->
+								<div class="card">
+								<hr/>
+						<div class="table-responsive">
+<div id="invoice_section_content">
+ <div align="right">
+	  <table width="100%" class="table" border="0">
+        <tr>
+		<td ></td>
+          <td style="width:5%;"></td>
+		  <td style="width:80%;"><div align="right"><input type="text" name="search"  style="margin:3px; width:100%;" autocomplete="off" class="form-control form-control-solid ps-10 "  id="suggest_item" placeholder="Search by  Item" /></div></td>
+		  <td style="width:5%;"><div align="right"><strong></strong></div></td>
+          <td style="width:10%;">
+		  <div class="input-group input-group-sm mb-5">
+								<select name="filter"  class="form-control" style="margin:3px;" aria-describedby="inputGroup-sizing-sm" id="filter">
+									<option value="50">Default</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+									<option value="200">200</option>
+							   </select>
+							   </div>
+		  </td>
+        </tr>
+      </table>
+</div>
+<hr/>
+<div id="suggest_list_div" style="padding-left:10%;padding-right:10%;"><div id="scroll_content_small"><div id="suggest_list"></div></div></div><br/>
+		
+ <script type="text/javascript">
+    $(document).ready(function () {
+        $("#suggest_list").hide();
+        $("#suggest_list_div").hide();
+        $("#suggest_item").keyup(function (d) {
+            d.preventDefault();
+            $("#content_data_site_detail").hide();
+            $("#paginated_data").hide();
+            $("#rec_found").hide();
+            var c = 0;
+            var b = $("#suggest_item").val();
+            site_id = <?php echo $site_id; ?>;
+            if (b.length > c) {
+                $.ajax({
+                    url: "process/suggest_site_stock_item.php",
+                    type: "POST",
+                    data: { keyword: b, site_id: site_id },
+                    success: function (e) {
+                        $("#suggest_list_div").show();
+                        $("#suggest_list").show();
+                        $("#suggest_list").html(e);
+                    },
+                });
+            } else {
+                $("#suggest_list").hide();
+                $("#suggest_list_div").hide();
+                $("#content_data_site_detail").show();
+                $("#paginated_data").hide();
+                $("#rec_found").show();
+            }
+        });
+        function a(b) {
+            $("#suggest_item").val(b);
+            $("#suggest_list").hide();
+        }
+    });
+    $(document).keypress(function (a) {
+        if (a.which == "13") {
+            a.preventDefault();
+        }
+    });
+</script>
+ 
+ 			<div id="loader_site_detail"><span class="loader-icon-2"><img width="30" height="30" src="images/loader.gif" />Loading content, please wait...</div>
+			<div id="scroll_content">
+			<div id="content_data_site_detail" style="min-height:400px;padding:20px;"></div>
+             </div>
+			 							<!--end::Card-->
+							</div>
+							<!--end::Container-->
+						</div>
+			<script>
+			$(document).ready(function(){	
+			    $("#loader_site_detail").show();
+				getdata(1);
+				function getdata(pageno){
+				site_id= <?php echo $site_id; ?>;
+				// source of data	
+				var myData = 'page=' + pageno + '&site_id=' + site_id;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/reports/loads/load_site_stock_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 $("#content_data_site_detail").html(response);
+			     $("#loader_site_detail").hide();
+                 }
+			 });
+			}		
+			});
+						
+			//filter change event
+			$("#filter").change(function(){
+			filter_val = $("#filter").val();
+			site_id= <?php echo $site_id; ?>;
+			pageno = 1;
+			$("#content_data_site_detail").empty();
+			$("#loader_site_detail").show();
+				// source of data	
+				var myData = 'page=' + pageno + '&filter=' + filter_val + '&site_id=' + site_id;
+				 jQuery.ajax({
+				 type: "GET", // Post / Get method
+				 url: "views/reports/loads/load_site_stock_data.php", //Where form data is sent on submission
+				 dataType:"text", // Data type, HTML, json etc.
+				 data:myData, //Form variables
+				 success:function(response){
+				 $("#content_data_site_detail").html(response);
+			     $("#loader_site_detail").hide();
+				 $("#content_data_site_detail").fadeIn();
+                 }
+				});
+			});	
+</script>

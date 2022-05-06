@@ -1,0 +1,513 @@
+<?php
+//Make a connection
+include("../../connection/connect.php");
+$site_id = sanitize_string($_GET['site_id']);
+//Get Site Details
+$site = $conn->prepare("SELECT id AS item_id, site_name,site_address,site_status,DATE_FORMAT(date_created, '%d %b %Y') AS inception_date FROM sites WHERE id='".$site_id."'");
+$site->execute();
+$site_row = $site->fetch(PDO::FETCH_ASSOC);
+$site_name = $site_row['site_name'];
+//get users
+$users = $conn->prepare("SELECT us.id AS item_id, us.fname, us.lname, us.email,us.active, r.role_name FROM users AS us LEFT JOIN roles AS r ON r.id = us.role_id WHERE us.site_id='".$site_id."' AND us.active='Yes'");
+$users->execute();
+$user_rows = $users->fetchAll(PDO::FETCH_ASSOC);
+$user_count = $users->rowCount();
+//total incoming from sites
+$incoming_site = $conn->prepare("SELECT COUNT(str.quantity) AS total_incoming FROM stock_transaction AS str LEFT JOIN materials_stock AS ms ON ms.id = str.stock_id LEFT JOIN stores AS st ON st.id = ms.store_id WHERE st.site_id=".$site_id." AND str.cr_dr='D'");
+$incoming_site->execute();
+$incoming_site_row = $incoming_site->fetch();
+$incoming_site_total = $incoming_site_row['total_incoming'];
+
+//total outgoing from sites
+$outgoing_site = $conn->prepare("SELECT COUNT(str.quantity) AS total_outgoing FROM stock_transaction AS str LEFT JOIN materials_stock AS ms ON ms.id = str.stock_id LEFT JOIN stores AS st ON st.id = ms.store_id WHERE st.site_id=".$site_id." AND str.cr_dr='C'");
+$outgoing_site->execute();
+$outgoing_site_row = $outgoing_site->fetch();
+$outgoing_site_total = $outgoing_site_row['total_outgoing'];
+//Site Orders 
+$orders = $conn->prepare("SELECT COUNT(*) item_count, order_status FROM purchase_order WHERE site_id=".$site_id."  GROUP BY order_status");
+$orders->execute();
+$order_rows = $orders->fetchAll(PDO::FETCH_ASSOC);
+
+$total_orders = 0;
+$pending_count = 0;
+foreach($order_rows as $order_row){
+$total_orders += $order_row['item_count'];
+if($order_row['order_status']=='N' || $order_row['order_status']=='P'){
+$pending_count +=$order_row['item_count'];
+}
+}
+//get all recent events
+$logs = $conn->prepare("SELECT sl.id AS item_id, sl.log_desc,sl.doc_type,sl.system_date, sl.time_stamp, sl.log_desc,us.fname  FROM system_logs AS sl LEFT JOIN users AS us ON us.id = sl.user_id WHERE us.site_id='".$site_id."' ORDER BY sl.id DESC LIMIT 5");
+$logs->execute();
+$log_rows = $logs->fetchAll(PDO::FETCH_ASSOC);
+//recent requisitons
+$req = $conn->prepare("SELECT req.id AS item_id, req.order_no, req.qty,req.req_time, req.req_status, req.req_desc, req.req_date, req.user_id, us.fname, b.building_name, s.site_name  FROM site_materials_request_form AS req LEFT JOIN materials AS mt  ON mt.id = req.mat_id  LEFT JOIN building AS b ON b.id = req.building_id LEFT JOIN users AS us ON us.id = req.user_id LEFT JOIN sites AS s ON s.id = req.site_id  WHERE req.site_id='".$site_id."' GROUP BY req.order_no  ORDER BY req.id  DESC LIMIT 5");
+$req->execute();
+$req_rows = $req->fetchAll(PDO::FETCH_ASSOC);
+//Recent inward 
+$inward = $conn->prepare("SELECT gi.id AS item_id, gi.inward_no,us.fname, gi.inw_date, gi.inw_time, gi.in_status, gi.delivery_note_no, gi.delivered_by, gi.g_desc, gi.vehicle_no, s.sup_name  FROM good_inward AS gi LEFT JOIN materials AS mt ON mt.id = gi.mat_id LEFT JOIN users AS us ON us.id = gi.user_id LEFT JOIN suppliers AS s ON s.id = gi.sup_id  WHERE gi.site_id='".$site_id."'    GROUP BY gi.inward_no  ORDER BY gi.id  DESC LIMIT 5");
+$inward->execute();
+$inward_rows = $inward->fetchAll(PDO::FETCH_ASSOC);
+?>  
+						<div class="row g-6 g-xl-9" >
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Summary-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Order Summary</h3>
+													<div class="fs-6 fw-bold text-gray-400"><?php  echo $pending_count; ?> Pending Orders</div>
+												</div>
+												<!--end::Card title-->
+												<!--begin::Card toolbar-->
+												<div class="card-toolbar">
+													<a href="#" class="btn btn-light btn-sm">View LPOs</a>
+												</div>
+												<!--end::Card toolbar-->
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body p-9 pt-5">
+												<!--begin::Wrapper-->
+												<div class="d-flex flex-wrap">
+													<!--begin::Chart-->
+													<div class="position-relative d-flex flex-center h-175px w-175px me-15 mb-7">
+														<div class="position-absolute translate-middle start-50 top-50 d-flex flex-column flex-center">
+															<span class="fs-2qx fw-bolder"><?php  echo $total_orders; ?></span>
+															<span class="fs-6 fw-bold text-gray-400">Total Orders</span>
+														</div>
+														<canvas id="project_overview_chart"></canvas>
+													</div>
+													<!--end::Chart-->
+													<!--begin::Labels-->
+													<div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+													
+													<?php
+													$n = 0;
+													$p = 0;
+													$a = 0;
+													$c = 0;
+													foreach($order_rows as $order_row){
+													
+													if($order_row['order_status']=='N'){
+													$n += $order_row['item_count'];
+													$order_status = '<div class="d-flex fs-6 fw-bold align-items-center mb-3">
+															<div class="bullet bg-gray-300 me-3"></div>
+															<div class="text-gray-400">New</div>
+															<div class="ms-auto fw-bolder text-gray-700">'.$n.'</div>
+														</div>';
+
+													}elseif($order_row['order_status']=='P'){
+													$p += $order_row['item_count'];
+													$order_status = '<div class="d-flex fs-6 fw-bold align-items-center mb-3">
+															<div class="bullet bg-warning me-3"></div>
+															<div class="text-gray-400">Pending</div>
+															<div class="ms-auto fw-bolder text-gray-700">'.$p.'</div>
+														</div>';
+													}elseif($order_row['order_status']=='A'){
+													$a += $order_row['item_count'];
+													$order_status = '<div class="d-flex fs-6 fw-bold align-items-center mb-3">
+															<div class="bullet bg-success me-3"></div>
+															<div class="text-gray-400">Approved</div>
+															<div class="ms-auto fw-bolder text-gray-700">'.$a.'</div>
+														</div>';
+													}elseif($order_row['order_status']=='R'){
+													$a += $order_row['item_count'];
+													$order_status = '<div class="d-flex fs-6 fw-bold align-items-center mb-3">
+															<div class="bullet bg-danger me-3"></div>
+															<div class="text-gray-400">Approved</div>
+															<div class="ms-auto fw-bolder text-gray-700">'.$r.'</div>
+														</div>';	
+													}elseif($order_row['order_status']=='C'){
+													$c += $order_row['item_count'];
+													$order_status = '<div class="d-flex fs-6 fw-bold align-items-center mb-3">
+															<div class="bullet bg-primary me-3"></div>
+															<div class="text-gray-400">Pending</div>
+															<div class="ms-auto fw-bolder text-gray-700">'.$c.'</div>
+														</div>';
+													}													
+													echo $order_status;													
+													?>													
+													<?php } ?>  
+					
+													</div>
+													<!--end::Labels-->
+												</div>
+												<!--end::Wrapper-->
+								
+											</div>
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Graph-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Materials Over Time</h3>
+													<!--begin::Labels-->
+													<div class="fs-6 d-flex text-gray-400 fs-6 fw-bold">
+														<!--begin::Label-->
+														<div class="d-flex align-items-center me-6">
+														<span class="menu-bullet d-flex align-items-center me-2">
+															<span class="bullet bg-success"></span>
+														</span>Incoming</div>
+														<!--end::Label-->
+														<!--begin::Label-->
+														<div class="d-flex align-items-center">
+														<span class="menu-bullet d-flex align-items-center me-2">
+															<span class="bullet bg-primary"></span>
+														</span>Outgoing</div>
+														<!--end::Label-->
+													</div>
+													<!--end::Labels-->
+												</div>
+												<!--end::Card title-->
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body pt-10 pb-0 px-5">
+												<!--begin::Chart-->
+												<div id="kt_project_overview_graph" class="card-rounded-bottom" style="height: 300px"></div>
+												<!--end::Chart-->
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Graph-->
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Card-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Users</h3>
+													<div class="fs-6 text-gray-400">Site Users</div>
+												</div>
+												<!--end::Card title-->
+							
+											</div>
+											<div class="card-body p-9 pt-4">
+												<div class="tab-content">
+													<div id="kt_schedule_day_0" class="tab-pane active fade show">
+													<?php foreach($user_rows as $us_row){ ?>
+														<div class="d-flex flex-stack position-relative mt-8">
+															<div class="position-absolute h-100 w-4px bg-secondary rounded top-0 start-0"></div>	
+															<div class="fw-bold ms-5 text-gray-600">
+																<div class="fs-5"><?php echo titleCase($us_row['fname']." ".$us_row['lname']); ?></div>
+																<a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2"><?php echo titleCase($us_row['role_name']); ?></a>
+																<div class="text-gray-400">Email 
+																<?php echo $us_row['email']; ?></div>
+															</div>
+															
+														</div>
+														<?php } ?>
+													</div>
+										
+												</div>
+												
+												
+												<!--end::Tab Content-->
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Card-->
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Card-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Recent Events</h3>
+													<!--<div class="fs-6 text-gray-400">Total 382 fiels, 2,6GB space usage</div>-->
+												</div>
+												<!--end::Card title-->
+												<!--begin::Card toolbar-->
+												<div class="card-toolbar">
+													<a href="#" class="btn btn-bg-light btn-active-color-primary btn-sm">View All</a>
+												</div>
+												<!--end::Card toolbar-->
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body p-9 pt-3">
+												<!--begin::Files-->
+												<div class="d-flex flex-column mb-9">
+												<?php foreach($log_rows as $row){?>
+													<!--begin::File-->
+													<div class="d-flex align-items-center mb-5">
+														<!--begin::Icon-->
+														<div class="symbol symbol-30px me-5">
+															<img alt="Icon" src="assets/media/icons/duotune/communication/com001.svg" />
+														</div>
+														<!--end::Icon-->
+														<!--begin::Details-->
+														<div class="fw-bold">
+															<a class="fs-6 fw-bolder text-dark text-hover-primary" href="#"><?php echo $row['log_desc']; ?></a>
+															<div class="text-gray-400"><?php echo $row['time_stamp']; ?>
+															<a href="#"><?php echo titleCase($row['fname']); ?></a></div>
+														</div>
+														<!--end::Details-->
+														<!--begin::Menu-->
+														<button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary ms-auto" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+															<!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+															<span class="svg-icon svg-icon-3">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		<rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+																		<rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+																		<rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+																		<rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+																	</g>
+																</svg>
+															</span>
+															<!--end::Svg Icon-->
+														</button>
+														<!--begin::Menu 1-->
+														
+														<!--end::Menu 1-->
+														<!--end::Menu-->
+													</div>
+													<?php } ?>
+	
+												
+												</div>
+												<!--end::Files-->
+								
+												<!--end::Notice-->
+											</div>
+											<!--end::Card body -->
+										</div>
+										<!--end::Card-->
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Card-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Recent Requisitions</h3>
+													
+												</div>
+												<!--end::Card title-->
+												<!--begin::Card toolbar-->
+												<div class="card-toolbar">
+													<a href="#" class="btn btn-bg-light btn-active-color-primary btn-sm">View All</a>
+												</div>
+												<!--end::Card toolbar-->
+											</div>
+											<div class="card-body d-flex flex-column p-9 pt-3 mb-9">
+											<?php foreach($req_rows as $row){ 
+											  $t_type = $row['req_status'];
+			   
+											   if($t_type=='A'){
+												  $status = '<span class="badge badge-success">Approved</span>'; 
+												   
+											   }elseif($t_type=='P'){
+												   $status = '<span class="badge badge-warning">Pending</span>'; 
+											   }elseif($t_type=='R'){
+												   $status = '<span class="badge badge-danger">Rejected</span>';
+											   }elseif($t_type=='C'){
+												   $status = '<span class="badge badge-info">Compeleted</span>';  				   
+												   
+											   }
+											?>
+												<div class="d-flex align-items-center mb-5">
+													<div class="me-5 position-relative">
+														<div class="symbol symbol-35px symbol-circle">
+															<span class="menu-icon">
+																<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+																<span class="svg-icon svg-icon-2">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path opacity="0.3" d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="black" />
+																<path d="M20 8L14 2V6C14 7.10457 14.8954 8 16 8H20Z" fill="black" />
+																<path d="M10.3629 14.0084L8.92108 12.6429C8.57518 12.3153 8.03352 12.3153 7.68761 12.6429C7.31405 12.9967 7.31405 13.5915 7.68761 13.9453L10.2254 16.3488C10.6111 16.714 11.215 16.714 11.6007 16.3488L16.3124 11.8865C16.6859 11.5327 16.6859 10.9379 16.3124 10.5841C15.9665 10.2565 15.4248 10.2565 15.0789 10.5841L11.4631 14.0084C11.1546 14.3006 10.6715 14.3006 10.3629 14.0084Z" fill="black" />
+															</svg>
+																</span>
+																<!--end::Svg Icon-->
+															</span>
+														</div>
+													</div>
+													<div class="fw-bold">
+														<a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary"><?php echo $row['order_no']; ?> | <?php echo $row['req_desc']; ?> | <?php echo $row['building_name']; ?></a>
+														<div class="text-gray-400"><?php echo $row['fname']; ?> | <?php echo $row['req_date']." ".$row['req_time']; ?></div>
+													</div>
+													<div class=" ms-auto"><?php  echo $status; ?></div>
+												</div>
+												<?php } ?>
+												<!--end::Item-->
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Card-->
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-lg-6">
+										<!--begin::Tasks-->
+										<div class="card card-flush h-lg-100">
+											<!--begin::Card header-->
+											<div class="card-header mt-6">
+												<!--begin::Card title-->
+												<div class="card-title flex-column">
+													<h3 class="fw-bolder mb-1">Recent Inwards</h3>
+												</div>
+												<div class="card-toolbar">
+													<a href="#" class="btn btn-bg-light btn-active-color-primary btn-sm">View All</a>
+												</div>
+											</div>
+											<div class="card-body d-flex flex-column mb-9 p-9 pt-3">
+												<?php
+												foreach($inward_rows as $row){	
+												 $t_type = $row['in_status'];			   
+												   if($t_type=='A'){
+													  $status = '<span class="badge badge-success">Approved</span>'; 				   
+												   }elseif($t_type=='P'){
+													   $status = '<span class="badge badge-warning">Pending</span>'; 
+												   }elseif($t_type=='R'){
+													   $status = '<span class="badge badge-danger">Rejected</span>';
+												   }elseif($t_type=='C'){ 
+													   $status = '<span class="badge badge-info">Compeleted</span>';  
+													}elseif($t_type=='N'){
+													   $status = '<span class="badge badge-info">New</span>';				   
+													   
+												   }
+												?>
+												<div class="d-flex align-items-center position-relative mb-7">
+													<span class="svg-icon svg-icon-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<path d="M21 9V11C21 11.6 20.6 12 20 12H14V8H20C20.6 8 21 8.4 21 9ZM10 8H4C3.4 8 3 8.4 3 9V11C3 11.6 3.4 12 4 12H10V8Z" fill="black" />
+													<path d="M15 2C13.3 2 12 3.3 12 5V8H15C16.7 8 18 6.7 18 5C18 3.3 16.7 2 15 2Z" fill="black" />
+													<path opacity="0.3" d="M9 2C10.7 2 12 3.3 12 5V8H9C7.3 8 6 6.7 6 5C6 3.3 7.3 2 9 2ZM4 12V21C4 21.6 4.4 22 5 22H10V12H4ZM20 12V21C20 21.6 19.6 22 19 22H14V12H20Z" fill="black" />
+												</svg>
+												  </span>													
+													<div class="fw-bold">
+														<a href="#" class="fs-6 fw-bolder text-gray-900 text-hover-primary"><?php echo $row['inward_no']; ?> | <?php echo $row['g_desc']; ?> | <?php echo titleCase($row['sup_name']); ?> </a>
+														<div class="text-gray-400"><?php echo $row['fname']; ?>
+														<a href="#"><?php echo $row['inw_date']." ".$row['inw_time']; ?></a></div>
+		
+													</div>
+													<div class=" ms-auto"><?php  echo $status; ?></div>
+												</div>
+												<?php } ?>
+												<!--end::Item-->
+									
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Tasks-->
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+								<!--begin::Table-->
+								<div class="card card-flush mt-6 mt-xl-9">
+								<?php 
+								//get site total based on orders
+								$order_total = $conn->prepare("SELECT qty, rate FROM purchase_order AS po WHERE po.site_id='".$site_id."' AND po.order_status='C'");
+								$order_total->execute();
+								$order_total_rows = $order_total->fetchAll(PDO::FETCH_ASSOC);
+								$site_total = 0.0;
+								foreach($order_total_rows as $total_row){
+								$site_total += $total_row['qty']*$total_row['rate'];
+								
+								}
+								//get all orders for this site 
+								$site_orders = $conn->prepare("SELECT po.id AS item_id,po.order_no, po.order_details,s.sup_name, po.order_date,po.order_status, st.site_name, us.fname FROM purchase_order AS po LEFT JOIN materials AS mt ON mt.id = po.mat_id LEFT JOIN suppliers AS s ON s.id = po.sup_id LEFT JOIN sites AS st ON st.id = po.site_id LEFT JOIN users AS us ON us.id = po.user_id  WHERE po.site_id='".$site_id."' ORDER BY po.id DESC LIMIT 8");
+								$site_orders->execute();
+								$order_rows = $site_orders->fetchAll(PDO::FETCH_ASSOC);
+								?>
+									<div class="card-header mt-5">
+										<div class="card-title flex-column">
+											<h3 class="fw-bolder mb-1">Purchase Orders</h3>
+											<div class="fs-6 text-gray-400">Total <?php echo number_format($site_total,2,".",","); ?> spent so far</div>
+										</div>
+									</div>
+									<div class="card-body pt-0">
+										<div class="table-responsive">
+											<table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bolder">
+												<thead class="fs-7 text-gray-400 text-uppercase">
+													<tr>
+														<th class="min-w-250px">Order No</th>
+														<th class="min-w-150px">Order Desc</th>
+														<th class="min-w-90px">Req By</th>
+														<th class="min-w-90px">Status</th>
+														<th class="min-w-90px">Order Date</th>
+
+													</tr>
+												</thead>
+												<tbody class="fs-6">
+												<?php 
+												foreach($order_rows as $row){ 
+												$t_type = $row['order_status'];			   
+											   if($t_type=='A'){
+												  $status = '<span class="badge badge-success">Approved</span>'; 				   
+											   }elseif($t_type=='P'){
+												   $status = '<span class="badge badge-warning">Pending</span>'; 
+											   }elseif($t_type=='R'){
+												   $status = '<span class="badge badge-danger">Rejected</span>';
+											   }elseif($t_type=='C'){
+												   $status = '<span class="badge badge-info">Compeleted</span>';  
+												}elseif($t_type=='N'){
+												   $status = '<span class="badge badge-info">New</span>';				   
+												   
+											   }
+												?>
+													<tr>
+														<td>
+															<div class="d-flex align-items-center">							
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="#" class="fs-6 text-gray-800 text-hover-primary"><?php echo $row['order_no'];?></a>
+																	<div class="fw-bold text-gray-400"><?php echo titleCase($row['sup_name']);?></div>
+																</div>
+															</div>
+														</td>
+														<td><?php echo $row['order_details'];?></td>
+														<td><?php echo titleCase($row['fname']);?></td>
+														<td><?php echo $status; ?></td>
+														<td><?php echo $row['order_date'];?></td>
+				
+													</tr>
+													<?php } ?>
+						
+												</tbody>
+											</table>
+										</div>
+										</div>
+									</div>
+				<div class="modal fade" id="ModalContentViewItem" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered mw-900px">
+	  <div class="modal-content">
+	  <span id="loader_add_new_content_view"><img width="30" height="30" src="images/loader.gif" />Loading...</span>
+	  <div id="modal_add_new_content_view"></div>
+	  </div>
+	  </div>
+	  </div> 	
+  <script>
+	  $(document).ready(function(){
+	  $("#loader_add_new").hide();
+	  });
+	     function viewPO(order_no){
+	   $("#loader_add_new_content_view").show();
+	   $("#modal_add_new_content_view").load("views/view_purchase_order.html?order_no="+order_no,function(responseTxt, statusTxt, jqXHR){
+	   if(statusTxt == "success"){$("#loader_add_new_content_view").hide();}
+		 if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		 });
+	  }
+   </script>				

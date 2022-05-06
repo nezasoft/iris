@@ -1,0 +1,263 @@
+<?php
+require_once("../connection/connect.php");
+include_once("../modules/permissions.php");
+//categories
+$cat = $conn->prepare("SELECT id AS item_id, mat_cat_name FROM materials_categories AS m GROUP BY mat_cat_name");
+$cat->execute();
+$cat_rows = $cat->fetchAll(PDO::FETCH_ASSOC);
+//manufactures
+$man = $conn->prepare("SELECT id AS item_id, man_name FROM manufactures ORDER BY man_name ASC");
+$man->execute();
+$man_rows = $man->fetchAll(PDO::FETCH_ASSOC);
+//Brands
+$brands = $conn->prepare("SELECT id AS item_id, brand_name FROM brands ORDER BY brand_name ASC");
+$brands ->execute();
+$brand_rows = $brands->fetchAll(PDO::FETCH_ASSOC);
+
+//Sizes
+$sizes = $conn->prepare("SELECT id AS item_id, size_name FROM sizes ORDER BY size_name ASC");
+$sizes ->execute();
+$size_rows = $sizes->fetchAll(PDO::FETCH_ASSOC);
+//Brands
+$sup = $conn->prepare("SELECT id AS item_id, sup_name FROM suppliers ORDER BY sup_name ASC");
+$sup ->execute();
+$sup_rows = $sup->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
+														<div class="modal-header" id="kt_modal_add_user_header">
+															<h2 class="fw-bolder">Add New Material</h2>
+															<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+																		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+																	</svg>
+																</span>
+															</div>
+														</div>
+														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+															<div id="form_section">
+		<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+			<div class="mb-7">
+			<label class="required fw-bold fs-6 mb-5">Category</label>
+					<div class="fv-row mb-7">
+						<select class="form-select form-select-solid" id="cat" data-control="select2">
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($cat_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['mat_cat_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="cat_error" style="color:red;"> *Select Category</span>
+						</div>
+				</div>
+			<div class="mb-7">
+			<label class="required fw-bold fs-6 mb-5">Manufacturer</label>
+					<div class="fv-row mb-7">
+						<select class="form-select form-select-solid" id="man" data-control="select2" data-hide-search="true" data-placeholder="Select Item" >
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($man_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['man_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="man_error" style="color:red;"> *Select Manufacturer</span>
+						</div>
+				</div>	
+			<div class="mb-7">
+			<label class="required fw-bold fs-6 mb-5">Brand</label>
+					<div class="fv-row mb-7">
+						<select class="form-select form-select-solid" id="brand" data-control="select2" data-hide-search="true" data-placeholder="Select Item" >
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($brand_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['brand_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="brand_error" style="color:red;"> *Select Brand</span>
+						</div>
+				</div>
+				<div class="mb-7">
+			<label class="required fw-bold fs-6 mb-5">Size</label>
+					<div class="fv-row mb-7">
+						<select class="form-select form-select-solid" id="size" data-control="select2" data-hide-search="true" data-placeholder="Select Item" >
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($size_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['size_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="size_error" style="color:red;"> *Select Size</span>
+						</div>
+				</div>	
+				<div class="mb-7">
+			<label class="required fw-bold fs-6 mb-5">Supplier</label>
+					<div class="fv-row mb-7">
+						<select class="form-select form-select-solid" id="sup" data-control="select2" data-hide-search="true" data-placeholder="Select Item" >
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($man_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['man_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="sup_error" style="color:red;"> *Select Supplier</span>
+						</div>
+				</div>					
+			<div class="fv-row mb-7">
+			<div >
+				<label class="required fw-bold fs-6 mb-2">Item Name</label>
+				<input type="text" id="item_name" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Item Name"  />
+				<span id="item_name_error" style="color:red;"> *Enter Item Name</span>
+		     </div>	
+		  </div>
+
+			<div class="fv-row mb-7">
+			<div>
+				<label class="required fw-bold fs-6 mb-2">Description</label>
+				<input type="text"  id="remark" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Description"  />
+				<span id="remark_error" style="color:red;"> *Enter Description</span>
+		     </div>	
+		  </div>		  
+		</div>
+		<div>
+		<button type="submit" id="save_request" class="btn btn-primary" data-kt-users-modal-action="submit">
+		<span class="indicator-label">Save</span>							
+		</button>
+		<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
+		
+	</div>
+	</div>
+														<div id="response"></div><br/>
+														</div>
+													</div>
+<script>
+//hide errors
+$("#man_error").hide();
+$("#item_name_error").hide();
+$("#brand_error").hide();
+$("#size_error").hide();
+$("#sup_error").hide();
+$("#remark_error").hide();
+$("#cat_error").hide();
+$(".loader").hide();
+$(document).ready(function(){
+/*$('#sup').select2({
+dropdownParent: $("#ModalContentAddNew")
+});
+$('#size').select2({
+dropdownParent: $("#ModalContentAddNew")
+});
+$('#brand').select2({
+dropdownParent: $("#ModalContentAddNew")
+});
+$('#man').select2({
+dropdownParent: $("#ModalContentAddNew")
+});
+$('#cat').select2({
+dropdownParent: $("#ModalContentAddNew")
+});*/
+
+
+$("#save_request").click(function(e){
+e.preventDefault();
+cat= $("#cat").val();
+brand= $("#brand").val();
+size= $("#size").val();
+sup= $("#sup").val();
+item_name= $("#item_name").val();
+man= $("#man").val();
+remark= $("#remark").val();
+error = false;
+$("#response").empty();
+
+if(cat ===''){
+error =true;
+$("#cat_error").fadeIn();
+$("#cat").focus();
+}else{
+$("#cat_error").fadeOut();
+}
+if(brand ===''){
+error =true;
+$("#brand_error").fadeIn();
+$("#brand").focus();
+}else{
+$("#brand_error").fadeOut();
+}
+if(size ===''){
+error =true;
+$("#size_error").fadeIn();
+$("#size").focus();
+}else{
+$("#size_error").fadeOut();
+}
+if(sup ===''){
+error =true;
+$("#sup_error").fadeIn();
+$("#sup").focus();
+}else{
+$("#sup_error").fadeOut();
+}
+if(man ===''){
+error =true;
+$("#man_error").fadeIn();
+$("#man").focus();
+}else{
+$("#man_error").fadeOut();
+}
+if(item_name ===''){
+error =true;
+$("#item_name_error").fadeIn();
+$("#item_name").focus();
+}else{
+$("#item_name_error").fadeOut();
+}
+if(remark ===''){
+error =true;
+$("#remark_error").fadeIn();
+$("#remark").focus();
+}else{
+$("#remark_error").fadeOut();
+}
+
+
+if(error ==false){
+//hide submit button
+$("#submit").fadeOut();
+$(".loader").fadeIn();
+var myData = 'cat='+ cat + '&brand=' + brand+  '&size=' + size + '&sup=' + sup+ '&man=' + man + '&item_name=' + escape(item_name) + '&remark=' + escape(remark); //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/add_new_material.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#response").append(response); 
+$('.loader').fadeOut();
+$('#submit').fadeIn();
+$('#response').fadeIn();
+}
+
+});
+}
+});
+
+});
+</script>	

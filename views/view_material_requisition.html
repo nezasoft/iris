@@ -1,0 +1,240 @@
+<?php
+require_once("../connection/connect.php");
+include_once("../modules/permissions.php");
+$order_no = sanitize_string($_GET['order_no']);
+//get order details
+$order = $conn->prepare("SELECT req.id AS item_id,req.order_no,req.req_date,req.req_time,req.req_status, bs.section_name, w.work_unit_name, sb.sub_section_name, req.qty,req.order_no, req.req_desc,mt.mat_name, b.building_name, w.work_unit_name FROM materials_request_form AS req LEFT JOIN materials AS mt ON mt.id = req.mat_id LEFT JOIN work_unit  AS w ON w.id = req.work_id LEFT JOIN sub_section AS sb ON sb.id = w.sub_section_id LEFT JOIN building_sections AS bs ON bs.id = sb.section_id  LEFT JOIN building AS b ON b.id = req.building_id WHERE req.order_no='".$order_no."' LIMIT 1");
+$order->execute();
+$order_row = $order->fetch(PDO::FETCH_ASSOC);
+//Company details
+$company = $conn->prepare("SELECT * FROM company");
+$company->execute();
+$company_row = $company->fetch(PDO::FETCH_ASSOC);
+$t_type = $order_row['req_status'];
+			   
+if($t_type=='A'){
+$status = '<font color="#2ECC71">Approved</font>'; 
+}elseif($t_type=='P'){
+$status = '<font color="#E67E22">Pending</font>'; 
+}elseif($t_type=='R'){
+$status = '<font color="#E74C3C">Rejected</font>';
+}elseif($t_type=='C'){
+$status = '<font color="#3498DB">Completed</font>';  				   
+}
+
+?>
+
+<div class="modal-header" id="kt_modal_add_user_header">
+	<h2 class="fw-bolder">Material Requisition Form</h2>
+	<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+	<span class="svg-icon svg-icon-1">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+		</svg>
+	</span>
+	</div>
+	</div>
+	<div class="modal-body scroll-y">
+	  <!-- Main Content -->
+	  <div id="print_section" style="background:#fff;">
+	  	  	    <header>
+  <div class="row align-items-center" style="font-size:10px;background:#fff;">
+        <table width="100%" border="0">
+          <tr>
+            <td> <div class="col-sm-6 order-sm-0" style="padding:10px;"> <!--<strong><?php echo $company_row['company_name']; ?></strong>-->
+      <address>
+      <i class="fas fa-map-pin" style="color:#E67E22;font-size:10px;"></i>   <?php echo $company_row['phy_add']; ?><br />
+      <i class="fas fa-envelope" style="color:#E67E22;font-size:10px"></i> P.O Box <?php echo $company_row['postal_add']."-".$company_row['postal_code']; ?><br />
+      <i class="fas fa-phone" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['mobile_no']; ?><br />
+      <i class="fas fa-at" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['email']; ?><br />
+	  <i class="fas fa-globe" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['website']; ?>
+      </address>
+      </div></td>
+            <td><div style="align:left" class="">
+              <div align="right"><img id="logo" width="100px;" height="100px;" src="images/logo.png" title="Willstone Homes" alt="Willstone Homes" />
+                        </div>
+            </div></td>
+          </tr>
+        </table>
+        <table width="100%" border="0" style="margin-bottom:10px;">
+      <tr>
+      <td width="35%">&nbsp;</td>
+        <td width="30%"><div align="center" style=" padding:5px; font-size:12px; border: 1px solid #E67E22;"><strong>Material Request Form</strong></div></td>
+        <td width="35%">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  </header>
+  <main style="font-size:10px;background:#fff;">
+  <div class="row">
+    <div align="left"><strong>Date:</strong> <?php echo $order_row['req_date']; ?></div>
+    <div align="right"> <strong>Order No:</strong> <?php echo $order_row['order_no']; ?></div>
+	<div align="right"> <strong>Status:</strong> <?php echo $status; ?></div>
+  </div>
+  <hr>
+
+    <div class="card" style="background:#fff;">
+    <div class="card-body p-0" style="background:#fff;">
+	 <?php 
+	 //get order items
+	 $order_items = $conn->prepare("SELECT req.id AS item_id,req.order_no,req.req_date,req.req_time,req.req_status, bs.section_name, w.work_unit_name, sb.sub_section_name, req.qty,req.order_no, req.req_desc,mt.mat_name, b.building_name, w.work_unit_name FROM materials_request_form AS req LEFT JOIN materials AS mt ON mt.id = req.mat_id LEFT JOIN work_unit  AS w ON w.id = req.work_id LEFT JOIN sub_section AS sb ON sb.id = w.sub_section_id LEFT JOIN building_sections AS bs ON bs.id = sb.section_id  LEFT JOIN building AS b ON b.id = req.building_id WHERE req.order_no='".$order_no."' ORDER BY req.id ASC");
+	 $order_items->execute();
+	 $item_rows = $order_items->fetchAll(PDO::FETCH_ASSOC);
+	 ?>
+      <div class="table-responsive" style="border:1px solid #000;padding:10px; background:#fff;">
+        <table class="table mb-0 table-striped" style="background:#fff;" >
+		<thead>
+          <tr class="fw-bolder text-muted bg-light-dark">
+		   <td><strong>#</strong></td>
+            <td><strong>Item</strong></td>
+			<td><strong>Description</strong></td>
+            <td><strong>Qty</strong></td>
+			<td><strong>Building</strong></td>			
+			<td><strong>Section</strong></td>
+			<td><strong>Work Unit</strong></td>
+          </tr>
+        </thead>
+          <tbody>
+		  <?php 
+		  $count =0;
+		  foreach($item_rows as $row){
+		  $count++;
+		  ?>
+            <tr>
+              <td><?php echo $count; ?></td>
+              <td><?php echo titleCase($row['mat_name']); ?></td>
+			  <td><?php echo titleCase($row['req_desc']); ?></td>
+              <td><?php echo $row['qty']; ?></td>
+			  <td><?php echo titleCase($row['building_name']); ?></td>
+			  <td><?php echo titleCase($row['section_name']); ?></td>
+			   <td><?php echo titleCase($row['work_unit_name']); ?></td>
+            </tr>
+		<?php } ?>	
+          </tbody>
+        </table>
+      </div>
+	  </div>
+    </div>
+  </main>
+
+<?php 
+$approvals = $conn->prepare("SELECT la.id AS app_id, la.approve_date,la.remarks, la.approve_time, us.fname, la.approval_status FROM requisition_approvals AS la LEFT JOIN users AS us ON us.id = la.user_id WHERE la.ref_no='".$order_no."' AND la.req_type='MR'");
+$approvals->execute();
+$app_count = $approvals->rowCount();
+if($app_count>=1){
+$app_rows = $approvals->fetchAll(PDO::FETCH_ASSOC);
+?>
+<table border="1" width="100%" style="margin-top:10px;font-size:10px;">
+<thead style>
+<tr border="1" style="background:#E67E22;color:#fff;">
+<th>Approved By</th>
+<th>Remarks</th>
+<th>Date</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach($app_rows as $app_row){?>
+<tr>
+<td><?php echo titleCase($app_row['fname']); ?></td>
+<td><?php echo $app_row['remarks']; ?></td>
+<td><?php echo $app_row['approve_date']; ?></td>
+<td><?php echo $app_row['approve_time']; ?></td>
+</tr>
+<?php } ?>
+</tbody>
+</table>
+<?php
+
+}
+?>	
+    </div>
+	<br/><br/>
+<button  onclick="jQuery('#print_section').print()" <?php if($app_count==0){echo "disabled";}?> class="btn btn-primary btn-sm btn-small"  id="print">Print <i class="fas fa-print"></i></button>
+<?php if($item13==1){ ?>
+<div id="approval_section" class="col-sm-6" style="margin-top:10px;border 2px solid:#000;">
+
+<?php 
+//check if item is approved
+$check = $conn->prepare("SELECT id AS item_id FROM requisition_approvals WHERE user_id='".$_SESSION['IRIS_USER_ID']."' AND ref_no='".$order_no."' AND req_type='MR' LIMIT 1");
+$check->execute();
+$check_count = $check->rowCount();
+if($check_count==0){
+?>
+<button class="btn btn-sm btn-xs btn-info" id="approve_link">Approve Request</button>
+<div id="approve_option" style="margin-top:10px;border 2px solid: #000;" class=" rounded-2">
+
+<div class=" fv-row col-sm-5">
+<select class="form-select form-select-solid" id="approve" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+<option value="">{--Select Option--}</option>
+<option value="A">Approve</option>
+<option value="R">Reject</option>						
+</select>
+</div>
+<div class="fv-row mb-7">
+<br/><label class="required fw-bold fs-6 mb-2">Remarks</label>
+<textarea class="form-control form-control-solid mb-3 mb-lg-0" id="remark" placeholder="Remarks"></textarea>
+</div>
+
+<button class="btn btn-sm btn-xs btn-primary" id="submit_approval">Save</button>
+<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Saving...</span><br/><br/>
+<div id="response"></div><br/>
+</div>
+<?php
+
+}
+?>
+<script>
+$(document).ready(function(){
+$("#approve_option").hide();
+$(".loader").hide();
+$("#approve_link").click(function(){
+$("#approve_option").show();
+});
+});
+$("#submit_approval").click(function(){
+$("#response").empty();
+error = false;
+approval = $("#approve").val();
+remark = $("#remark").val();
+req_type ="MR";
+order_no = "<?php  echo $order_no; ?>";
+
+if(approval===''){
+alert("Select option!");
+$("#approve").focus();
+error = true;
+}
+
+if(remark===''){
+alert("Enter remarks !");
+$("#remark").focus();
+error = true;
+}
+
+if(error == false){
+$(".loader").show();
+$("#submit_approval").hide();
+var myData = 'approval='+ approval + '&remark=' + escape(remark)  + '&req_type=' + req_type + '&order_no=' + order_no; //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/approve_requisition.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#response").append(response); 
+$('.loader').fadeOut();
+$('#submit_approval').fadeIn();
+$('#response').fadeIn();
+}
+
+});
+
+}
+});
+</script>
+</div>
+<?php } ?>
+</div>
+</div>	

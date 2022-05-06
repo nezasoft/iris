@@ -1,0 +1,79 @@
+
+	<body id="kt_body" class="bg-body">
+		<div class="d-flex flex-column flex-root">
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/metronic8/demo1/assets/media/illustrations/sketchy-1/14.png">
+				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+					<a href="?home" class="mb-12">
+						<img alt="Logo" src="images/logo.png" class="h-100px" />
+					</a>
+					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+						<div id="form_section">
+							<form class="form w-100" novalidate="novalidate" id="kt_password_reset_form">
+							<div class="text-center mb-10">
+								<h1 class="text-dark mb-3">Reset Password</h1>
+								<div class="text-gray-400 fw-bold fs-4">Enter your email to reset your password.</div>
+							</div>
+							<div class="fv-row mb-10">
+								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+								<input class="form-control form-control-lg form-control-solid" id="email" type="text" name="email" autocomplete="off" /><br/>
+								<span id="email_error" style="color:red;"> *Enter username / email address</span>
+							</div>
+							<div class="d-flex flex-wrap justify-content-center pb-lg-0">
+								<button type="submit" id="submit" class="btn btn-lg btn-primary w-100 mb-5">
+									<span class="indicator-label">Reset Password</span>	
+								</button>
+								<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span>	
+								<a href="?home" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
+							</div>
+						</form>
+						</div>
+						<div id="response"></div><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+<script>
+$("#email_error").hide();
+$("#response").hide();
+$(".loader").hide();
+$(document).ready(function(){
+      $("#submit").click(function(e){
+		e.preventDefault();
+		$("#response").empty();		
+			email = $("#email").val();		
+			error = false;		
+      if(email ===''){
+		error =true;
+		$("#email_error").fadeIn();
+		$("#email").focus();
+		}else{
+		$("#email_error").fadeOut();
+		}
+		
+		if(error ==false){
+		//hide submit button
+		$("#submit").fadeOut();
+		$(".loader").show();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'email='+ email ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "process/recover_password.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('.loader').hide();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+		}		
+		
+	});
+});
+
+</script>

@@ -1,0 +1,204 @@
+<?php
+//Make a connection
+include("../connection/connect.php");
+$unit_id = sanitize_string($_GET['unit_id']);
+//Get Unit Details
+$unit = $conn->prepare("SELECT b.id AS unit_id, s.id AS site_id, b.building_name AS unit_name, b.`status`, s.site_name,  s.estimated_cost FROM building AS b LEFT JOIN sites AS s ON s.id = b.site_id  WHERE b.id='".$unit_id."'");
+$unit->execute();
+$unit_row = $unit->fetch(PDO::FETCH_ASSOC);
+$site_name = $unit_row['site_name'];
+$unit_name = $unit_row['unit_name'];
+$site_id = $unit_row['site_id'];
+
+
+?>  
+ 
+	 <div class="modal-header">
+                <h5 class="modal-title"><?php echo titleCase($site_name); ?></h5>
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">X</span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+			<div style="background: rgb(226,226,237);background: linear-gradient(90deg, rgba(226,226,237,1) 0%, rgba(228,228,246,1) 35%, rgba(213,235,240,1) 100%);padding:10px;">
+               			<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Navbar-->
+								<div class="card mb-6 mb-xl-9">
+									<div class="card-body pt-9 pb-0">
+										<!--begin::Details-->
+										<div class="d-flex flex-wrap flex-sm-nowrap mb-6">
+											<!--begin::Image-->
+											<div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
+												<img class="mw-50px mw-lg-75px" src="assets/media/svg/misc/infography.svg" alt="image" />
+											</div>
+											<!--end::Image-->
+											<!--begin::Wrapper-->
+											<div class="flex-grow-1">
+												<!--begin::Head-->
+												<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+													<!--begin::Details-->
+													<div class="d-flex flex-column">
+														<!--begin::Status-->
+														<div class="d-flex align-items-center mb-1">
+															<a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3"><?php echo titleCase($unit_row['unit_name']); ?></a>
+				
+														</div>
+														<!--end::Status-->
+														<!--begin::Description-->
+				
+														<!--end::Description-->
+													</div>
+													<!--end::Details-->
+
+												</div>
+												<!--end::Head-->
+												<!--begin::Info-->
+									
+												<!--end::Info-->
+											</div>
+											<!--end::Wrapper-->
+										</div>
+										<!--end::Details-->
+										<div class="separator"></div>
+										<!--begin::Nav-->
+										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+											<!--begin::Nav item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary py-5 me-6 active" href="#hold_main_content_section" id="unit_boq">BOQ</a>
+											</li>
+											<!--end::Nav item-->
+											<!--begin::Nav item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail" id="unit_requisition" >Requisitions</a>
+											</li>
+											<!--end::Nav item-->
+											<!--begin::Nav item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail" id="unit_orders">Orders</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail" id="unit_materials">Consumption  (Materials) Qty</a>
+											</li>
+											<!--end::Nav item-->
+			
+										</ul>
+										<script>
+										$(document).ready(function(){
+										$("#wait_site").hide();
+										//load content here
+										$("#hold_main_content_section").empty();
+										$("#wait_site").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section").load("views/reports/unit_boq.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	
+										
+										});
+										$("#unit_boq").click(function(){
+										$("#unit_boq").addClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section").empty();
+										$("#wait_site").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section").load("views/reports/unit_boq.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										$("#unit_requisition").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").addClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section").empty();
+										$("#wait_site").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section").load("views/reports/unit_requisition.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										$("#unit_orders").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").addClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section").empty();
+										$("#wait_site").show();
+										document.title="Unit LPOs";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section").load("views/reports/unit_order.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										
+										$("#unit_materials").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").addClass("active");
+										//load content here
+										$("#hold_main_content_section").empty();
+										$("#wait_site").show();
+										document.title="Unit Materials";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section").load("views/reports/unit_materials.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+																			
+										</script>
+										<!--end::Nav-->
+									</div>
+								</div>
+								<!--end::Navbar-->
+								<!--begin::Row-->
+								<div id="wait_site" style="margin-left:20px;"><img width="30" height="30" src="images/loader.gif" />Loading content, please wait...</div>
+								<div  style="min-height:400px;">
+								<div id="hold_main_content_section" style="background:#fff;">
+	
+								</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Post-->
+						</div>
+            </div>
+	
+  <script>
+	  $(document).ready(function(){
+	  $("#loader_add_new").hide();
+	  });
+	     function viewPO(order_no){
+		//load content here
+		$("#hold_main_content_section").empty();
+		$("#wait_site").show();
+		document.title="Purchase Order";
+		site_id = <?php echo $site_id; ?>;
+		$("#hold_main_content_section").load("views/view_purchase_order.html?order_no="+order_no,function(responseTxt, statusTxt, jqXHR){
+		if(statusTxt == "success"){$("#wait_site").hide();}
+		if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		});
+	  }
+   </script>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+			

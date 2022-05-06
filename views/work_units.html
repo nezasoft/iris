@@ -1,0 +1,36 @@
+<?php
+require_once("../connection/connect.php");
+require_once("../modules/permissions.php");
+?>
+						<div class="toolbar" id="kt_toolbar">
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+									<h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Work Units
+									<span class="h-20px border-1 border-gray-200 border-start ms-3 mx-2 me-1"></span>
+									<span class="text-muted fs-7 fw-bold mt-2">Manage Work Units</span>
+								</h1>
+
+								</div>
+								<?php if($item85==1){ ?>
+								<div class="d-flex align-items-center gap-2 gap-lg-3">
+									<a href="#" class="btn btn-sm btn-primary" onclick="addNew()" data-bs-toggle="modal" data-bs-target="#ModalContentAddNew">Add New</a>
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+						<div id="wait_2" style="margin-left:20px;"><img width="30" height="30" src="images/loader.gif" />Loading content, please wait...</div>
+						<div id="main_page_content">
+						
+						</div>
+						
+<script>
+$(document).ready(function(){
+$("#main_page_content").empty();
+$("#wait_2").show();
+document.title="Sub Sections Report";
+$("#main_page_content").load("views/list_work_units.html",function(responseTxt, statusTxt, jqXHR){
+if(statusTxt == "success"){$("#wait_2").hide();}
+if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+ }); 	
+});
+</script>

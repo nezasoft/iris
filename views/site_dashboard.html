@@ -1,0 +1,563 @@
+<?php
+require_once("../connection/connect.php");
+if(!isset($_SESSION['IRIS_USER_ID']) || $_SESSION['IRIS_USER_ID']=='' ){
+echo '<script>window.location.href="?home";</script>';
+exit();
+}
+//get  all users 
+$users = $conn->prepare("SELECT  us.id AS item_id, us.fname, us.lname,us.username, us.email,us.date_created,s.site_name, r.role_name, us.active FROM  users AS us LEFT JOIN sites AS s ON s.id = us.site_id LEFT JOIN roles AS r ON r.id = us.role_id WHERE us.active='Yes' AND us.site_id='".$_SESSION['IRIS_SITE_ID']."' ORDER BY us.fname ASC LIMIT 10");
+$users->execute();
+$user_rows=$users->fetchAll();
+//get all suppliers
+$suppliers = $conn->prepare("SELECT id AS item_id, sup_name,sup_email,sup_phone,sup_postal,sup_physical FROM suppliers ORDER BY RAND() LIMIT 5");
+$suppliers->execute();
+$supplier_rows = $suppliers->fetchAll(PDO::FETCH_ASSOC);
+//requisitions
+$req = $conn->prepare("SELECT req.id AS item_id, req.order_no, req.qty, req.req_status, req.req_desc, req.req_date, req.user_id, us.fname, b.building_name, mt.mat_name, s.site_name  FROM site_materials_request_form AS req LEFT JOIN materials AS mt  ON mt.id = req.mat_id  LEFT JOIN building AS b ON b.id = req.building_id LEFT JOIN users AS us ON us.id = req.user_id LEFT JOIN sites AS s ON s.id = req.site_id WHERE req.site_id='".$_SESSION['IRIS_SITE_ID']."' GROUP BY req.order_no ORDER BY req.id DESC LIMIT 5");
+$req->execute();
+$req_rows = $req->fetchAll(PDO::FETCH_ASSOC);
+//Purchase orders 
+$po = $conn->prepare("SELECT po.id AS item_id,po.order_no, po.order_details,s.sup_name, po.order_date,po.order_status, st.site_name, us.fname, mt.mat_name FROM purchase_order AS po LEFT JOIN materials AS mt ON mt.id = po.mat_id LEFT JOIN suppliers AS s ON s.id = po.sup_id LEFT JOIN sites AS st ON st.id = po.site_id LEFT JOIN users AS us ON us.id = po.user_id WHERE po.site_id='".$_SESSION['IRIS_SITE_ID']."'   GROUP BY po.order_no  ORDER BY po.id  DESC LIMIT 5");
+$po->execute();
+$po_rows = $po->fetchAll(PDO::FETCH_ASSOC);
+//Get site Stock
+$stock = $conn->prepare("SELECT st.id AS item_id, st.min_stock_level,st.max_stock_level, st.quantity,st.stock_desc, mt.mat_name,pk.pack_name, s.site_name, s.id AS site_id FROM materials_stock AS st LEFT JOIN materials AS mt ON mt.id = st.mat_id LEFT JOIN stores AS str ON str.id = st.store_id LEFT JOIN sites AS s ON s.id = str.site_id LEFT JOIN packages AS pk ON pk.id = st.pack_id GROUP BY st.site_id, st.mat_id ORDER BY st.quantity DESC LIMIT 5");
+$stock->execute();
+$stock_rows = $stock->fetchAll(PDO::FETCH_ASSOC);
+//Get Site units
+$units = $conn->prepare("SELECT b.id AS item_id, b.building_name, b.status, s.site_name FROM building AS b LEFT JOIN sites AS s ON s.id = b.site_id WHERE b.site_id='".$_SESSION['IRIS_SITE_ID']."' ORDER BY RAND() LIMIT 5");
+$units->execute();
+$unit_rows = $units->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<script>
+$(document).ready(function(){
+startRefreshingActivities();
+startRefreshingNotif();
+});
+</script>
+
+<div class="post d-flex flex-column-fluid" id="kt_post">
+							<div id="kt_content_container" class="container-xxl">
+								<div class="row gy-5 g-xl-8">
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch">
+											<div class="card-header border-0 bg-danger py-5">
+												<h3 class="card-title fw-bolder text-white">Quick Links</h3>
+												<div class="card-toolbar">
+		
+												</div>
+											</div>
+											<div class="card-body p-0">
+												<div class="mixed-widget-2-chart card-rounded-bottom bg-danger" data-kt-color="danger" style="height: 200px"></div>
+												<div class="card-p mt-n20 position-relative">
+													<div class="row g-0">
+														<div class="col bg-light-warning px-6 py-8 rounded-2 me-7 mb-7">
+															<!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
+															<span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<rect x="8" y="9" width="3" height="10" rx="1.5" fill="black" />
+																	<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black" />
+																	<rect x="18" y="11" width="3" height="8" rx="1.5" fill="black" />
+																	<rect x="3" y="13" width="3" height="6" rx="1.5" fill="black" />
+																</svg>
+															</span>
+															<a href="#" onclick="viewStock()" class="text-warning fw-bold fs-6">Material Stock</a>
+														</div>
+														<div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
+															<span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path opacity="0.3" d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z" fill="black" />
+																	<path d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z" fill="black" />
+																</svg>
+															</span>
+															<a href="#" onclick="viewRequisitions()" class="text-primary fw-bold fs-6">Requisitions</a>
+														</div>
+													</div>
+													<script>
+													function viewStock(){
+													$("#page_content").empty();
+													$("#wait").show();
+													document.title="Stock";
+													$("#page_content").load("views/reports/stock_reports.html",function(responseTxt, statusTxt, jqXHR){
+													if(statusTxt == "success"){$("#wait").hide();}
+													if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+													 }); 	
+													}
+													function viewOrders(){
+													$("#page_content").empty();
+													$("#wait").show();
+													document.title="Purchase Orders";
+													$("#page_content").load("views/reports/lpo_reports.html",function(responseTxt, statusTxt, jqXHR){
+													if(statusTxt == "success"){$("#wait").hide();}
+													if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+													 }); 	
+													}
+													function viewDeliveries(){
+													$("#page_content").empty();
+													$("#wait").show();
+													document.title="Deliveries";
+													$("#page_content").load("views/reports/delivery_reports.html",function(responseTxt, statusTxt, jqXHR){
+													if(statusTxt == "success"){$("#wait").hide();}
+													if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+													 }); 	
+													}
+													function viewRequisition(){
+													$("#page_content").empty();
+													$("#wait").show();
+													document.title="Requisition Reports";
+													$("#page_content").load("views/reports/requisition_reports.html",function(responseTxt, statusTxt, jqXHR){
+													if(statusTxt == "success"){$("#wait").hide();}
+													if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+													 }); 	
+													}
+													</script>
+													<div class="row g-0">
+														<div class="col bg-light-danger px-6 py-8 rounded-2 me-7">
+															<span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black" />
+																	<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black" />
+																</svg>
+															</span>
+															<a href="#" onclick="viewOrders()" class="text-danger fw-bold fs-6 mt-2">Purchase Orders</a>
+														</div>
+														<div class="col bg-light-success px-6 py-8 rounded-2">
+															<span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
+																	<path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
+																</svg>
+															</span>
+															<a href="#"  onclick="viewDeliveries()" class="text-success fw-bold fs-6 mt-2">Deliveries</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch">
+											<div class="card-header align-items-center border-0 mt-4">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="fw-bolder mb-2 text-dark">Activities</span>
+												</h3>
+												<div class="card-toolbar">
+			
+												</div>
+											</div>
+											<script>
+											// Config for the javascript part                            
+											var urlUserActivity = "process/get_activities.php";
+											var milsecondsTillRepeat = 1500;
+											var ReplaceUserActivity = "activity_content";
+
+											function startRefreshingActivities() {
+											setTimeout("startRefreshingActivities()", milsecondsTillRepeat);
+											reloadUserActivity();
+											}
+
+											function reloadUserActivity() {
+											xmlhttp = GetXmlHttpObject();
+											if(xmlhttp == null) {
+											alert("Your Browser does not support HTTP Request");
+											return;
+											}
+											var url = urlUserActivity;
+											url = url + "?random=" + Math.random();
+											xmlhttp.onreadystatechange = stateChanged;
+											xmlhttp.open("GET", url, true);
+											xmlhttp.send(null);
+											}
+
+											function stateChanged(){
+											if(xmlhttp.readyState == 4){
+											document.getElementById(ReplaceUserActivity).innerHTML = xmlhttp.responseText;
+											}
+											}
+
+											function GetXmlHttpObject() {
+											if(window.XMLHttpRequest) {
+											// code for IE7+, Firefox, Chrome, Opera, Safari
+											return new XMLHttpRequest();
+											}
+											if(window.ActiveXObject) {
+											// code for IE6, IE5
+											return new ActiveXObject("Microsoft.XMLHTTP");
+											}
+											return null;
+											}
+											</script>
+											<div class="card-body pt-5">
+												<div class="timeline-label">
+													<div id="activity_content" style="font-size:12px;"></div>											
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch-50 mb-5 mb-xl-8">
+											<div class="card-body d-flex flex-column p-0">
+												<div class="flex-grow-1 card-p pb-0">
+													<div class="d-flex flex-stack flex-wrap">
+														<div class="me-2">
+															<a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Purchases</a>
+															<div class="text-muted fs-7 fw-bold">Finance and accounting reports</div>
+														</div>
+														<div class="fw-bolder fs-3 text-primary">$24,500</div>
+													</div>
+												</div>
+												<div class="mixed-widget-7-chart card-rounded-bottom" data-kt-chart-color="primary" style="height: 150px"></div>
+											</div>
+										</div>
+										<div class="card card-xl-stretch-50 mb-5 mb-xl-8">
+											<div class="card-body p-0 d-flex justify-content-between flex-column overflow-hidden">
+												<div class="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
+													<div class="me-2">
+														<span class="fw-bolder text-gray-800 d-block fs-3">Consumption</span>
+														<span class="text-gray-400 fw-bold">Oct 8 - Oct 26 22</span>
+													</div>
+													<div class="fw-bolder fs-3 text-primary">$15,300</div>
+												</div>
+												<div class="mixed-widget-10-chart" data-kt-color="primary" style="height: 175px"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row gy-5 g-xl-8">
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-header border-0">
+												<h3 class="card-title fw-bolder text-dark">Notifications</h3>
+												<div class="card-toolbar">
+
+												</div>
+											</div>
+											<div class="card-body pt-2">
+											  <div id="notification_content" style="font-size:12px;"></div>
+												
+												
+											</div>
+										</div>
+									</div>
+									
+									
+									<script>
+											// Config for the javascript part                            
+											var urlUserNotif = "process/get_notifications.php";
+											var milsecondsTillRepeatNotif = 1500;
+											var ReplaceUserNotif = "notification_content";
+
+											function startRefreshingNotif() {
+											setTimeout("startRefreshingNotif()", milsecondsTillRepeatNotif);
+											reloadUserNotif();
+											}
+
+											function reloadUserNotif() {
+											xmlhttp2 = GetXmlHttpObjectNotif();
+											if(xmlhttp2 == null) {
+											alert("Your Browser does not support HTTP Request");
+											return;
+											}
+											var url2 = urlUserNotif;
+											url2 = url2 + "?random=" + Math.random();
+											xmlhttp2.onreadystatechange = stateChangedNotif;
+											xmlhttp2.open("GET", url2, true);
+											xmlhttp2.send(null);
+											}
+
+											function stateChangedNotif(){
+											if(xmlhttp.readyState == 4){
+											document.getElementById(ReplaceUserNotif).innerHTML = xmlhttp2.responseText;
+											}
+											}
+
+											function GetXmlHttpObjectNotif() {
+											if(window.XMLHttpRequest) {
+											// code for IE7+, Firefox, Chrome, Opera, Safari
+											return new XMLHttpRequest();
+											}
+											if(window.ActiveXObject) {
+											// code for IE6, IE5
+											return new ActiveXObject("Microsoft.XMLHTTP");
+											}
+											return null;
+											}
+											</script>
+									<div class="col-xl-8">
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Users </span>
+													<span class="text-muted mt-1 fw-bold fs-7">Active Users</span>
+												</h3>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body py-3">
+												<!--begin::Table container-->
+												<div class="table-responsive">
+													<!--begin::Table-->
+													<table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-8" >
+														<!--begin::Table head-->
+														<thead>
+															<tr class="fw-bolder text-muted">
+																<th class="min-w-150px">Name</th>
+																<th class="min-w-140px">Contact</th>
+																<th class="min-w-120px">Site</th>
+																<th class="min-w-120px">Active</th>
+															</tr>
+														</thead>
+														<!--end::Table head-->
+														<!--begin::Table body-->
+														<tbody>
+														<?php foreach($user_rows as $row){ ?>
+															<tr>
+																<td>
+																	<div class="d-flex align-items-center">
+																		<div class="symbol symbol-30px me-5">
+																			<img src="images/user.png" alt="" />
+																		</div>
+																		<div class="d-flex justify-content-start flex-column">
+																			<a href="#" class="text-dark fw-bolder text-hover-primary fs-6"><?php echo titleCase($row['fname']." ".$row['lname']); ?></a>
+																			<span class="text-muted fw-bold text-muted d-block fs-7"><?php echo titleCase($row['role_name']); ?></span>
+																		</div>
+																	</div>
+																</td>
+																<td>
+																	<a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6"><?php echo titleCase($row['role_name']); ?></a>
+																	<span class="text-muted fw-bold text-muted d-block fs-7"><?php echo $row['email']; ?></span>
+																</td>
+																<td class="text-end">
+																	<div class="d-flex flex-column w-100 me-2">
+																		<div class="d-flex flex-stack mb-2">
+																			<span class="badge badge-primary"><?php echo titleCase($row['site_name']); ?></span>
+																		</div>
+																	</div>
+																</td>
+																<td class="text-end">
+																	<div class="d-flex flex-column w-100 me-2">
+																		<div class="d-flex flex-stack mb-2">
+																			<span class="badge badge-success"><?php echo titleCase($row['active']); ?></span>
+																		</div>
+																	</div>
+																</td>
+															
+															</tr>
+															<?php } ?>
+															
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row gy-5 g-xl-8">
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-header border-0">
+												<h3 class="card-title fw-bolder text-dark">Suppliers</h3>
+												<div class="card-toolbar">
+		
+												</div>
+											</div>
+											<div class="card-body pt-2">
+											<?php foreach($supplier_rows as $row){ ?>
+											
+												<div class="d-flex align-items-center mb-7">
+													<div class="symbol symbol-45px me-5">
+														<img src="images/carts.png"  class="" alt="" />
+													</div>
+													<div class="flex-grow-1">
+														<a href="#" class="text-dark fw-bolder text-hover-primary fs-6"><?php echo titleCase($row['sup_name']); ?></a>
+														<span class="text-muted d-block fw-bold"><?php echo $row['sup_email']; ?></span>
+													</div>
+												</div>																																		
+											<?php } ?>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-header border-0">
+												<h3 class="card-title fw-bolder text-dark">Requisitions</h3>
+												<div class="card-toolbar">
+												</div>
+											</div>
+											<div class="card-body pt-0">
+											<?php foreach($req_rows as $row){ ?>
+												<div class="d-flex align-items-center bg-light-warning rounded p-5 mb-7" style="font-size:12px;">
+													<span class="svg-icon svg-icon-info me-5">
+														<span class="svg-icon svg-icon-1">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black" />
+																<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black" />
+															</svg>
+														</span>
+													</span>
+													<div class="flex-grow-1 me-2">
+														<a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6"><?php echo $row['order_no'];?></a>
+														<span class="text-muted fw-bold d-block"><?php echo $row['mat_name'];?></span>
+													</div>
+													<span class="fw-bolder text-info py-1"><?php echo $row['site_name'];?></span>
+												</div>
+							                 <?php } ?>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-4">
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder text-dark">Purchase Orders</span>
+													<span class="text-muted mt-1 fw-bold fs-7">Latest LPOs</span>
+												</h3>
+												<div class="card-toolbar">
+													
+							
+												</div>
+											</div>
+											<div class="card-body pt-5">
+											<?php 
+											foreach($po_rows as $row){
+											   $t_type = $row['order_status'];			   
+											   if($t_type=='A'){
+												  $status = '<span class="badge badge-success">Approved</span>'; 				   
+											   }elseif($t_type=='P'){
+												   $status = '<span class="badge badge-warning">Pending</span>'; 
+											   }elseif($t_type=='R'){
+												   $status = '<span class="badge badge-danger">Rejected</span>';
+											   }elseif($t_type=='C'){
+												   $status = '<span class="badge badge-info">Completed</span>';  
+												}elseif($t_type=='N'){
+												   $status = '<span class="badge badge-info">New</span>';				   
+												   
+											   }
+											?>
+												<div class="d-flex align-items-sm-center mb-7">
+													<div class="symbol symbol-50px me-5">
+														<span class="symbol-label">
+															<img src="assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt="" />
+														</span>
+													</div>
+													<div class="d-flex align-items-center flex-row-fluid flex-wrap">
+														<div class="flex-grow-1 me-2">
+															<a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder"><?php echo $row['order_no']; ?></a>
+															<span class="text-muted fw-bold d-block fs-7"><?php echo titleCase($row['mat_name']); ?>, <?php echo titleCase($row['site_name']); ?></span>
+														</div>
+														<span class="badge badge-light fw-bolder my-2"><?php echo $status; ?></span>
+													</div>
+												</div>
+											<?php } ?>	
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row g-5 g-xl-8">
+									<div class="col-xl-4">
+										<div class="card card-xxl-stretch mb-xl-8">
+											<div class="card-header border-0 py-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Units</span>
+													<span class="text-muted fw-bold fs-7">Completed Units</span>
+												</h3>
+											</div>
+											<div class="card-body d-flex flex-column">
+												<div class="mt-5">
+												<?php 
+												foreach($unit_rows as $row){ 
+												$t_type = $row['status'];			   
+											   if($t_type=='A'){
+												  $status = '<span class="badge badge-success">Approved</span>'; 				   
+											   }elseif($t_type=='P'){
+												   $status = '<span class="badge badge-warning">Pending</span>'; 
+											   }elseif($t_type=='S'){
+												   $status = '<span class="badge badge-danger">Sold</span>';
+											   }elseif($t_type=='C'){
+												   $status = '<span class="badge badge-info">Completed</span>';  
+												}elseif($t_type=='N'){
+												   $status = '<span class="badge badge-info">New</span>';				   
+												   
+											   }
+												?>
+												
+													<div class="d-flex flex-stack mb-5">
+														<div class="d-flex align-items-center me-2">
+															<div class="symbol symbol-50px me-3">
+																<div class="symbol-label bg-light">
+																	<img src="assets/media/svg/brand-logos/plurk.svg" class="h-50" alt="" />
+																</div>
+															</div>
+															<div>
+																<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder"><?php echo titleCase($row['building_name']); ?></a>
+																<div class="fs-7 text-muted fw-bold mt-1"><?php echo titleCase($row['site_name']); ?></div>
+															</div>
+														</div>
+														<div class="badge badge-light fw-bold py-4 px-3"><?php echo $status; ?></div>
+													</div>
+												<?php } ?>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-8">
+										<div class="card card-xxl-stretch mb-5 mb-xl-8">
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Stock</span>
+													<span class="text-muted mt-1 fw-bold fs-7">Materials</span>
+												</h3>
+												<div class="card-toolbar">												
+												</div>
+											</div>
+											<div class="card-body py-3">
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_table_widget_5_tab_1">
+														<div class="table-responsive">
+															<table class="table table-row-dashed table-row-gray-200 align-middle gs-0 gy-4">
+																<thead>
+																	<tr class="border-0">
+																		<th class="p-0 w-50px"></th>
+																		<th class="p-0 min-w-150px"></th>
+																		<th class="p-0 min-w-140px"></th>
+																		<th class="p-0 min-w-110px"></th>
+																	</tr>
+																</thead>
+																<tbody>
+																<?php foreach($stock_rows as $row){ ?>
+																	<tr>
+																		<td>
+																			<div class="symbol symbol-45px me-2">
+																				<span class="symbol-label">
+																					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black" />
+																	<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black" />
+																</svg>
+																				</span>
+																			</div>
+																		</td>
+																		<td>
+																			<a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6"><?php echo titleCase($row['mat_name']); ?></a>
+																			<span class="text-muted fw-bold d-block"><?php echo titleCase($row['site_name']); ?></span>
+																		</td>
+																		<td class="text-end text-muted fw-bold"><?php echo $row['stock_desc']; ?></td>
+																		<td class="text-end">
+																			<span class="badge badge-light-success"><?php echo $row['quantity']; ?></span>
+																		</td>
+										
+																	</tr>
+																	<?php } ?>
+																	
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>

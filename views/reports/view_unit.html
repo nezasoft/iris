@@ -1,0 +1,133 @@
+<?php
+//Make a connection
+include("../../connection/connect.php");
+$unit_id = sanitize_string($_GET['unit_id']);
+//Get Unit Details
+$unit = $conn->prepare("SELECT b.id AS unit_id, s.id AS site_id, b.building_name AS unit_name, b.`status`, s.site_name,  s.estimated_cost FROM building AS b LEFT JOIN sites AS s ON s.id = b.site_id  WHERE b.id='".$unit_id."'");
+$unit->execute();
+$unit_row = $unit->fetch(PDO::FETCH_ASSOC);
+$site_name = $unit_row['site_name'];
+$unit_name = $unit_row['unit_name'];
+$site_id = $unit_row['site_id'];
+
+
+?>  
+ <div class="card" style="padding:10px;">
+ <h4><?php echo titleCase($unit_name); ?></h4>
+	<div class="separator"></div>
+	<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+	<li class="nav-item"><a class="nav-link text-active-primary py-5 me-6 active" href="#hold_main_content_section_unit" id="unit_boq">BOQ</a></li>
+    <li class="nav-item"><a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail_unit" id="unit_requisition" >Requisitions</a></li>
+	<li class="nav-item"><a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail_unit" id="unit_orders">Orders</a></li>
+	<li class="nav-item"><a class="nav-link text-active-primary py-5 me-6" href="#content_data_site_detail_unit" id="unit_materials">Consumption  (Materials) Qty</a></li>
+   </ul>
+			<div style="padding:10px;">					
+								<div class="card mb-6 mb-xl-9">
+									<div class="card-body pt-9 pb-0">																	
+										<script>
+										$(document).ready(function(){
+										$("#wait_site_unit").hide();
+										//load content here
+										$("#hold_main_content_section_unit").empty();
+										$("#wait_site_unit").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section_unit").load("views/reports/unit_boq.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site_unit").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	
+										
+										});
+										$("#unit_boq").click(function(){
+										$("#unit_boq").addClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section_unit").empty();
+										$("#wait_site_unit").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section_unit").load("views/reports/unit_boq.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site_unit").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										$("#unit_requisition").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").addClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section_unit").empty();
+										$("#wait_site_unit").show();
+										document.title="Unit BOQ";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section_unit").load("views/reports/unit_requisition.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site_unit").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										$("#unit_orders").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").addClass("active");
+										$("#unit_materials").removeClass("active");
+										//load content here
+										$("#hold_main_content_section_unit").empty();
+										$("#wait_site_unit").show();
+										document.title="Unit LPOs";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section_unit").load("views/reports/unit_order.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site_unit").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+										
+										$("#unit_materials").click(function(){
+										$("#unit_boq").removeClass("active");
+										$("#unit_requisition").removeClass("active");
+										$("#unit_orders").removeClass("active");
+										$("#unit_materials").addClass("active");
+										//load content here
+										$("#hold_main_content_section_unit").empty();
+										$("#wait_site_unit").show();
+										document.title="Unit Materials";
+										unit_id = <?php echo $unit_id; ?>;
+										$("#hold_main_content_section_unit").load("views/reports/unit_materials.html?unit_id="+unit_id,function(responseTxt, statusTxt, jqXHR){
+										if(statusTxt == "success"){$("#wait_site_unit").hide();}
+										if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+										 }); 	 
+										});
+																			
+										</script>
+									</div>
+								</div>
+								<div id="wait_site_unit" style="margin-left:20px;"><img width="20" height="20" src="images/loader.gif" />Loading content, please wait...</div>
+								<div  style="min-height:400px;">
+								<div id="hold_main_content_section_unit" style="background:#fff;">
+	
+								</div>
+						       </div>
+						</div>
+
+</div>	
+  <script>
+	  $(document).ready(function(){
+	  $("#loader_add_new").hide();
+	  });
+	     function viewPO(order_no){
+		//load content here
+		$("#hold_main_content_section").empty();
+		$("#wait_site").show();
+		document.title="Purchase Order";
+		site_id = <?php echo $site_id; ?>;
+		$("#hold_main_content_section").load("views/view_purchase_order.html?order_no="+order_no,function(responseTxt, statusTxt, jqXHR){
+		if(statusTxt == "success"){$("#wait_site").hide();}
+		if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}
+		});
+	  }
+   </script>
+
+  
+			

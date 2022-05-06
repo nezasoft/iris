@@ -1,0 +1,342 @@
+<?php
+require_once("../connection/connect.php");
+//Get all materials
+$mat = $conn->prepare("SELECT id AS item_id, mat_name FROM materials AS mt ORDER BY mat_name ASC");
+$mat->execute();
+$mat_rows = $mat->fetchAll(PDO::FETCH_ASSOC);
+//get Building Name
+$build = $conn->prepare("SELECT id AS item_id,building_name FROM building WHERE site_id='".$_SESSION['IRIS_SITE_ID']."' ORDER BY building_name ASC");
+$build->execute();
+$build_rows = $build->fetchAll(PDO::FETCH_ASSOC);
+
+//sections
+$sections = $conn->prepare("SELECT id AS item_id,section_name FROM building_sections ORDER BY section_name ASC");
+$sections->execute();
+$section_rows = $sections->fetchAll(PDO::FETCH_ASSOC);
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+   }
+
+    $ref_no = strtoupper(generateRandomString());
+?>
+
+
+<div class="modal-header" id="kt_modal_add_user_header">
+	<h2 class="fw-bolder">New Site Material Request</h2>
+	<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+	<span class="svg-icon svg-icon-1">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+		</svg>
+	</span>
+	</div>
+	</div>
+	<div class="modal-body scroll-y">
+	<div id="form_section">
+		<div>
+			<label class="required fw-bold fs-6 mb-5">Material</label>
+					<div class=" fv-row">
+						<select class="form-select form-select-solid" id="material" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($mat_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['mat_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="material_error" style="color:red;"> *Select Material</span>
+						</div>
+				</div>
+				<div>
+			   <label class="required fw-bold fs-6 mb-5">Building</label>
+					<div class=" fv-row">
+						<select class="form-select form-select-solid" id="building" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($build_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['building_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="building_error" style="color:red;"> *Select Building</span>
+						</div>
+				</div>
+		
+					<div>
+			   <label class="required fw-bold fs-6 mb-5">Section</label>
+					<div class=" fv-row">
+						<select class="form-select form-select-solid" id="section" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($section_rows as $row){
+							?>
+							<option value="<?php echo $row['item_id']; ?>"><?php echo titleCase($row['section_name']); ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="section_error" style="color:red;"> *Select Section</span>
+						</div>
+				</div>
+					<div class="fv-row mb-7">
+															   <label class="required fw-bold fs-6 mb-5">Sub Section</label>
+																	<div class=" fv-row">
+																		<select class="form-select form-select-solid" id="sub_section" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+																			<option value="">{--Select Sub Section--}</option>
+										
+																		</select>
+																		<span id="sub_section_error" style="color:red;"> *Select Sub Section</span>
+																		</div>
+																</div>
+		                                                       <div class="fv-row mb-7">
+															   <label class="required fw-bold fs-6 mb-5">Work Unit</label>
+																	<div class=" fv-row">
+																		<select class="form-select form-select-solid" id="work_unit" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+																			<option value="">{--Select Work Unit--}</option>
+										
+																		</select>
+																		<span id="work_unit_error" style="color:red;"> *Select Work Unit</span>
+																		</div>
+																</div>
+		  <div class="fv-row mb-7">
+			<label class="required fw-bold fs-6 mb-2">Quantity</label>
+			<input type="text" name="fname" id="quantity" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Quantity"  />
+			<span id="quantity_error" style="color:red;"> *Enter quantity</span>
+			</div>
+
+	       <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+																
+		   <div class="fv-row mb-7">
+			<label class="required fw-bold fs-6 mb-2">Description</label>
+			<input type="text" name="fname" id="remark" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Remarks"  />
+			<span id="remark_error" style="color:red;"> *Enter remarks</span>
+			</div>
+		</div>
+		<button class="btn btn-xs btn-sm btn-danger" id="add" >Add Item </button> | <button class="btn btn-xs btn-sm btn-success" id="refresh" > Refresh</button>
+		<span class="loader2"><img src="images/loader.gif" width="20px" height="20px"/>Adding...</span><br/><br/>
+		<div id="response2"></div><br/>
+		<div id="ReqItemsList"></div><hr/>
+		<br><div id="fields_error" class="alert alert-danger">* Please fill in all the highlighted fields.</div><br/>
+		<div>
+		<button type="submit" id="save_request" class="btn btn-primary" data-kt-users-modal-action="submit">
+		<span class="indicator-label">Save</span>							
+		</button>
+		<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
+		
+		</div>
+		</div>
+		<div id="response"></div><br/>
+	</div>
+</div>
+<script>
+//hide errors
+$("#material_error").hide();
+$("#building_error").hide();
+$("#section_error").hide();
+$("#sub_section_error").hide();
+$("#work_unit_error").hide();
+$("#quantity_error").hide();
+$("#remark_error").hide();
+$(".loader").hide();
+$(".loader2").hide();
+$("#save_request").hide();
+$("#fields_error").hide();
+
+$('#section').change(function(){
+section = $(this).val();
+$.ajax({
+type:'POST',
+data:{section:section},
+url:'process/get_sub_sections.php',
+success:function(data){
+$('#sub_section').html(data);
+} 
+});
+});
+$('#sub_section').change(function(){
+section = $(this).val();
+$.ajax({
+type:'POST',
+data:{section:section},
+url:'process/get_work_units.php',
+success:function(data){
+$('#work_unit').html(data);
+} 
+});
+});
+$(document).ready(function(){
+$('#material').select2({
+dropdownParent: $("#ModalContentAddUser")
+});
+
+$("#save_request").click(function(e){
+e.preventDefault();
+ref_no = "<?php echo $ref_no; ?>";
+error = false;
+$("#response").empty();
+
+if(error ==false){
+//hide submit button
+$("#save_request").fadeOut();
+$(".loader").fadeIn();
+var myData = 'ref_no='+ ref_no ; //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/add_site_requisition.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#response").append(response); 
+$('.loader').fadeOut();
+$('#save_request').fadeIn();
+$('#response').fadeIn();
+}
+
+});
+}
+});
+
+});
+/*$('#material').select2();
+$('#building').select2();
+$('#floor').select2();
+$('#section').select2();*/
+ //Hit Refresh to reload the data
+ $("#refresh").click(function(e){
+ e.preventDefault();
+ $(".loader").hide();
+ ajaxrequest('views/material_req_items.php', 'ReqItemsList');
+ //Show save button
+ $("#save_request").fadeIn();
+ });
+//Add to cart button
+ $("#add").click(function(e){//User clicks the add button post record and return response
+ e.preventDefault();
+ $("#ReqItemsList").empty();
+ $("#response2").empty();
+ error = false;
+ material = $("#material").val();
+ ref_no = "<?php echo $ref_no; ?>";
+ quantity = $("#quantity").val();
+ remark = $("#remark").val();
+ building = $("#building").val();
+ work_unit = $("#work_unit").val();
+	 
+if(material ===''){
+error =true;
+$("#material_error").fadeIn();
+$("#material").focus();
+}else{
+$("#material_error").fadeOut();
+} 
+if(quantity ===''){
+error =true;
+$("#quantity_error").fadeIn();
+$("#quantity").focus();
+}else{
+$("#quantity_error").fadeOut();
+}
+if(remark ===''){
+error =true;
+$("#remark_error").fadeIn();
+$("#remark").focus();
+}else{
+$("#remark_error").fadeOut();
+}
+
+if(building ===''){
+error =true;
+$("#building_error").fadeIn();
+$("#building").focus();
+}else{
+$("#building_error").fadeOut();
+}
+if(work_unit ===''){
+error =true;
+$("#work_unit_error").fadeIn();
+$("#work_unit").focus();
+}else{
+$("#work_unit_error").fadeOut();
+}
+
+ 
+	 if(error==false){//No Error send request to server
+	 $(".loader2").fadeIn();
+	  $("#fields_error").hide();
+	 //Send request to server for processing
+		 myData = 'material='+ material +  '&quantity=' + quantity + '&ref_no=' + ref_no + '&remark=' + remark + '&work_unit=' + work_unit  + '&building=' + building;
+		 jQuery.ajax({
+                type: "POST", // Post / Get method
+                url: "process/save_material_req_temp.php", //Where form data is sent on submission
+                dataType:"text", // Data type, HTML, json etc.
+                data:myData, //Form variables
+                success:function(response){
+                    $("#response2").append(response);
+                    $("#response2").fadeIn();
+					$(".loader2").hide();
+                   ajaxrequest('views/material_req_items.php', 'ReqItemsList');	
+				   $("#save_request").fadeIn();
+                }
+            });
+			
+	 }
+ 
+ });
+// sends data to a php file, via POST, and displays the received answer
+function ajaxrequest(php_file, tagID) {
+  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');  // XMLHttpRequest object
+  var  the_data = '';       // here you can set data to be send to the server (pairs index=value)
+  request.open("POST", php_file, true);			// set the request
+ // adds  a header to tell the PHP script to recognize the data as is sent via POST
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(the_data);		// calls the send() method with data as parameter
+  // Check request status
+  // If the response is received completely, will be transferred to the HTML tag with tagID
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      var resp = request.responseText;        // get the response from php
+      document.getElementById(tagID).innerHTML = resp;       // add the response into the tag with the ID from "tagID"
+      // calls the parseScript() function, with the response from PHP as argument
+      parseScript(resp);
+    }
+  }
+}
+
+// this function create an Array that contains the JS code of every <script> tag in parameter
+// then apply the eval() to execute the code in every script collected
+function parseScript(strcode) {
+  var scripts = new Array();         // Array which will store the script's code
+  // Strip out tags
+  while(strcode.indexOf("<script") > -1 || strcode.indexOf("</script") > -1) {
+    var s = strcode.indexOf("<script");
+    var s_e = strcode.indexOf(">", s);
+    var e = strcode.indexOf("</script", s);
+    var e_e = strcode.indexOf(">", e);  
+    // Add to scripts array
+    scripts.push(strcode.substring(s_e+1, e));
+    // Strip from strcode
+    strcode = strcode.substring(0, s) + strcode.substring(e_e+1);
+  }  
+  // Loop through every script collected and eval it
+  for(var i=0; i<scripts.length; i++) {
+    try {
+      eval(scripts[i]);
+    }
+    catch(ex) {
+      // do what you want here when a script fails
+    }
+  }
+}
+</script>
+												
+													

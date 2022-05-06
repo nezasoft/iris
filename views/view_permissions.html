@@ -1,0 +1,124 @@
+<?php 
+include("../connection/connect.php");
+if(!isset($_SESSION['IRIS_USER_ID'])){
+echo '<script>
+window.location.href="?home";
+</script>';
+exit();
+}
+$level_id = sanitize_string($_GET['level_id']);
+//Get this users roles
+$roles = $conn->prepare("SELECT lp.id AS lp_id, ul.id AS level_id, lp.perm_id, p.permission_name,ul.role_name FROM role_permissions AS lp LEFT JOIN permissions AS p ON p.id = lp.perm_id LEFT JOIN roles AS ul ON ul.id = lp.role_id WHERE ul.id = '".$level_id."' ORDER BY p.permission_name ASC ");
+$roles->execute();
+$role_rows = $roles->fetchAll(PDO::FETCH_ASSOC);
+$role_count = $roles->rowCount();
+if($role_count==0){
+die('<div class="alert alert-danger d-flex align-items-center p-5 mb-10" style="margin:10px;">
+				<!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+				<span class="svg-icon svg-icon-2hx svg-icon-dangerme-4">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+				<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black" />
+				<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="black" />
+				</svg>
+				</span>
+				<!--end::Svg Icon-->
+				<div class="d-flex flex-column">
+				<h4 class="mb-1 text-danger">Warning</h4>
+					<span>No permission set for this role</span>
+				</div>
+			</div>');
+}
+
+?>
+ <div class="modal-header" id="kt_modal_add_user_header">
+	<h2 class="fw-bolder">User Permissions</h2>
+	<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+	<span class="svg-icon svg-icon-1">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+		</svg>
+	</span>
+	</div>
+	</div>
+    
+		<div style="margin:20px;">
+          <table id="example2" class="table table-striped" style="font-size:12px;">
+            <thead>
+              <tr>
+                <th>Permission</th>
+				<th>Access Level</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+			<tr>
+				<td></td>
+				<td>All </td>
+				<td> <input type="checkbox" id="check_all_edit" name="check_all_edit" /></td>
+				<td></td>
+			</tr>
+			<?php foreach($role_rows as $row){ ?>
+              <tr id="tr_<?php echo $row['lp_id']; ?>">
+                <td><?php echo $row['permission_name']; ?></td>
+				<td><?php echo $row['role_name']; ?></td>
+				<td><input type="checkbox" id="user_role_edit" value="<?php echo $row['lp_id']; ?>" name="user_role_edit" /></td>
+   
+              </tr>
+         <?php } ?>
+            </tbody>
+          </table>
+
+		<button name="save_item_edit" id="save_items_edit" class="btn btn-sm btn-danger">Delete Roles(s)</button><br/>		
+		<div id="assign_loading_edit"><img width="30" height="30" src="images/loader.gif" />Saving...</div><br/>
+		<div id="response_assign_edit"></div>
+	
+		</div>
+		<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.dataTables.min.js"></script>
+<script>
+$("#check_all_edit").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+ $(document).ready(function(){$("#assign_loading_edit").hide();});
+ $("#save_items_edit").click(function(){
+ $('#response_assign_edit').empty();
+   level_id = <?php  echo $level_id; ?>;
+	user_roles = $("input[name='user_role_edit']:checked").map(function(){return $(this).val();}).get();
+	if(user_roles.length===0){
+	alert('Select Roles!');
+	
+	}else{
+	$("#assign_loading_edit").show();
+		//data values
+		var myData =  'level_id=' + level_id + '&user_roles='+user_roles; //build a post data structure
+		jQuery.ajax({
+		type: "POST", // Post / Get method
+		url: "process/delete_role_permissions.php", //Where form data is sent on submission
+		dataType:"text", // Data type, HTML, json etc.
+		data:myData, //Form variables
+		success:function(response){
+		$("#response_assign_edit").append(response);
+		//display the success message
+		$("#assign_loading_edit").hide();
+		$('#response_assign_edit').show();
+		}
+		});
+	}
+    //alert(user_roles);
+			
+	
+});
+      $(function(){
+        'use strict'
+
+        $('#example2').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+      });
+</script>

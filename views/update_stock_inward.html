@@ -1,0 +1,107 @@
+<?php
+include("../connection/connect.php");include_once("../modules/permissions.php");
+//Get all inwards
+$inwards = $conn->prepare("SELECT g.id AS item_id, g.inward_no,g.qty, g.inw_date  FROM good_inward AS g  WHERE g.site_id='".$_SESSION['IRIS_SITE_ID']."' AND  g.in_status !='C' GROUP BY g.inward_no ORDER BY g.id DESC");
+$inwards->execute();
+$inw_count = $inwards->rowCount();
+$inward_rows = $inwards->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="card-body pt-0">
+<div class="card-header border-0 pt-5">
+<h3 class="card-title align-items-start flex-column">
+<span class="card-label fw-bolder fs-3 mb-1">Inward >> Update Stock</span>
+</h3>
+</div>
+	<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+	<div id="form_section">
+		<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+				<div class="mb-7">
+			    <label class="required fw-bold fs-6 mb-5">Inward</label>
+					<div class="col-md-6 fv-row">
+						<select class="form-select form-select-solid" id="inward" data-control="select2" data-hide-search="true" data-placeholder="Select Item">
+							<option value="">{--Select Option--}</option>
+							<?php 
+							foreach($inward_rows as $row){
+							?>
+							<option value="<?php echo $row['inward_no']; ?>"><?php echo $row['inward_no']."-".$row['inw_date']; ?></option>
+							<?php
+							}
+							?>		
+						</select>
+						<span id="inward_error" style="color:red;"> *Select Inward</span>
+						</div>
+				</div>			  
+		</div>
+		<div id="preview_inward">
+		</div>
+		<div>
+		<button type="submit" id="save_request" class="btn btn-primary" data-kt-users-modal-action="submit">
+		<span class="indicator-label">Update Stock</span>							
+		</button>
+		<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
+		
+	</div>
+	</div>
+	<div id="response"></div><br/>
+</div>	
+</div>
+<script>
+$("#inward").change(function(){
+$("#preview_inward").empty();
+inward_no = $(this).val();
+var myData = 'inward_no=' + inward_no; //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/preview_inward.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#preview_inward").append(response); 
+}
+});
+});
+
+$("#inward").select2();
+$(document).ready(function(){
+//hide errors
+$("#inward_error").hide();
+$(".loader").hide();
+
+$("#save_request").click(function(e){
+e.preventDefault();
+inward = $("#inward").val();
+error = false;
+$("#response").empty();
+
+if(inward===''){
+error =true;
+$("#inward_error").fadeIn();
+$("#inward").focus();
+}else{
+$("#inward_error").fadeOut();
+}
+
+if(error ==false){
+//hide submit button
+$("#submit").fadeOut();
+$(".loader").fadeIn();
+var myData = 'inward_no=' + inward; //build a post data structure
+jQuery.ajax({
+type: "POST", // Post / Get method
+url: "process/update_stock_inward.php", //Where form data is sent on submission
+dataType:"text", // Data type, HTML, json etc.
+data:myData, //Form variables
+success:function(response){
+$("#response").append(response); 
+$('.loader').fadeOut();
+$('#submit').fadeIn();
+$('#response').fadeIn();
+}
+
+});
+}
+});
+
+});
+</script>			

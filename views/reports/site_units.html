@@ -1,0 +1,55 @@
+<?php
+//Make a connection
+include("../../connection/connect.php");
+$site_id = sanitize_string($_GET['site_id']);
+$site = $conn->prepare("SELECT * FROM building AS b  WHERE site_id='".$site_id."' ORDER BY building_name ASC");
+$site->execute();
+$site_rows = $site->fetchAll(PDO::FETCH_ASSOC);
+?>
+								<div class="row g-6 g-xl-9">
+								<?php 
+								foreach($site_rows as $row){
+								$in_status = $row['status'];								
+								if($in_status=='N'){
+								 $pro_status = '<span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">New</span>';
+								}elseif($in_status=='C'){
+								 $pro_status = '<span class="badge badge-light-success fw-bolder me-auto px-4 py-3">Completed</span>';								
+								}elseif($in_status=='S'){
+								 $pro_status = '<span class="badge badge-light-danger fw-bolder me-auto px-4 py-3">Sold</span>';
+								}
+								$progress = ($row['current_cost'] / $row['estimated_cost']) * 100;
+								?>
+									<div class="col-md-6 col-xl-4">
+										<a href="#" class="card border-hover-primary" onclick="viewUnit(<?php echo $row['id']; ?>)">
+											<div class="card-header border-0 pt-9">
+												<div class="card-title m-0">
+													<div class="symbol symbol-50px w-50px bg-light">
+														<img src="assets/media/svg/brand-logos/plurk.svg" alt="image" class="p-3" />
+													</div>
+												</div>
+												<div class="card-toolbar">
+													<?php echo $pro_status; ?>
+												</div>
+											</div>
+											<div class="card-body p-9">
+												<div class="fs-3 fw-bolder text-dark"><?php echo titleCase($row['building_name']); ?></div>
+												<p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">&nbsp;</p>
+												<div class="d-flex flex-wrap mb-5">
+													<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+														<div class="fs-6 text-gray-800 fw-bolder">KES <?php echo number_format($row['estimated_cost'],2,".",","); ?></div>
+														<div class="fw-bold text-gray-400">Budget</div>
+													</div>
+													<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+														<div class="fs-6 text-gray-800 fw-bolder">KES <?php echo number_format($row['current_cost'],2,".",","); ?></div>
+														<div class="fw-bold text-gray-400">Cost</div>
+													</div>
+												</div>
+												<div class="h-4px w-100 bg-light mb-5" data-bs-toggle="tooltip" title="This project <?php echo number_format($progress,2,".",","); ?>% completed">
+													<div class="bg-primary rounded h-4px" role="progressbar" style="width: <?php echo number_format($progress,2,".",","); ?>%" aria-valuenow="<?php echo number_format($progress,2,".",","); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+										</a>
+									</div>
+									<?php } ?>
+									
+								</div>

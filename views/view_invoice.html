@@ -1,0 +1,125 @@
+<?php
+require_once("../connection/connect.php");
+$order_no = sanitize_string($_GET['order_no']);
+//get order details
+$order = $conn->prepare("SELECT req.id AS item_id, req.order_no, req.qty, req.req_status, req.req_desc, req.req_date, req.user_id, us.fname, b.building_name  FROM materials_request_form AS req LEFT JOIN materials AS mt  ON mt.id = req.mat_id LEFT JOIN building_floors AS fl ON fl.id = req.floor_id LEFT JOIN building AS b ON b.id = req.building_id LEFT JOIN building_sections AS bs ON bs.id = req.section_id LEFT JOIN users AS us ON us.id = req.user_id WHERE req.order_no='".$order_no."' LIMIT 1");
+$order->execute();
+$order_row = $order->fetch(PDO::FETCH_ASSOC);
+//Company details
+$company = $conn->prepare("SELECT * FROM company");
+$company->execute();
+$company_row = $company->fetch(PDO::FETCH_ASSOC);
+$t_type = $order_row['req_status'];
+			   
+if($t_type=='A'){
+$status = '<font color="#2ECC71">Approved</font>'; 
+}elseif($t_type=='P'){
+$status = '<font color="#E67E22">Pending</font>'; 
+}elseif($t_type=='R'){
+$status = '<font color="#E74C3C">Rejected</font>';
+}elseif($t_type=='C'){
+$status = '<font color="#3498DB">Compeleted</font>';  				   
+}
+
+?>
+
+<div class="modal-header" id="kt_modal_add_user_header">
+	<h2 class="fw-bolder">Invoice</h2>
+	<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+	<span class="svg-icon svg-icon-1">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+		</svg>
+	</span>
+	</div>
+	</div>
+	<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+	  <!-- Main Content -->
+	  <div id="print_section" style="background:#fff;">
+  <main style="font-size:10px;background:#fff;">
+  <div class="row">
+    <div align="left"><strong>Date:</strong> <?php echo $order_row['req_date']; ?></div>
+    <div align="right"> <strong>Order No:</strong> <?php echo $order_row['order_no']; ?></div>
+	<div align="right"> <strong>Status:</strong> <?php echo $status; ?></div>
+  </div>
+  <hr>
+
+    <div class="col-sm-6 order-sm-0"> <strong><?php echo $company_row['company_name']; ?></strong>
+      <address>
+      <i class="fas fa-map-pin" style="color:#E67E22;font-size:10px;"></i>   <?php echo $company_row['phy_add']; ?><br />
+      <i class="fas fa-envelope" style="color:#E67E22;font-size:10px"></i> P.O Box <?php echo $company_row['postal_add']."-".$company_row['postal_code']; ?><br />
+      <i class="fas fa-phone" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['mobile_no']; ?><br />
+      <i class="fas fa-at" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['email']; ?><br />
+	  <i class="fas fa-globe" style="color:#E67E22;font-size:10px"></i> <?php echo $company_row['website']; ?>
+      </address>
+      </div>
+	
+    
+    <table width="100%" border="0" style="margin-bottom:10px;">
+      <tr>
+      <td width="35%">&nbsp;</td>
+        <td width="30%"><div align="center" style=" padding:5px; font-size:12px; border: 1px solid #E67E22;"><strong>Material Request Form</strong></div></td>
+        <td width="35%">&nbsp;</td>
+      </tr>
+    </table>
+    <div class="card" style="background:#fff;">
+    <div class="card-body p-0" style="background:#fff;">
+	 <?php 
+	 //get order items
+	 $order_items = $conn->prepare("SELECT req.id AS req_id, req.order_no, req.qty, req.req_status, req.req_desc, req.req_date, req.user_id, us.fname, b.building_name, mat.mat_name, bs.section_name  FROM materials_request_form AS req LEFT JOIN materials AS mt  ON mt.id = req.mat_id LEFT JOIN building_floors AS fl ON fl.id = req.floor_id LEFT JOIN building AS b ON b.id = req.building_id LEFT JOIN building_sections AS bs ON bs.id = req.section_id LEFT JOIN users AS us ON us.id = req.user_id LEFT JOIN materials AS mat ON mat.id = req.mat_id WHERE req.order_no='".$order_no."' ORDER BY req.id ASC");
+	 $order_items->execute();
+	 $item_rows = $order_items->fetchAll(PDO::FETCH_ASSOC);
+	 ?>
+      <div class="table-responsive" style="border:1px solid #000;padding:10px; background:#fff;">
+        <table class="table mb-0 table-striped" style="background:#fff;" >
+		<thead >
+          <tr>
+		   <td><strong>#</strong></td>
+            <td><strong>Item/Material</strong></td>
+			<td><strong>Description</strong></td>
+            <td><strong>Qty</strong></td>
+			<td><strong>Building</strong></td>
+			<td><strong>Section</strong></td>
+          </tr>
+        </thead>
+          <tbody>
+		  <?php 
+		  $count =0;
+		  foreach($item_rows as $row){
+		  $count++;
+		  ?>
+            <tr>
+              <td><?php echo $count; ?></td>
+              <td><?php echo titleCase($row['mat_name']); ?></td>
+			  <td><?php echo titleCase($row['req_desc']); ?></td>
+              <td><?php echo $row['qty']; ?></td>
+			  <td><?php echo titleCase($row['building_name']); ?></td>
+			  <td><?php echo titleCase($row['section_name']); ?></td>
+            </tr>
+		<?php } ?>	
+          </tbody>
+		  <tfoot class="card-footer">
+			<tr>
+              <td colspan="5" class="text-end"><strong>Sub Total:</strong></td>
+              <td class="text-end">$2150.00</td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-end"><strong>Tax:</strong></td>
+              <td class="text-end">$215.00</td>
+            </tr>
+			<tr>
+              <td colspan="5" class="text-end border-bottom-0"><strong>Total:</strong></td>
+              <td class="text-end border-bottom-0">$2365.00</td>
+            </tr>
+		  </tfoot>
+        </table>
+      </div>
+	  </div>
+    </div>
+  </main>
+    </div>
+	<br/><br/>
+<button  onclick="jQuery('#print_section').print()" class="btn btn-primary btn-sm btn-small"  id="print">Print <i class="fas fa-print"></i></button>	
+	
+	</div>
+</div>	

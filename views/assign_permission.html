@@ -1,0 +1,113 @@
+<?php
+require_once("../connection/connect.php");
+if(!isset($_SESSION['IRIS_USER_ID']) || $_SESSION['IRIS_USER_ID']=='' ){
+echo '<script>window.location.href="?home";</script>';
+exit();
+}
+$level_id = sanitize_string($_GET['level_id']);
+//get this users role name
+$role = $conn->prepare("SELECT * FROM roles WHERE id='".$level_id."' LIMIT 1 ");
+$role->execute();
+$role_row = $role->fetch(PDO::FETCH_ASSOC);
+$role_name = $role_row['role_name'];
+//Get all perimissions
+$perm = $conn->prepare("SELECT * FROM permissions ORDER BY permission_name ASC");
+$perm->execute();
+$perm_rows = $perm->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+<div class="modal-header" id="kt_modal_add_user_header">
+	<h2 class="fw-bolder">Assign Permission</h2>
+	<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+	<span class="svg-icon svg-icon-1">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+		</svg>
+	</span>
+	</div>
+	</div>
+	 <div style="margin:20px;">
+
+                    <h5 class="mg-b-5"><?php echo titleCase($role_name); ?></h5>
+					
+					<hr/>
+	
+          <table id="example2" class="table table-striped" style="font-size:12px;">
+            <thead>
+              <tr>
+                <th>Permission</th>
+                <th>All <input type="checkbox" id="check_all" name="check_all" /> </th>
+              </tr>
+            </thead>
+            <tbody>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<?php foreach($perm_rows as $row){ ?>
+              <tr>
+                <td><?php echo $row['permission_name']; ?></td>
+				<td><input type="checkbox" id="user_role" value="<?php echo $row['id']; ?>" name="user_role" /></td>
+   
+              </tr>
+         <?php } ?>
+            </tbody>
+          </table>
+
+		<button name="save_item" id="save_items" class="btn btn-sm btn-primary">Save</button><br/>
+		
+		<div id="assign_loading"><img width="30" height="30" src="images/loader.gif" />Saving...</div><br/>
+		<div id="response_assign"></div>
+
+</div>
+  
+ <script>
+ $("#check_all").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+ $(document).ready(function(){$("#assign_loading").hide();});
+ $("#save_items").click(function(){
+ $('#response_assign').empty();
+   level_id = <?php  echo $level_id; ?>;
+	user_roles = $("input[name='user_role']:checked").map(function(){return $(this).val();}).get();
+	if(user_roles.length===0){
+	alert('Select Roles!');
+	
+	}else{
+	$("#assign_loading").show();
+		//data values
+		var myData =  'level_id=' + level_id + '&user_roles='+user_roles; //build a post data structure
+		jQuery.ajax({
+		type: "POST", // Post / Get method
+		url: "process/save_role_permission.php", //Where form data is sent on submission
+		dataType:"text", // Data type, HTML, json etc.
+		data:myData, //Form variables
+		success:function(response){
+		$("#response_assign").append(response);
+		//display the success message
+		$("#assign_loading").hide();
+		$('#response_assign').show();
+		}
+		});
+	}
+    //alert(user_roles);
+			
+	
+});
+ 
+      $(function(){
+        'use strict'
+
+        $('#example2').DataTable({
+		"lengthMenu": [[10, 25, 50, -1], [50, 100, 200, "All"]],
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+      });
+    </script>		  			  				  
+			  
