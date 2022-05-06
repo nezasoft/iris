@@ -1,8 +1,10 @@
 <?php
-ini_set("display_errors",true);
 //Make a connection
 include("../connection/connect.php");
-
+if(!isset($_SESSION['IRIS_USER_ID']) || $_SESSION['IRIS_USER_ID']=='' ){
+echo '<script>window.location.href="?home";</script>';
+exit();
+}
 //check if its an ajax request
  if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
@@ -22,7 +24,7 @@ include("../connection/connect.php");
 	  }
       	 $log_desc ="Updated details for the store <strong>".$input['Name']."</strong>";
 		  //Log Activity
-		  $log = $conn->prepare("INSERT INTO system_logs(system_date,time_stamp,user_id,log_desc,doc_type,doc_no,company_id)VALUES(curdate(),curtime(),'".$_SESSION['IRIS_USER_ID']."','".$log_desc."','OTHER','','".$company_id."')");
+		  $log = $conn->prepare("INSERT INTO system_logs(system_date,time_stamp,user_id,log_desc,doc_type,doc_no)VALUES(curdate(),curtime(),'".$_SESSION['IRIS_USER_ID']."','".$log_desc."','OTHER','')");
 		  $log->execute(); 
 	   
 		$update->execute();
@@ -34,7 +36,7 @@ include("../connection/connect.php");
 		$update->execute();
 		$log_desc ="Removed role <strong>".$input['RoleName']."</strong>";
 		//Log Activity
-		$log = $conn->prepare("INSERT INTO system_logs(system_date,time_stamp,user_id,log_desc,doc_type,doc_no,company_id)VALUES(curdate(),curtime(),'".$_SESSION['IRIS_USER_ID']."','".$log_desc."','OTHER','','".$company_id."')");
+		$log = $conn->prepare("INSERT INTO system_logs(system_date,time_stamp,user_id,log_desc,doc_type,doc_no)VALUES(curdate(),curtime(),'".$_SESSION['IRIS_USER_ID']."','".$log_desc."','OTHER','')");
 		$log->execute(); 
 		
 	}	

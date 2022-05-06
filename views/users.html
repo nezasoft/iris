@@ -1,4 +1,7 @@
-
+<?php
+require_once("../connection/connect.php");
+require_once("../modules/permissions.php");
+?>
 						<!--begin::Toolbar-->
 						<div class="toolbar" id="kt_toolbar">
 							<!--begin::Container-->
@@ -17,14 +20,12 @@
 								</div>
 								<!--end::Page title-->
 								<!--begin::Actions-->
+								<?php if($item52==1){ ?>
 								<div class="d-flex align-items-center gap-2 gap-lg-3">
-									
-									<!--begin::Secondary button-->
-									<!--end::Secondary button-->
-									<!--begin::Primary button-->
 									<a href="#" class="btn btn-sm btn-primary" onclick="addNewClient()" data-bs-toggle="modal" data-bs-target="#ModalContentAddUser">Add New</a>
 									<!--end::Primary button-->
 								</div>
+								<?php } ?>
 								<!--end::Actions-->
 							</div>
 							<!--end::Container-->

@@ -1,8 +1,10 @@
 <?php
-ini_set("display_errors",true);
 //Make a connection
 include("../connection/connect.php");
-
+if(!isset($_SESSION['IRIS_USER_ID']) || $_SESSION['IRIS_USER_ID']=='' ){
+echo '<script>window.location.href="?home";</script>';
+exit();
+}
 //check if its an ajax request
  if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
@@ -16,8 +18,9 @@ include("../connection/connect.php");
   $physical = sanitize_string($input['Physical']);
   $date = sanitize_string($input['DateCreated']);
   $status = sanitize_string($input['Status']);
+  $cost = sanitize_string($input['Cost']);
    	if($input['action']==='edit'){	 
-	  $update = $conn->prepare("UPDATE  sites SET site_name='".$name."',site_email='".$email."',site_phone='".$phone."',site_address='".$physical."',site_postal='".$postal."',date_created='".$date."',site_status='".$status."' WHERE id='".$item_code."'");
+	  $update = $conn->prepare("UPDATE  sites SET site_name='".$name."',site_email='".$email."',site_phone='".$phone."',site_address='".$physical."',site_postal='".$postal."',date_created='".$date."',site_status='".$status."',estimated_cost='".$cost."' WHERE id='".$item_code."'");
 	  $update->execute();
 	  $row_count = $update->rowCount();
 	  if($row_count >=1){

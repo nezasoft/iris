@@ -15,7 +15,7 @@ require_once("../connection/connect.php");
 															</div>
 														</div>
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-															
+															<div id="form_section">
 																<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 																
 																	<div class="fv-row mb-7">
@@ -43,27 +43,38 @@ require_once("../connection/connect.php");
 																		<input type="text" id="physical" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Physical Address"  />
 																		<span id="physical_error" style="color:red;"> *Enter Physical Address</span>
 																	</div>
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Estimated Cost</label>
+																		<input type="text" id="est_cost" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Estimated Cost"  />
+																		<span id="est_cost_error" style="color:red;"> *Enter Estimated Cost</span>
+																	</div>
 																</div>
 																<div>
 																	<button type="submit" id="save_request" class="btn btn-primary" data-kt-users-modal-action="submit">
 																		<span class="indicator-label">Save</span>							
 																	</button>
 																	<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
-																	<div id="response"></div><br/>
+																	
 																</div>
-														
+														  </div>
+														  <div id="response"></div><br/>
 														</div>
 													</div>
 <script>
-$(document).ready(function(){
 //hide errors
 $("#site_name_error").hide();
 $("#phone_no_error").hide();
+$("#est_cost_error").hide();
 $("#postal_error").hide();
 $("#physical_error").hide();
 $("#email_error").hide();
 $(".loader").hide();
-
+$(document).ready(function(){
+ $("#est_cost ").focusout(function() {
+var a = $("#est_cost ").val();
+a = a ? parseFloat(a.replace(/,/g, "")) : 0;
+$(this).val(a);
+ });
 $("#save_request").click(function(e){
 e.preventDefault();
 site_name = $("#site_name").val();
@@ -71,6 +82,7 @@ phone_no = $("#phone_no").val();
 postal= $("#postal").val();
 email = $("#email").val();
 physical = $("#physical").val();
+est_cost = $("#est_cost").val();
 error = false;
 $("#response").empty();
 
@@ -102,13 +114,32 @@ $("#postal").focus();
 }else{
 $("#postal_error").fadeOut();
 }
+if(est_cost ===''){
+error =true;
+$("#est_cost_error").fadeIn();
+$("#est_cost").focus();
+}else{
+$("#est_cost_error").fadeOut();
+}
+if(est_cost===''){
+error = true;
+alert("Enter Amount");
+$("#est_cost").focus();
+$("#est_cost").css("border-color","red");
+}
+if(est_cost===0){
+ error = true;
+ alert("Enter Amount");
+$("#est_cost").focus();
+$("#est_cost").css("border-color","red");
+ }
 
 
 if(error ==false){
 //hide submit button
 $("#submit").fadeOut();
 $(".loader").fadeIn();
-var myData = 'site_name='+ site_name + '&phone_no=' + phone_no + '&email=' + email + '&postal=' + postal + '&physical=' + physical; //build a post data structure
+var myData = 'site_name='+ site_name + '&phone_no=' + phone_no + '&email=' + email + '&postal=' + postal + '&physical=' + physical + '&est_cost=' + est_cost; //build a post data structure
 jQuery.ajax({
 type: "POST", // Post / Get method
 url: "process/add_site.php", //Where form data is sent on submission

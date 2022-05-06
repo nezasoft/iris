@@ -1,7 +1,10 @@
 <?php
 //Make a connection
 include("../connection/connect.php");
-
+if(!isset($_SESSION['IRIS_USER_ID']) || $_SESSION['IRIS_USER_ID']=='' ){
+echo '<script>window.location.href="?home";</script>';
+exit();
+}
 //check if its an ajax request
 	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 		$search = str_replace("'","",sanitize_string($_POST['keyword']));
@@ -16,7 +19,7 @@ include("../connection/connect.php");
 		if($num_rows>=1){
 		foreach ($rows as $row){
 
-			echo '<div class="show_suggest" align="left">'.str_ireplace($search,$bold,titleCase($row['mat_name'])).'--' <span class="badge badge-danger">Min Stock: '.$row['min_stock_level'].' </span> <span class="badge badge-success">Max Stock: '.$row['max_stock_level'].' </span>  <span class="badge badge-warning">Stock Level:'.$row['quantity'].'</span></div></div>';	
+			echo '<div class="show_suggest" align="left"> Item : '.str_ireplace($search,$bold,titleCase($row['mat_name'])).' <span class="badge badge-danger">Min Stock: '.$row['min_stock_level'].' </span> <span class="badge badge-success">Max Stock: '.$row['max_stock_level'].' </span>  <span class="badge badge-warning">Stock Level:'.$row['quantity'].'</span></div></div>';	
 			}
 	        if($num_rows>=30){
 				 echo '<div class="show_suggest" align="left"><span class="customer_name"><font color="red">* Search limited to 30 records. For a more refined search choose advanced search on the menu</font></span></div>';

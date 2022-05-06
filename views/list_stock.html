@@ -8,20 +8,21 @@ $store_id = sanitize_string($_GET['store_id']);
 		<td ></td>
           <td style="width:5%;"></td>
 		  <td style="width:80%;"><div align="right"><input type="text" name="search"  style="margin:3px; width:100%;" autocomplete="off" class="form-control form-control-solid ps-10 "  id="suggest_item" placeholder="Search by  Item" /></div></td>
-		  <td style="width:5%;"><div align="right"><strong>Filter:</strong></div></td>
-          <td style="width:10%;"><div align="left">
-            <select name="select" class="form-control" id="filter">
-              <option selected value="50">50</option>
-              <option value="100">100</option>
-              <option value="200">200</option>
-              <option value="500">500</option>
-            </select>
-          </div></td>
+		  <td style="width:5%;"><div align="right"><strong></strong></div></td>
+          <td style="width:10%;">
+		  <div class="input-group input-group-sm mb-5">
+								<select name="filter"  class="form-control" style="margin:3px;" aria-describedby="inputGroup-sizing-sm" id="filter">
+									<option value="50">Default</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+									<option value="200">200</option>
+							   </select>
+							   </div>
+		  </td>
         </tr>
       </table>
 </div>
-<div id="suggest_list_div"><div id="scroll_content_small"><div id="suggest_list"></div></div></div><br/>
-		
+<div id="suggest_list_div" style="padding-left:10px;padding-right:10%;"><div id="scroll_content_small"><div id="suggest_list"></div></div></div><br/>	
  <script type="text/javascript">
     $(document).ready(function () {
         $("#suggest_list").hide();
@@ -67,7 +68,7 @@ $store_id = sanitize_string($_GET['store_id']);
  
  			<div id="loader"><span class="loader-icon-2"><img width="30" height="30" src="images/loader.gif" />Loading content, please wait...</div>
 			<div id="scroll_content">
-			<div id="content_data"></div>
+			<div id="content_data" style="min-height:400px;padding:10px;"></div>
              </div>
 			<script>
 			$(document).ready(function(){	

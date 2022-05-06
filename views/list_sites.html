@@ -3,20 +3,25 @@
  include_once("../modules/permissions.php");
  ?>
  
- 					<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
+ 				<div class="post d-flex flex-column-fluid" id="kt_post">
 							<div id="kt_content_container" class="container-xxl">
-								<!--begin::Card-->
 								<div class="card">
+									<div class="card-header border-0 pt-5">
+										<h3 class="card-title align-items-start flex-column">
+											<span class="card-label fw-bolder fs-3 mb-1">Sites</span>
+											<span class="text-muted mt-1 fw-bold fs-7">Site Report</span>
+										</h3>
+									</div>
 							<table width="100%" border="0">
 							<tr>        			
-							 <td width="90%">
+							 <td width="80%">
 							 
 							 </td>
-								<td width="5%">
+							   <td width="10%"><div align="right"><strong></strong></div></td>
+								<td width="10%">
 								<div align="right">
-								<select name="filter"  class="my-form-control" style="width:80px;margin:3px;" id="filter">
+								<div class="input-group input-group-sm mb-5">
+								<select name="filter"  class="form-control" style="margin:3px;" aria-describedby="inputGroup-sizing-sm" id="filter">
 									<option value="50">Default</option>
 									<option value="50">50</option>
 									<option value="100">100</option>
@@ -27,8 +32,8 @@
 							</tr>
 						</table>
 						<div id="loader"><span class="loader-icon-2"><img width="20" height="20" src="images/loader.gif" />Loading content, please wait...</div>
-			<div id="scroll_content">
-			<div id="content_data"></div>
+			<div id="scroll_content" style="min-height:400px;">
+			<div id="content_data" style="padding:10px;"></div>
              </div>
 			<script>
 			$(document).ready(function(){	

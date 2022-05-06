@@ -1,3 +1,6 @@
+	<?php
+	include_once("modules/permissions.php");
+	?>
 	<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
@@ -5,10 +8,11 @@
 				<!--begin::Aside-->
 				<div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
 					<!--begin::Brand-->
-					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
+					<div class="aside-logo flex-column-auto" id="kt_aside_logo" style="background:#fff;">
 						<!--begin::Logo-->
 						<a href="index.html">
-							<img alt="Logo" src="assets/media/logos/logo-1-dark.svg" class="h-25px logo" />
+							<!--<img alt="Logo" src="images/logo.png" class="h-25px logo" />-->
+							<img alt="Logo" src="images/logo.png" class="h-80px logo" />
 						</a>
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
@@ -30,14 +34,32 @@
 						<!--begin::Aside Menu-->
 						<div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
 							<!--begin::Menu-->
-							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-							
+							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">							
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">
 										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Home</span>
 									</div>
-								</div>
-					
+								</div>									
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+								<?php if($item1==1){ ?>
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+										<span class="svg-icon svg-icon-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+													<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+													<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+													<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title" onclick="viewDashboard()">Dashboard </span>						
+									</span>	
+									<?php } ?>									
+								</div>	
+								<?php if($item2==1){ ?>
 							      <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -50,20 +72,69 @@
 											</span>
 											<!--end::Svg Icon-->
 										</span>
+										
 										<span class="menu-title">Requisitions </span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item3==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
-											<a class="menu-link" href="#" id="requisitions_reports_link">
+											<a class="menu-link" href="#" id="site_requisitions_link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
+												<span class="menu-title" >Site Requisitions</span>
 											</a>
 										</div>									
-									</div>								
+									</div>
+									<?php } ?>
+									<?php if($item4==1){ ?>
+										<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="material_requisitions_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Material Requisitions</span>
+											</a>
+										</div>									
+									</div>
+								<?php } ?>
 								</div>
+								<?php } ?>
+								<?php if($item14==1){ ?>
+								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+											<span class="svg-icon svg-icon-2">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="black" />
+																		<path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="black" />
+																		<path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="black" />
+																		<path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="black" />
+																	</svg>
+																</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">LPOs </span>
+										<span class="menu-arrow"></span>
+									</span>
+									<?php if($item15==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="manage_lpos_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Manage</span>
+											</a>
+										</div>									
+									</div>
+                                    <?php } ?>									
+								</div>
+								<?php } ?>
+								<?php if($item23==1){ ?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -80,17 +151,22 @@
 										<span class="menu-title">Inwards </span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item24==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
-											<a class="menu-link" href="#" id="inwards_reports_link">
+											<a class="menu-link" href="#" id="incoming_inwards_reports_link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
+												<span class="menu-title">Manage</span>
 											</a>
 										</div>									
-									</div>								
+									</div>	
+									<?php } ?>
+															
 								</div>
+								<?php } ?>
+								<?php if($item29==1){ ?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -108,17 +184,21 @@
 										<span class="menu-title">Deliveries </span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item30==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="deliveries_reports_link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
+												<span class="menu-title">Manage</span>
 											</a>
 										</div>									
-									</div>								
+									</div>	
+									<?php } ?>									
 								</div>
+								<?php } ?>
+								<?php if($item34==1){ ?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -135,17 +215,21 @@
 										<span class="menu-title">Stores </span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item35==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="stores_reports_link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
+												<span class="menu-title">Manage</span>
 											</a>
 										</div>									
-									</div>								
+									</div>	
+                                 <?php } ?>									
 								</div>
+								<?php } ?>
+								<?php if($item39==1){ ?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -163,17 +247,91 @@
 										<span class="menu-title">Suppliers </span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item40==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="suppliers_reports_link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
+												<span class="menu-title">Manage</span>
 											</a>
+										</div>									
+									</div>	
+									<?php } ?>									
+								</div>
+								<?php } ?>
+								<?php if($item9==1){ ?>
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+											<span class="svg-icon svg-icon-2">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<path d="M13 5.91517C15.8 6.41517 18 8.81519 18 11.8152C18 12.5152 17.9 13.2152 17.6 13.9152L20.1 15.3152C20.6 15.6152 21.4 15.4152 21.6 14.8152C21.9 13.9152 22.1 12.9152 22.1 11.8152C22.1 7.01519 18.8 3.11521 14.3 2.01521C13.7 1.91521 13.1 2.31521 13.1 3.01521V5.91517H13Z" fill="black" />
+																		<path opacity="0.3" d="M19.1 17.0152C19.7 17.3152 19.8 18.1152 19.3 18.5152C17.5 20.5152 14.9 21.7152 12 21.7152C9.1 21.7152 6.50001 20.5152 4.70001 18.5152C4.30001 18.0152 4.39999 17.3152 4.89999 17.0152L7.39999 15.6152C8.49999 16.9152 10.2 17.8152 12 17.8152C13.8 17.8152 15.5 17.0152 16.6 15.6152L19.1 17.0152ZM6.39999 13.9151C6.19999 13.2151 6 12.5152 6 11.8152C6 8.81517 8.2 6.41515 11 5.91515V3.01519C11 2.41519 10.4 1.91519 9.79999 2.01519C5.29999 3.01519 2 7.01517 2 11.8152C2 12.8152 2.2 13.8152 2.5 14.8152C2.7 15.4152 3.4 15.7152 4 15.3152L6.39999 13.9151Z" fill="black" />
+											</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Reports </span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+										<?php if($item45==1){ ?>
+											<a class="menu-link" href="#" id="report_site_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Sites</span>
+											</a>
+											<?php } ?>
+											<?php if($item46==1){ ?>
+											<a class="menu-link" href="#" id="report_lpos_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">LPOs</span>
+											</a>
+											<?php } ?>
+											<?php if($item47==1){ ?>
+											<a class="menu-link" href="#" id="report_requisitions_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Requisitions</span>
+											</a>
+											<?php } ?>
+											<?php if($item48==1){ ?>
+											<a class="menu-link" href="#" id="report_deliveries_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Deliveries</span>
+											</a>
+											<?php }?>
+											<?php if($item49==1){ ?>
+											<a class="menu-link" href="#" id="report_inwards_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Inwards</span>
+											</a>
+											<?php } ?>
+											<?php if($item50==1){ ?>
+											<a class="menu-link" href="#" id="report_stock_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Stock</span>
+											</a>
+											<?php } ?>
 										</div>									
 									</div>								
 								</div>
+								<?php } ?>
+								<?php if($item104==1){ ?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -189,6 +347,7 @@
 										<span class="menu-title">Settings</span>
 										<span class="menu-arrow"></span>
 									</span>
+									<?php if($item51==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="settings_users_link">
@@ -200,6 +359,8 @@
 										</div>
 									
 									</div>
+									<?php } ?>
+									<?php if($item55==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="settings_roles_link">
@@ -211,6 +372,8 @@
 										</div>
 									
 									</div>
+									<?php } ?>
+									<?php if($item59==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="settings_sites_link">
@@ -222,6 +385,8 @@
 										</div>
 									
 									</div>
+									<?php } ?>
+									<?php if($item64==1){ ?>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
 											<a class="menu-link" href="#" id="settings_stores_link">
@@ -231,8 +396,118 @@
 												<span class="menu-title">Stores</span>
 											</a>
 										</div>									
-									</div>								
+									</div>
+									<?php } ?>
+									<?php if($item68=1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_materials_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Materials</span>
+											</a>
+										</div>									
+									</div>
+									<?php } ?>
+									<?php if($item72==1){ ?>
+										<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_units_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Units</span>
+											</a>
+										</div>									
+									</div>
+									<?php } ?>
+									<?php if($item76==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_sections_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Sections</span>
+											</a>
+										</div>									
+									</div>	
+									<?php }  ?>
+									<?php if($item80==1){ ?>
+										<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_sub_sections_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Sub Sections</span>
+											</a>
+										</div>									
+									</div>	
+									<?php } ?>
+									<?php if($item84==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_work_units_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Work Units</span>
+											</a>
+										</div>									
+									</div>
+									<?php } ?>
+									<?php if($item88==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_boqs_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">BOQs</span>
+											</a>
+										</div>									
+									</div>
+									<?php } ?>
+									<?php if($item92==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_size_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Sizes</span>
+											</a>
+										</div>									
+									</div>	
+									<?php }  ?>
+									<?php if($item96==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_package_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Package</span>
+											</a>
+										</div>									
+									</div>	
+									<?php } ?>
+									<?php if($item100==1){ ?>
+									<div class="menu-sub menu-sub-accordion">
+										<div class="menu-item">
+											<a class="menu-link" href="#" id="settings_mail_link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Mail</span>
+											</a>
+										</div>									
+									</div>	
+									<?php } ?>
 								</div>
+								<?php } ?>
 						
 							</div>
 							<!--end::Menu-->
@@ -441,7 +716,7 @@
 						
 											<!--begin::Menu item-->
 											<div class="menu-item px-5 my-1">
-												<a href="#" class="menu-link px-5">Account Settings</a>
+												<a href="#" class="menu-link px-5" data-bs-toggle="modal" data-bs-target="#change_password" id="change_pass_link">Change Password</a>
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
@@ -496,7 +771,7 @@
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted fw-bold me-1">Copyright &copy; <?php echo date('Y'); ?></span>
-								<a href="https://www.nezasoft.net/" target="_blank" class="text-gray-800 text-hover-primary">Iris Real Estate</a>
+								<a href="https://www.nezasoft.net/" target="_blank" class="text-gray-800 text-hover-primary"> Willstone Stock Management System</a>
 							</div>
 							<!--end::Copyright-->
 							<!--begin::Menu-->
@@ -520,3 +795,147 @@
 			<!--end::Page-->
 		</div>
 		<!--end::Root-->
+		
+		<script>
+		function changePassword(){
+		
+		}
+		
+		</script>
+
+<div class="modal fade" tabindex="-1" id="change_password">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Password Request</h5>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">X</span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+			<div id="form_section">
+               <div class="fv-row mb-10">
+								<div class="d-flex flex-stack mb-2">
+									<label class="form-label fw-bolder text-dark fs-6 mb-0">Current Password</label>
+								</div>
+								<input class="form-control form-control-lg form-control-solid" id="current_password" type="password" name="password" autocomplete="off" /><br/>
+								<span id="current_password_error" style="color:red;"> *Enter your current password</span>
+				</div>
+				 <div class="fv-row mb-10">
+								<div class="d-flex flex-stack mb-2">
+									<label class="form-label fw-bolder text-dark fs-6 mb-0">New Password</label>
+								</div>
+								<input class="form-control form-control-lg form-control-solid" id="new_password" type="password" name="password" autocomplete="off" /><br/>
+								<span id="new_password_error" style="color:red;"> *Enter your new password</span>
+				</div>
+				 <div class="fv-row mb-10">
+								<div class="d-flex flex-stack mb-2">
+									<label class="form-label fw-bolder text-dark fs-6 mb-0">Confirm Password</label>
+								</div>
+								<input class="form-control form-control-lg form-control-solid" id="confirm_password" type="password" name="password" autocomplete="off" /><br/>
+								<span id="confirm_password_error" style="color:red;"> *Confirm new password</span>
+								<span id="match_password_error" style="color:red;"> *Passwords do not match</span>
+				</div>
+				<div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="submit" class="btn btn-primary">Update Password</button>
+				<span id="loader"><img src="images/loader.gif" width="30px" height="30px"/>Saving...</span>	
+            </div>
+            </div>
+			<div id="response"></div><br/>
+			</div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+
+$("#current_password_error").hide();
+$("#new_password_error").hide();
+$("#match_password_error").hide();
+$("#confirm_password_error").hide();
+$("#loader").hide();
+$("#submit").click(function(){
+$("#response").empty();
+error = false;
+current_password = $("#current_password").val();
+new_password = $("#new_password").val();
+confirm_password = $("#confirm_password").val();
+
+if(current_password===''){
+error = true;
+$("#current_password_error").fadeIn();
+$("#current_password").focus();
+}else{
+$("#current_password_error").fadeOut();
+}
+
+if(new_password===''){
+error = true;
+$("#new_password_error").fadeIn();
+$("#new_password").focus();
+}else{
+$("#new_password_error").fadeOut();
+}
+
+if(confirm_password===''){
+error = true;
+$("#confirm_password_error").fadeIn();
+$("#confirm_password").focus();
+}else{
+$("#confirm_password_error").fadeOut();
+ 
+	if(new_password!==confirm_password){
+	error = true;
+	$("#match_password_error").fadeIn();
+	$("#confirm_password").focus();
+	}else{
+	$("#match_password_error").fadeOut();
+	}
+
+}
+
+if(error==false){
+
+//hide submit button
+		$("#submit").fadeOut();
+		$("#loader").fadeIn();
+		
+		/* Ajax Request here*/
+					//data values
+			var myData = 'current_password='+ current_password + '&confirm_password='+ confirm_password + '&new_password='+ new_password ; //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "process/change_password.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+			$("#response").append(response); 
+			$('#loader').fadeOut();
+			$('#submit').fadeIn();
+			$('#response').fadeIn();
+			}
+
+			});
+
+}
+
+});
+
+function viewDashboard(){
+$("#page_content").empty();
+$("#wait").show();
+document.title="Home- Dashboard";
+$("#page_content").load("views/dashboard.html",function(responseTxt, statusTxt, jqXHR){
+if(statusTxt == "success"){$("#wait").hide();}
+if(statusTxt == "error"){alert("Error: " + jqXHR.status + " " + jqXHR.statusText);}});
+}
+</script>
+		
+		

@@ -15,7 +15,7 @@ require_once("../connection/connect.php");
 															</div>
 														</div>
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-															
+															<div id="form_section">
 																<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 																
 																	<div class="fv-row mb-7">
@@ -35,18 +35,18 @@ require_once("../connection/connect.php");
 																		<span class="indicator-label">Save</span>							
 																	</button>
 																	<span class="loader"><img src="images/loader.gif" width="30px" height="30px"/>Requesting...</span><br/><br/>
-																	<div id="response"></div><br/>
+																	
 																</div>
-														
+														   </div>
+														   <div id="response"></div><br/>
 														</div>
 													</div>
 <script>
-$(document).ready(function(){
 //hide errors
 $("#name_error").hide();
 $("#store_desc_error").hide();
 $(".loader").hide();
-
+$(document).ready(function(){
 $("#save_request").click(function(e){
 e.preventDefault();
 name = $("#name").val();
